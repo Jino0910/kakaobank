@@ -15,6 +15,10 @@
 		619670F8227D37C500852ED0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 619670F6227D37C500852ED0 /* LaunchScreen.storyboard */; };
 		61967103227D37C500852ED0 /* KakaobankTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61967102227D37C500852ED0 /* KakaobankTestTests.swift */; };
 		6196710E227D37C500852ED0 /* KakaobankTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196710D227D37C500852ED0 /* KakaobankTestUITests.swift */; };
+		6196711F227D58FB00852ED0 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196711E227D58FB00852ED0 /* UIColor+Extension.swift */; };
+		61967122227D598600852ED0 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61967121227D598600852ED0 /* APIManager.swift */; };
+		61967124227D5ABC00852ED0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61967123227D5ABC00852ED0 /* API.swift */; };
+		61967126227D793D00852ED0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61967125227D793D00852ED0 /* String+Extension.swift */; };
 		89824791AA7ADBC4F1220A88 /* Pods_KakaobankTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */; };
 		9FEF3FA416DB60968093F745 /* Pods_KakaobankTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4796B3656B3F04BC0E100F4 /* Pods_KakaobankTestTests.framework */; };
 /* End PBXBuildFile section */
@@ -52,6 +56,10 @@
 		61967109227D37C500852ED0 /* KakaobankTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KakaobankTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6196710D227D37C500852ED0 /* KakaobankTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaobankTestUITests.swift; sourceTree = "<group>"; };
 		6196710F227D37C500852ED0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6196711E227D58FB00852ED0 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		61967121227D598600852ED0 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		61967123227D5ABC00852ED0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		61967125227D793D00852ED0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		7550B26E4F7B9594B22B3995 /* Pods-KakaobankTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestTests.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTestTests/Pods-KakaobankTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2C536686074CC42F63DB90C /* Pods-KakaobankTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestUITests.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTestUITests/Pods-KakaobankTestUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +122,8 @@
 		619670EC227D37C400852ED0 /* KakaobankTest */ = {
 			isa = PBXGroup;
 			children = (
+				6196711B227D58A700852ED0 /* Extension */,
+				61967120227D596300852ED0 /* Manager */,
 				619670ED227D37C400852ED0 /* AppDelegate.swift */,
 				619670EF227D37C400852ED0 /* ViewController.swift */,
 				619670F1227D37C400852ED0 /* Main.storyboard */,
@@ -140,6 +150,24 @@
 				6196710F227D37C500852ED0 /* Info.plist */,
 			);
 			path = KakaobankTestUITests;
+			sourceTree = "<group>";
+		};
+		6196711B227D58A700852ED0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6196711E227D58FB00852ED0 /* UIColor+Extension.swift */,
+				61967125227D793D00852ED0 /* String+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		61967120227D596300852ED0 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				61967121227D598600852ED0 /* APIManager.swift */,
+				61967123227D5ABC00852ED0 /* API.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		6B71548388D0BFE81C38EEC5 /* Pods */ = {
@@ -407,8 +435,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61967122227D598600852ED0 /* APIManager.swift in Sources */,
+				6196711F227D58FB00852ED0 /* UIColor+Extension.swift in Sources */,
 				619670F0227D37C400852ED0 /* ViewController.swift in Sources */,
 				619670EE227D37C400852ED0 /* AppDelegate.swift in Sources */,
+				61967126227D793D00852ED0 /* String+Extension.swift in Sources */,
+				61967124227D5ABC00852ED0 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

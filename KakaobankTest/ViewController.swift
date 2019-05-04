@@ -7,14 +7,22 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class ViewController: UIViewController {
+    
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        APIManager.request(target: .searchAppStore(query: "카카오뱅크"))
+            .filter {$0.0 == .code200}
+            .subscribe(onSuccess: { (_, json) in
+                print(json)
+            })
+            .disposed(by: disposeBag)
     }
-
-
 }
 
