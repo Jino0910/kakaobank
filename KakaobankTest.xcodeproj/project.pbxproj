@@ -29,6 +29,8 @@
 		61F51821227D8E8800340CBF /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51820227D8E8800340CBF /* TokenManager.swift */; };
 		61F51825227DA98F00340CBF /* AppSearchBaseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51824227DA98F00340CBF /* AppSearchBaseItem.swift */; };
 		61F51827227DB9B300340CBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51826227DB9B300340CBF /* UIView+Extension.swift */; };
+		61F5182B227DD35100340CBF /* UITableView+Extionsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F5182A227DD35100340CBF /* UITableView+Extionsion.swift */; };
+		61F5182D227DD3AB00340CBF /* AppSearchViewListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F5182C227DD3AB00340CBF /* AppSearchViewListCell.swift */; };
 		89824791AA7ADBC4F1220A88 /* Pods_KakaobankTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */; };
 		9FEF3FA416DB60968093F745 /* Pods_KakaobankTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4796B3656B3F04BC0E100F4 /* Pods_KakaobankTestTests.framework */; };
 /* End PBXBuildFile section */
@@ -80,6 +82,8 @@
 		61F51820227D8E8800340CBF /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		61F51824227DA98F00340CBF /* AppSearchBaseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchBaseItem.swift; sourceTree = "<group>"; };
 		61F51826227DB9B300340CBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		61F5182A227DD35100340CBF /* UITableView+Extionsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extionsion.swift"; sourceTree = "<group>"; };
+		61F5182C227DD3AB00340CBF /* AppSearchViewListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchViewListCell.swift; sourceTree = "<group>"; };
 		7550B26E4F7B9594B22B3995 /* Pods-KakaobankTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestTests.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTestTests/Pods-KakaobankTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2C536686074CC42F63DB90C /* Pods-KakaobankTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestUITests.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTestUITests/Pods-KakaobankTestUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 				6196711E227D58FB00852ED0 /* UIColor+Extension.swift */,
 				61967125227D793D00852ED0 /* String+Extension.swift */,
 				61F51826227DB9B300340CBF /* UIView+Extension.swift */,
+				61F5182A227DD35100340CBF /* UITableView+Extionsion.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				61F5181E227D8BB900340CBF /* AppSearchMainListCell.swift */,
+				61F5182C227DD3AB00340CBF /* AppSearchViewListCell.swift */,
 			);
 			path = AppSearch;
 			sourceTree = "<group>";
@@ -511,12 +517,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61F5182D227DD3AB00340CBF /* AppSearchViewListCell.swift in Sources */,
 				61967122227D598600852ED0 /* APIManager.swift in Sources */,
 				61F5181F227D8BB900340CBF /* AppSearchMainListCell.swift in Sources */,
 				61F51827227DB9B300340CBF /* UIView+Extension.swift in Sources */,
 				61967130227D813500852ED0 /* AppSearchWorker.swift in Sources */,
 				61967134227D813500852ED0 /* AppSearchInteractor.swift in Sources */,
 				61967131227D813500852ED0 /* AppSearchRouter.swift in Sources */,
+				61F5182B227DD35100340CBF /* UITableView+Extionsion.swift in Sources */,
 				6196711F227D58FB00852ED0 /* UIColor+Extension.swift in Sources */,
 				619670F0227D37C400852ED0 /* ViewController.swift in Sources */,
 				61F51825227DA98F00340CBF /* AppSearchBaseItem.swift in Sources */,

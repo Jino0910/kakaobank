@@ -87,6 +87,8 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
         tv.backgroundColor = .red
         tv.alpha = 0.0
         
+        tv.registerCellClass(AppSearchViewListCell.self)
+        
         return tv
     }()
     
@@ -133,6 +135,7 @@ extension AppSearchViewController: UITableViewDelegate {
         definesPresentationContext = true
 
         self.view.addSubview(searchTv)
+        searchTv.delegate = self
         Async.main(after: 0.1) {
             guard let nav = self.navigationController else { return }
             self.searchTv.snp.makeConstraints { (make) in
