@@ -1,0 +1,6 @@
+framework module Pods_KakaobankTestUITests {
+  umbrella header "Pods-KakaobankTestUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
