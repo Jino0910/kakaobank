@@ -19,6 +19,12 @@
 		61967122227D598600852ED0 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61967121227D598600852ED0 /* APIManager.swift */; };
 		61967124227D5ABC00852ED0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61967123227D5ABC00852ED0 /* API.swift */; };
 		61967126227D793D00852ED0 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61967125227D793D00852ED0 /* String+Extension.swift */; };
+		6196712F227D813500852ED0 /* AppSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61967129227D813500852ED0 /* AppSearchPresenter.swift */; };
+		61967130227D813500852ED0 /* AppSearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712A227D813500852ED0 /* AppSearchWorker.swift */; };
+		61967131227D813500852ED0 /* AppSearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712B227D813500852ED0 /* AppSearchRouter.swift */; };
+		61967132227D813500852ED0 /* AppSearchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712C227D813500852ED0 /* AppSearchModels.swift */; };
+		61967133227D813500852ED0 /* AppSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712D227D813500852ED0 /* AppSearchViewController.swift */; };
+		61967134227D813500852ED0 /* AppSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712E227D813500852ED0 /* AppSearchInteractor.swift */; };
 		89824791AA7ADBC4F1220A88 /* Pods_KakaobankTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */; };
 		9FEF3FA416DB60968093F745 /* Pods_KakaobankTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4796B3656B3F04BC0E100F4 /* Pods_KakaobankTestTests.framework */; };
 /* End PBXBuildFile section */
@@ -60,6 +66,12 @@
 		61967121227D598600852ED0 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		61967123227D5ABC00852ED0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		61967125227D793D00852ED0 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		61967129227D813500852ED0 /* AppSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchPresenter.swift; sourceTree = "<group>"; };
+		6196712A227D813500852ED0 /* AppSearchWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchWorker.swift; sourceTree = "<group>"; };
+		6196712B227D813500852ED0 /* AppSearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchRouter.swift; sourceTree = "<group>"; };
+		6196712C227D813500852ED0 /* AppSearchModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchModels.swift; sourceTree = "<group>"; };
+		6196712D227D813500852ED0 /* AppSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchViewController.swift; sourceTree = "<group>"; };
+		6196712E227D813500852ED0 /* AppSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchInteractor.swift; sourceTree = "<group>"; };
 		7550B26E4F7B9594B22B3995 /* Pods-KakaobankTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestTests.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTestTests/Pods-KakaobankTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2C536686074CC42F63DB90C /* Pods-KakaobankTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestUITests.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTestUITests/Pods-KakaobankTestUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -124,6 +136,7 @@
 			children = (
 				6196711B227D58A700852ED0 /* Extension */,
 				61967120227D596300852ED0 /* Manager */,
+				61967127227D80ED00852ED0 /* Scene */,
 				619670ED227D37C400852ED0 /* AppDelegate.swift */,
 				619670EF227D37C400852ED0 /* ViewController.swift */,
 				619670F1227D37C400852ED0 /* Main.storyboard */,
@@ -168,6 +181,27 @@
 				61967123227D5ABC00852ED0 /* API.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		61967127227D80ED00852ED0 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				61967128227D811200852ED0 /* AppSearch */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		61967128227D811200852ED0 /* AppSearch */ = {
+			isa = PBXGroup;
+			children = (
+				61967129227D813500852ED0 /* AppSearchPresenter.swift */,
+				6196712A227D813500852ED0 /* AppSearchWorker.swift */,
+				6196712B227D813500852ED0 /* AppSearchRouter.swift */,
+				6196712C227D813500852ED0 /* AppSearchModels.swift */,
+				6196712D227D813500852ED0 /* AppSearchViewController.swift */,
+				6196712E227D813500852ED0 /* AppSearchInteractor.swift */,
+			);
+			path = AppSearch;
 			sourceTree = "<group>";
 		};
 		6B71548388D0BFE81C38EEC5 /* Pods */ = {
@@ -436,10 +470,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				61967122227D598600852ED0 /* APIManager.swift in Sources */,
+				61967130227D813500852ED0 /* AppSearchWorker.swift in Sources */,
+				61967134227D813500852ED0 /* AppSearchInteractor.swift in Sources */,
+				61967131227D813500852ED0 /* AppSearchRouter.swift in Sources */,
 				6196711F227D58FB00852ED0 /* UIColor+Extension.swift in Sources */,
 				619670F0227D37C400852ED0 /* ViewController.swift in Sources */,
 				619670EE227D37C400852ED0 /* AppDelegate.swift in Sources */,
+				6196712F227D813500852ED0 /* AppSearchPresenter.swift in Sources */,
+				61967132227D813500852ED0 /* AppSearchModels.swift in Sources */,
 				61967126227D793D00852ED0 /* String+Extension.swift in Sources */,
+				61967133227D813500852ED0 /* AppSearchViewController.swift in Sources */,
 				61967124227D5ABC00852ED0 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,6 +659,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5RFEZ8DV2;
 				INFOPLIST_FILE = KakaobankTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -638,6 +679,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5RFEZ8DV2;
 				INFOPLIST_FILE = KakaobankTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

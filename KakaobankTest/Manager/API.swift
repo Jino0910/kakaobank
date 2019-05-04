@@ -14,26 +14,6 @@ enum Kakao {
     case searchAppStore(query: String)
 }
 
-public enum HTTPMethod: String {
-    
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
-    case delete = "DELETE"
-}
-
-public enum HttpResponseCode: String {
-    case code200 = "200"
-    case code400 = "400"
-    case unknown = "9999"
-}
-
-enum NetworkError: Error {
-    case networkError
-    case jsonParseError
-    case noDataError
-}
-
 extension Kakao {
     
     // base url
@@ -77,28 +57,26 @@ extension Kakao {
         switch self {
         default: return [:]
         }
-        
-    }
-    
-    // task
-    var kakaoTask: URLSessionDataTask {
-
-        
-        let httpTask = URLSession.shared.dataTask(with: URL(string: "\(self.baseURL.absoluteString)\(self.path)")!) {
-            (data, response, error) in
-            guard let validData = data, error == nil else {
-                DispatchQueue.main.async(execute: {
-                    print("Error getting apple website\n") })
-                return
-            }
-            var results = String(data: data!, encoding: String.Encoding.utf8) ?? "Error decoding Apple's website HTML\n"
-            DispatchQueue.main.async(execute: {
-                print("Correctly read \(results.characters.count) characters from Apple's website HTML\n")
-            })
-        }
-        return httpTask
     }
 }
 
+public enum HTTPMethod: String {
+    
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+}
 
+public enum HttpResponseCode: String {
+    case code200 = "200"
+    case code400 = "400"
+    case unknown = "9999"
+}
+
+enum NetworkError: Error {
+    case networkError
+    case jsonParseError
+    case noDataError
+}
 
