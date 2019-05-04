@@ -11,9 +11,12 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import RealmSwift
 
 protocol AppSearchBusinessLogic {
-    func doSomething(request: AppSearch.Something.Request)
+    func doRecentHistory()
 }
 
 protocol AppSearchDataStore {
@@ -22,17 +25,54 @@ protocol AppSearchDataStore {
 
 class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     var presenter: AppSearchPresentationLogic?
-    var worker: AppSearchWorker?
-    //var name: String = ""
+    var worker = AppSearchWorker()
+    
+    let realm = try! Realm()
+    
+    var recentHistoryList: Results<RecentHistoryRealmItem> = {
+        try! Realm()
+            .objects(RecentHistoryRealmItem.self)
+            .sorted(byKeyPath: "date", ascending: false)
+    }()
+    
+    var recentHistoryItemNotificationToken: NotificationToken?
     
     // MARK: Do something
     
-    func doSomething(request: AppSearch.Something.Request) {
-        worker = AppSearchWorker()
-        worker?.doSomeWork()
+    func doRecentHistory() {
         
-        let response = AppSearch.Something.Response()
-        presenter?.presentSomething(response: response)
+        recentHistoryItemNotificationToken = recentHistoryList.observe({ [weak self](_:RealmCollectionChange) in
+
+            guard let self = self else { return }
+            var models: [RecentHitoryModel] = []
+            for item in self.recentHistoryList {
+                models.append(RecentHitoryModel(searchWord: item.searchWord, date: item.date))
+            }
+            
+            let response = AppSearch.RecentHitory.Response(recentHitoryModels: models)
+            self.presenter?.presentRecentHistory(response: response)
+        })
+        
+//        let realm = try! Realm()
+        
+//        let keyword = "카카오뱅크"
+//
+//        try! realm.write {
+//
+//
+//            for item in recentHistoryList {
+//                if item.searchWord == keyword {
+//                    realm.delete(item)
+//                    break
+//                }
+//            }
+//
+//
+//            let item = RecentHistoryRealmItem()
+//            item.searchWord = keyword
+//            realm.add(item)
+//        }
+        
     }
 }
 

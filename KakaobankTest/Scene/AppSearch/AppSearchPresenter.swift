@@ -13,7 +13,7 @@
 import UIKit
 
 protocol AppSearchPresentationLogic {
-    func presentSomething(response: AppSearch.Something.Response)
+    func presentRecentHistory(response: AppSearch.RecentHitory.Response)
 }
 
 class AppSearchPresenter: AppSearchPresentationLogic {
@@ -21,9 +21,29 @@ class AppSearchPresenter: AppSearchPresentationLogic {
     
     // MARK: Do something
     
-    func presentSomething(response: AppSearch.Something.Response) {
-        let viewModel = AppSearch.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentRecentHistory(response: AppSearch.RecentHitory.Response) {
+        let sectionModels = self.getSectionModel(recentHitoryModels: response.recentHitoryModels)
+        let viewModel = AppSearch.RecentHitory.ViewModel(recentHitoryModels: response.recentHitoryModels, sectionModels: sectionModels)
+        viewController?.displayRecentHistory(viewModel: viewModel)
     }
 }
 
+extension AppSearchPresenter {
+    
+    func getSectionModel(recentHitoryModels: [RecentHitoryModel]) -> [AppSearchBaseItemSection] {
+        
+        var sectionModels: [AppSearchBaseItemSection] = [
+            AppSearchBaseItemSection(items: [AppSearchBaseItem(type: .recentWordTitle, object: RecentHitoryModel(searchWord: "최근 검색어", date: Date()))])
+        ]
+        
+        for (index, item) in recentHitoryModels.enumerated() {
+            
+            guard index < 10 else { return sectionModels }
+            sectionModels.append(AppSearchBaseItemSection(items: [
+                AppSearchBaseItem(type: .recentWordContent, object: item)
+                ]))
+        }
+        
+        return sectionModels
+    }
+}

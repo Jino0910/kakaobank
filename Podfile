@@ -12,6 +12,9 @@ target 'KakaobankTest' do
   pod 'RxKeyboard'
   pod 'RealmSwift'
   pod 'SwiftyJSON'
+  pod 'KeychainSwift', '~> 11.0'
+  pod 'AsyncSwift'
+  pod 'SnapKit', '~> 5.0.0'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

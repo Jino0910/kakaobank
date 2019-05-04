@@ -7,17 +7,22 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    // 램 버전
+    let realmVersion: UInt64 = 1
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UISearchBar.appearance().tintColor = .appleBlue
         UINavigationBar.appearance().tintColor = .appleBlue
+        
+        loadRealm()
         
         return true
     }
@@ -47,3 +52,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate {
+
+    func loadRealm() {
+        
+        let config = Realm.Configuration(encryptionKey: TokenManager.shared.realmKeyData, schemaVersion: realmVersion, migrationBlock: { (_, oldSchemaVersion) in
+        })
+     
+        Realm.Configuration.defaultConfiguration = config
+    }
+}

@@ -11,9 +11,12 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import RxDataSources
 
 protocol AppSearchDisplayLogic: class {
-    func displaySomething(viewModel: AppSearch.Something.ViewModel)
+    func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel)
 }
 
 class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
@@ -62,26 +65,38 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configure()
+        interactor?.doRecentHistory()
     }
     
     // MARK: Do something
     
+    let disposeBag = DisposeBag()
+    
     let searchController = UISearchController(searchResultsController: nil)
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var tv: UITableView!
     
-    func doSomething() {
-        let request = AppSearch.Something.Request()
-        interactor?.doSomething(request: request)
-    }
+    let dataSource = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
+        
+        let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchMainListCell", for: indexPath) as! AppSearchMainListCell
+        if let model = item.object as? RecentHitoryModel {
+            cell.configure(model: model, type: item.type)
+        }
+        
+        return cell
+    })
+        
+    let sectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     
-    func displaySomething(viewModel: AppSearch.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel) {
+        print("hi \(viewModel.recentHitoryModels)")
+        sectionModels.accept(viewModel.sectionModels)
     }
 }
 
-extension AppSearchViewController {
+extension AppSearchViewController: UITableViewDelegate {
     
     private func configure() {
         configureUI()
@@ -89,7 +104,6 @@ extension AppSearchViewController {
     }
     
     private func configureUI() {
-//        cv.rx.setDelegate(self).disposed(by: self.disposeBag)
         
         searchController.searchResultsUpdater = self
         //
@@ -107,6 +121,8 @@ extension AppSearchViewController {
     }
     
     private func configureRx() {
+        
+        sectionModels.bind(to: tv.rx.items(dataSource: dataSource)).disposed(by: self.disposeBag)
     }
 }
 
@@ -121,5 +137,7 @@ extension AppSearchViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
 //        filterContentForSearchText(searchController.searchBar.text!)
+        
     }
 }
+

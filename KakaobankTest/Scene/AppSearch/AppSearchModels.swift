@@ -11,20 +11,39 @@
 //
 
 import UIKit
+import RealmSwift
+import RxDataSources
 
 enum AppSearch {
     // MARK: Use cases
     
-    enum Something {
+    enum RecentHitory {
         struct Request {
             
         }
         struct Response {
-            
+            var recentHitoryModels: [RecentHitoryModel]
         }
         struct ViewModel {
-            
+            var recentHitoryModels: [RecentHitoryModel]
+            var sectionModels: [AppSearchBaseItemSection]
         }
     }
 }
 
+struct RecentHitoryModel {
+    
+    var searchWord: String?
+    var date: Date?
+    
+    init(searchWord: String, date: Date) {
+        self.searchWord = searchWord
+        self.date = date
+    }
+}
+
+class RecentHistoryRealmItem: Object {
+    
+    @objc dynamic var searchWord: String = ""
+    @objc dynamic var date: Date = Date()
+}
