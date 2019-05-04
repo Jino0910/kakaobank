@@ -20,12 +20,14 @@ protocol AppSearchBusinessLogic {
 }
 
 protocol AppSearchDataStore {
-    //var name: String { get set }
+    var appSearchStatus: AppSearchStatus { get set }
 }
 
 class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     var presenter: AppSearchPresentationLogic?
     var worker = AppSearchWorker()
+    
+    var appSearchStatus: AppSearchStatus = .searchNon
     
     let realm = try! Realm()
     

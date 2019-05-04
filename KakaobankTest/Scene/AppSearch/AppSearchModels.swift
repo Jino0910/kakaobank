@@ -47,3 +47,21 @@ class RecentHistoryRealmItem: Object {
     @objc dynamic var searchWord: String = ""
     @objc dynamic var date: Date = Date()
 }
+
+enum AppSearchStatus {
+    case searchNon
+    case searchStart
+    case searching
+}
+
+extension AppSearchStatus {
+    
+    var alpha: CGFloat {
+        
+        switch self {
+        case .searchNon: return 0.0
+        case .searchStart: return 0.5
+        case .searching: return 1.0
+        }
+    }
+}

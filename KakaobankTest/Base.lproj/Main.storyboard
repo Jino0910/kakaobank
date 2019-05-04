@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AppSearchMainListCell" rowHeight="50" id="EVJ-6R-AvV" customClass="AppSearchMainListCell" customModule="KakaobankTest" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="AppSearchMainListCell" rowHeight="50" id="EVJ-6R-AvV" customClass="AppSearchMainListCell" customModule="KakaobankTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EVJ-6R-AvV" id="9QL-oa-len">
@@ -47,7 +47,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="검색" largeTitleDisplayMode="always" id="44Y-T2-LXo"/>
                     <connections>
-                        <outlet property="tv" destination="gyY-si-3zd" id="uen-AE-CWe"/>
+                        <outlet property="recentTv" destination="gyY-si-3zd" id="Fql-L7-lOx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
