@@ -29,6 +29,18 @@ enum AppSearch {
         }
     }
     
+    enum SearchHitory {
+        struct Request {
+            var query: String
+        }
+        struct Response {
+            var recentHistoryModels: [RecentHistoryModel]
+        }
+        struct ViewModel {
+            var sectionModels: [AppSearchBaseItemSection]
+        }
+    }
+    
     enum SearchAppStore {
         struct Request {
             var query: String

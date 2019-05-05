@@ -165,17 +165,27 @@ extension AppSearchViewController: UITableViewDelegate {
             })
             .disposed(by: disposeBag)
         
-        // 키보드 동작
-        RxKeyboard.instance.visibleHeight
-            .skip(1)
-            .drive(onNext: { [weak self] (height) in
-                guard let self = self else { return }
-                self.searchBaseViewBottom.constant = height
-                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
+        // 검색한 앱선택
+        searchTv.rx.itemSelected
+            .subscribe(onNext: { (indexPath) in
+                guard let model = self.router?.dataStore?.appInfoModels?[indexPath.section-1] else { return }
+                print(model.trackName)
             })
             .disposed(by: disposeBag)
         
-        // 검색뷰 터치
+        // 검색중 이벤트
+        searchController.searchBar.rx
+            .textDidBeginEditing
+            .subscribe(onNext: { (_) in
+                if let text = self.searchController.searchBar.text, !text.isEmpty {
+                    
+                } else {
+                    
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // 검색하단뷰 터치(검색어 없을 경우)
         searchBaseView.rx.tapGesture()
             .filter({_ in
                 guard var data = self.router?.dataStore else { return false }
@@ -186,7 +196,7 @@ extension AppSearchViewController: UITableViewDelegate {
                 self.searchController.isActive = false
             }).disposed(by: disposeBag)
         
-        // 검색중 키보드 검색완료 클릭시
+        // 검색완료 클릭
         searchController.searchBar.rx
             .searchButtonClicked
             .subscribe(onNext: { (_) in
@@ -200,14 +210,18 @@ extension AppSearchViewController: UITableViewDelegate {
         searchController.searchBar.rx
             .cancelButtonClicked
             .subscribe(onNext: { (_) in
+                // 앱검색 정보 클리어
                 self.searchSectionModels.accept([])
             })
             .disposed(by: disposeBag)
         
-        // 검색한 앱선택
-        searchTv.rx.itemSelected
-            .subscribe(onNext: { (_) in
-                
+        // 키보드 동작
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { [weak self] (height) in
+                guard let self = self else { return }
+                self.searchBaseViewBottom.constant = height
+                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
             })
             .disposed(by: disposeBag)
     }

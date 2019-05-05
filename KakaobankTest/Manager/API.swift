@@ -32,7 +32,7 @@ extension Kakao {
              media : 미디어의 타입, 종류는 movie, podcast, music, musicVideo, audiobook, shortFilm, tvShow, software, ebook, all 기본값은 all
              limit : 받을 갯수설정, 기본값은 50
             */
-            return "country=kr&media=software&limit=10&term=\(query)"
+            return "country=kr&media=software&term=\(query)" // &limit=
         }
     }
     

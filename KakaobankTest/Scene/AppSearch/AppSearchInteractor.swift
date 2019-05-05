@@ -15,9 +15,11 @@ import RxCocoa
 import RxSwift
 import RealmSwift
 import Async
+import SwiftyJSON
 
 protocol AppSearchBusinessLogic {
     func doRecentHistory()
+    func doSearchHistory(request: AppSearch.SearchHitory.Request)
     func doSearchAppStore(request: AppSearch.SearchAppStore.Request)
 }
 
@@ -46,7 +48,13 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
             .sorted(byKeyPath: "date", ascending: false)
     }()
     
+    var searchHistoryList: Results<SearchHistoryRealmItem> = {
+        try! Realm()
+            .objects(SearchHistoryRealmItem.self)
+    }()
+    
     var recentHistoryItemNotificationToken: NotificationToken?
+    var searchHistoryItemNotificationToken: NotificationToken?
     
     // MARK: Do something
     
@@ -64,6 +72,20 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
             let response = AppSearch.RecentHitory.Response(recentHistoryModels: models)
             self.presenter?.presentRecentHistory(response: response)
         })
+        
+        searchHistoryItemNotificationToken = searchHistoryList.observe({ [weak self](_:RealmCollectionChange) in
+
+            guard let self = self else { return }
+            for item in self.searchHistoryList {
+                print("1 \(item.searchWord)")
+            }
+            
+        })
+    }
+    
+    func doSearchHistory(request: AppSearch.SearchHitory.Request) {
+        
+        
     }
     
     func doSearchAppStore(request: AppSearch.SearchAppStore.Request) {
@@ -76,13 +98,15 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
                 self.saveSearchWord(query: request.query)
                 
                 // 검색 히스토리 저장
-                
-                
+                self.saveSearchHistory(json: json)
+
                 var models: [AppInfoModel] = []
                 for item in json["results"].array ?? [] {
                     models.append(AppInfoModel(json: item))
                 }
                 self.appInfoModels = models
+                
+                
                 
                 let response = AppSearch.SearchAppStore.Response(json: json, appInfoModels: models)
                 self.presenter?.presentSearchAppStore(response: response)
@@ -94,6 +118,7 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     func doSearchWordHistory(request: AppSearch.SearchAppStore.Request) {
         
     }
+    
 }
 
 extension AppSearchInteractor {
@@ -102,20 +127,46 @@ extension AppSearchInteractor {
         
         Async.main() {
             
-            let keyword = query
-            
             try! self.realm.write {
                 
                 for item in self.recentHistoryList {
-                    if item.searchWord == keyword {
+                    if item.searchWord == query {
                         self.realm.delete(item)
                         break
                     }
                 }
                 
                 let item = RecentHistoryRealmItem()
-                item.searchWord = keyword
+                item.searchWord = query
                 self.realm.add(item)
+            }
+        }
+    }
+    
+    func saveSearchHistory(json: JSON) {
+        
+        Async.main() {
+            
+            try! self.realm.write {
+
+                var newHistoryRealmItem: [SearchHistoryRealmItem] = []
+                
+                for item2 in json["results"].array ?? [] {
+                    
+                    let realmItem = SearchHistoryRealmItem()
+                    realmItem.searchWord = item2["trackName"].stringValue
+                    newHistoryRealmItem.append(realmItem)
+                    
+                    for item1 in self.searchHistoryList {
+
+                        if item1.searchWord == item2["trackName"].stringValue {
+                            self.realm.delete(item1)
+                            continue
+                        }
+                    }
+                }
+                
+                self.realm.add(newHistoryRealmItem)
             }
         }
     }
