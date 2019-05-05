@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Cosmos
 
 class AppItemCell: UITableViewCell {
     
@@ -15,6 +16,9 @@ class AppItemCell: UITableViewCell {
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var downLoadButton: UIButton!
     @IBOutlet weak var inAppEnableLabel: UILabel!
+    
+    @IBOutlet weak var ratingView: CosmosView!
+    @IBOutlet weak var reviewCountLabel: UILabel!
     
     @IBOutlet weak var screenShotImageView1: UIImageView!
     @IBOutlet weak var screenShotImageView2: UIImageView!
@@ -31,17 +35,21 @@ class AppItemCell: UITableViewCell {
         self.screenShotImageView1.image = nil
         self.screenShotImageView2.image = nil
         self.screenShotImageView3.image = nil
+        self.ratingView.rating = 0
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.ratingView.settings.fillMode = .precise
     }
     
     func configure(model: AppInfoModel) {
         
         self.titleLabel.text = model.trackName
         self.subTitleLabel.text = model.artistName
+        
+        self.ratingView.rating = Double(model.averageUserRating)
         
         self.iconImageView.asyncImageLoad(url: model.artworkUrl100, cachedName: model.artworkUrl100, handler: { (iv, image) in
             guard let image = image else { return }

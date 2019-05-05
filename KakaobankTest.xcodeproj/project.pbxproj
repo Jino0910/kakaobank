@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4AF304E4AF290D0F5CF4EC34 /* Pods_KakaobankTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A44CBBE8DDE5FDFA937DDEFD /* Pods_KakaobankTest.framework */; };
+		09959AD1F0C4E231AD66487F /* Pods_KakaobankTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49945F4203681249D588909B /* Pods_KakaobankTestUITests.framework */; };
 		619670EE227D37C400852ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619670ED227D37C400852ED0 /* AppDelegate.swift */; };
 		619670F0227D37C400852ED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619670EF227D37C400852ED0 /* ViewController.swift */; };
 		619670F3227D37C400852ED0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 619670F1227D37C400852ED0 /* Main.storyboard */; };
@@ -36,8 +36,8 @@
 		61F51847227ED32200340CBF /* SearchHistoryRealmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51846227ED32200340CBF /* SearchHistoryRealmItem.swift */; };
 		61F51849227EEA8B00340CBF /* AppSearchHistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51848227EEA8B00340CBF /* AppSearchHistoryListCell.swift */; };
 		61F5184B227EEAA600340CBF /* AppRecentHistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F5184A227EEAA500340CBF /* AppRecentHistoryListCell.swift */; };
-		89824791AA7ADBC4F1220A88 /* Pods_KakaobankTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */; };
-		9FEF3FA416DB60968093F745 /* Pods_KakaobankTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4796B3656B3F04BC0E100F4 /* Pods_KakaobankTestTests.framework */; };
+		AB2BFC54BEA97AB0911E8A12 /* Pods_KakaobankTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B070D9DB8D045128A3E526 /* Pods_KakaobankTest.framework */; };
+		B4D99AC2128D0D1BEA71A939 /* Pods_KakaobankTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D86B45DE4937B73DA6E5936C /* Pods_KakaobankTestTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +58,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2D78B7AD1FB4CA8CBFDB2628 /* Pods-KakaobankTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTest.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest.release.xcconfig"; sourceTree = "<group>"; };
-		3FAAD866C6906E5BD692C18E /* Pods-KakaobankTestUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestUITests.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTestUITests/Pods-KakaobankTestUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		08D2472E86D6A54D7011466E /* Pods-KakaobankTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestUITests.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTestUITests/Pods-KakaobankTestUITests.release.xcconfig"; sourceTree = "<group>"; };
+		10CFD0CD56FCC9E3454AE80A /* Pods-KakaobankTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTest.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest.debug.xcconfig"; sourceTree = "<group>"; };
+		19575D360A8432EEBA8404A9 /* Pods-KakaobankTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTest.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest.release.xcconfig"; sourceTree = "<group>"; };
+		49945F4203681249D588909B /* Pods_KakaobankTestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		619670EA227D37C400852ED0 /* KakaobankTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaobankTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		619670ED227D37C400852ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		619670EF227D37C400852ED0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -94,13 +96,11 @@
 		61F51846227ED32200340CBF /* SearchHistoryRealmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryRealmItem.swift; sourceTree = "<group>"; };
 		61F51848227EEA8B00340CBF /* AppSearchHistoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchHistoryListCell.swift; sourceTree = "<group>"; };
 		61F5184A227EEAA500340CBF /* AppRecentHistoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecentHistoryListCell.swift; sourceTree = "<group>"; };
-		7550B26E4F7B9594B22B3995 /* Pods-KakaobankTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestTests.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTestTests/Pods-KakaobankTestTests.debug.xcconfig"; sourceTree = "<group>"; };
-		924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A2C536686074CC42F63DB90C /* Pods-KakaobankTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestUITests.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTestUITests/Pods-KakaobankTestUITests.release.xcconfig"; sourceTree = "<group>"; };
-		A2CDA674B9D4F85DCD2D6753 /* Pods-KakaobankTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTest.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest.debug.xcconfig"; sourceTree = "<group>"; };
-		A44CBBE8DDE5FDFA937DDEFD /* Pods_KakaobankTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4796B3656B3F04BC0E100F4 /* Pods_KakaobankTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7ADB964F73B30C4967316BA /* Pods-KakaobankTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestTests.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTestTests/Pods-KakaobankTestTests.release.xcconfig"; sourceTree = "<group>"; };
+		9F7FED181FB9605989CCAFAD /* Pods-KakaobankTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestTests.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTestTests/Pods-KakaobankTestTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B2873B22D0DC54E08E1BAD55 /* Pods-KakaobankTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestTests.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTestTests/Pods-KakaobankTestTests.release.xcconfig"; sourceTree = "<group>"; };
+		B6A22902BB4573FE1FCB33BC /* Pods-KakaobankTestUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestUITests.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTestUITests/Pods-KakaobankTestUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D0B070D9DB8D045128A3E526 /* Pods_KakaobankTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D86B45DE4937B73DA6E5936C /* Pods_KakaobankTestTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTestTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AF304E4AF290D0F5CF4EC34 /* Pods_KakaobankTest.framework in Frameworks */,
+				AB2BFC54BEA97AB0911E8A12 /* Pods_KakaobankTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,7 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FEF3FA416DB60968093F745 /* Pods_KakaobankTestTests.framework in Frameworks */,
+				B4D99AC2128D0D1BEA71A939 /* Pods_KakaobankTestTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89824791AA7ADBC4F1220A88 /* Pods_KakaobankTestUITests.framework in Frameworks */,
+				09959AD1F0C4E231AD66487F /* Pods_KakaobankTestUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +139,7 @@
 				6196710C227D37C500852ED0 /* KakaobankTestUITests */,
 				619670EB227D37C400852ED0 /* Products */,
 				6B71548388D0BFE81C38EEC5 /* Pods */,
-				7A528ED49162C3BF08754529 /* Frameworks */,
+				BFF6E1EFB391B264D1A1F06F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -264,22 +264,22 @@
 		6B71548388D0BFE81C38EEC5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A2CDA674B9D4F85DCD2D6753 /* Pods-KakaobankTest.debug.xcconfig */,
-				2D78B7AD1FB4CA8CBFDB2628 /* Pods-KakaobankTest.release.xcconfig */,
-				7550B26E4F7B9594B22B3995 /* Pods-KakaobankTestTests.debug.xcconfig */,
-				E7ADB964F73B30C4967316BA /* Pods-KakaobankTestTests.release.xcconfig */,
-				3FAAD866C6906E5BD692C18E /* Pods-KakaobankTestUITests.debug.xcconfig */,
-				A2C536686074CC42F63DB90C /* Pods-KakaobankTestUITests.release.xcconfig */,
+				10CFD0CD56FCC9E3454AE80A /* Pods-KakaobankTest.debug.xcconfig */,
+				19575D360A8432EEBA8404A9 /* Pods-KakaobankTest.release.xcconfig */,
+				9F7FED181FB9605989CCAFAD /* Pods-KakaobankTestTests.debug.xcconfig */,
+				B2873B22D0DC54E08E1BAD55 /* Pods-KakaobankTestTests.release.xcconfig */,
+				B6A22902BB4573FE1FCB33BC /* Pods-KakaobankTestUITests.debug.xcconfig */,
+				08D2472E86D6A54D7011466E /* Pods-KakaobankTestUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		7A528ED49162C3BF08754529 /* Frameworks */ = {
+		BFF6E1EFB391B264D1A1F06F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A44CBBE8DDE5FDFA937DDEFD /* Pods_KakaobankTest.framework */,
-				A4796B3656B3F04BC0E100F4 /* Pods_KakaobankTestTests.framework */,
-				924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */,
+				D0B070D9DB8D045128A3E526 /* Pods_KakaobankTest.framework */,
+				D86B45DE4937B73DA6E5936C /* Pods_KakaobankTestTests.framework */,
+				49945F4203681249D588909B /* Pods_KakaobankTestUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -291,11 +291,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61967112227D37C500852ED0 /* Build configuration list for PBXNativeTarget "KakaobankTest" */;
 			buildPhases = (
-				43BB94F3B9C4C21FB3AB7AE2 /* [CP] Check Pods Manifest.lock */,
+				825785FAF2A7D6E463576269 /* [CP] Check Pods Manifest.lock */,
 				619670E6227D37C400852ED0 /* Sources */,
 				619670E7227D37C400852ED0 /* Frameworks */,
 				619670E8227D37C400852ED0 /* Resources */,
-				A0681C02E8137373C1B6DCE8 /* [CP] Embed Pods Frameworks */,
+				6C6F42856B9AEE24801B0DEC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -310,7 +310,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61967115227D37C500852ED0 /* Build configuration list for PBXNativeTarget "KakaobankTestTests" */;
 			buildPhases = (
-				2A1D61BD2392664E2C151EBB /* [CP] Check Pods Manifest.lock */,
+				85C72C1B80D5915252635FE1 /* [CP] Check Pods Manifest.lock */,
 				619670FA227D37C500852ED0 /* Sources */,
 				619670FB227D37C500852ED0 /* Frameworks */,
 				619670FC227D37C500852ED0 /* Resources */,
@@ -329,7 +329,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61967118227D37C500852ED0 /* Build configuration list for PBXNativeTarget "KakaobankTestUITests" */;
 			buildPhases = (
-				BC589EA480B2BF80502F8D31 /* [CP] Check Pods Manifest.lock */,
+				B3B4FAB246B9CA7E83831EEA /* [CP] Check Pods Manifest.lock */,
 				61967105227D37C500852ED0 /* Sources */,
 				61967106227D37C500852ED0 /* Frameworks */,
 				61967107227D37C500852ED0 /* Resources */,
@@ -415,29 +415,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A1D61BD2392664E2C151EBB /* [CP] Check Pods Manifest.lock */ = {
+		6C6F42856B9AEE24801B0DEC /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-KakaobankTestTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		43BB94F3B9C4C21FB3AB7AE2 /* [CP] Check Pods Manifest.lock */ = {
+		825785FAF2A7D6E463576269 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -459,7 +454,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A0681C02E8137373C1B6DCE8 /* [CP] Embed Pods Frameworks */ = {
+		85C72C1B80D5915252635FE1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -467,43 +462,21 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Async.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxKeyboard.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"$(DERIVED_FILE_DIR)/Pods-KakaobankTestTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BC589EA480B2BF80502F8D31 /* [CP] Check Pods Manifest.lock */ = {
+		B3B4FAB246B9CA7E83831EEA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -727,7 +700,7 @@
 		};
 		61967113227D37C500852ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2CDA674B9D4F85DCD2D6753 /* Pods-KakaobankTest.debug.xcconfig */;
+			baseConfigurationReference = 10CFD0CD56FCC9E3454AE80A /* Pods-KakaobankTest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -747,7 +720,7 @@
 		};
 		61967114227D37C500852ED0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2D78B7AD1FB4CA8CBFDB2628 /* Pods-KakaobankTest.release.xcconfig */;
+			baseConfigurationReference = 19575D360A8432EEBA8404A9 /* Pods-KakaobankTest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -767,7 +740,7 @@
 		};
 		61967116227D37C500852ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7550B26E4F7B9594B22B3995 /* Pods-KakaobankTestTests.debug.xcconfig */;
+			baseConfigurationReference = 9F7FED181FB9605989CCAFAD /* Pods-KakaobankTestTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -789,7 +762,7 @@
 		};
 		61967117227D37C500852ED0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7ADB964F73B30C4967316BA /* Pods-KakaobankTestTests.release.xcconfig */;
+			baseConfigurationReference = B2873B22D0DC54E08E1BAD55 /* Pods-KakaobankTestTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -811,7 +784,7 @@
 		};
 		61967119227D37C500852ED0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3FAAD866C6906E5BD692C18E /* Pods-KakaobankTestUITests.debug.xcconfig */;
+			baseConfigurationReference = B6A22902BB4573FE1FCB33BC /* Pods-KakaobankTestUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -832,7 +805,7 @@
 		};
 		6196711A227D37C500852ED0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A2C536686074CC42F63DB90C /* Pods-KakaobankTestUITests.release.xcconfig */;
+			baseConfigurationReference = 08D2472E86D6A54D7011466E /* Pods-KakaobankTestUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

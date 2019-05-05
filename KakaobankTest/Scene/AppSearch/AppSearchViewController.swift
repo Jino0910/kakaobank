@@ -173,13 +173,11 @@ extension AppSearchViewController: UITableViewDelegate {
                 
                 self.recentTv.reloadRows(at: [indexPath], with: .none)
                 guard indexPath.section > 0 else { return }
-                guard var data = self.router?.dataStore else { return }
-                guard let model = data.recentHistoryModels?[indexPath.section-1] else { return }
-                guard let searchWord = model.searchWord else { return }
+                guard let searchWord = self.router?.dataStore?.recentHistoryModels?[indexPath.section-1].searchWord else { return }
                 
                 self.searchController.searchBar.text = searchWord
                 self.searchController.isActive = true
-                data.appSearchStatus = .searchComplete
+                self.setAppSearchStatus(status: .searchComplete)
                 
                 Async.background(after: 0.2) {
                     let request = AppSearch.SearchAppStore.Request(query: searchWord)
@@ -192,17 +190,16 @@ extension AppSearchViewController: UITableViewDelegate {
         searchTv.rx.itemSelected
             .subscribe(onNext: { (indexPath) in
                 
-                self.recentTv.reloadRows(at: [indexPath], with: .none)
                 guard var data = self.router?.dataStore else { return }
                 
                 if data.appSearchStatus == .searching {
                     
-                    guard let model = data.searchHistoryModels?[indexPath.section] else { return }
-                    guard let query = model.searchWord else { return }
+                    self.recentTv.reloadRows(at: [indexPath], with: .none)
+                    guard let query = data.searchHistoryModels?[indexPath.section].searchWord else { return }
                     
                     self.searchController.searchBar.text = query
                     self.searchController.searchBar.endEditing(true)
-                    data.appSearchStatus = .searchComplete
+                    self.setAppSearchStatus(status: .searchComplete)
                     
                     let request = AppSearch.SearchAppStore.Request(query: query)
                     self.interactor?.doSearchAppStore(request: request)
@@ -233,10 +230,10 @@ extension AppSearchViewController: UITableViewDelegate {
             .searchButtonClicked
             .subscribe(onNext: { (_) in
                 guard let query = self.searchController.searchBar.text else { return }
-                guard var data = self.router?.dataStore else { return }
                 let request = AppSearch.SearchAppStore.Request(query: query)
                 self.interactor?.doSearchAppStore(request: request)
-                data.appSearchStatus = .searchComplete
+
+                self.setAppSearchStatus(status: .searchComplete)
             })
             .disposed(by: disposeBag)
         
@@ -269,10 +266,9 @@ extension AppSearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard let text = searchBar.text else { return }
-        guard !text.isEmpty else { return }
-        guard var data = self.router?.dataStore else { return }
-        data.appSearchStatus = .searching
+        guard let text = searchBar.text, !text.isEmpty else { return }
+        
+        setAppSearchStatus(status: .searching)
         
         let request = AppSearch.SearchWordHitory.Request(query: text)
         self.interactor?.doSearchWordHistory(request: request)
@@ -283,9 +279,8 @@ extension AppSearchViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
 
-        guard var data = self.router?.dataStore else { return }
-        guard data.appSearchStatus != .searchBefore else { return }
-        
+        guard var data = self.router?.dataStore, data.appSearchStatus != .searchBefore else { return }
+
         if searchController.searchBar.text!.isEmpty {
             setAppSearchStatus(status: .searchStart)
         } else {
