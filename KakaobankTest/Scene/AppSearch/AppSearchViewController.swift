@@ -193,13 +193,12 @@ extension AppSearchViewController: UITableViewDelegate {
             .subscribe(onNext: { (indexPath) in
                 
                 self.recentTv.reloadRows(at: [indexPath], with: .none)
-                guard let data = self.router?.dataStore else { return }
+                guard var data = self.router?.dataStore else { return }
                 
                 if data.appSearchStatus == .searching {
                     
                     guard let model = data.searchHistoryModels?[indexPath.section] else { return }
                     guard let query = model.searchWord else { return }
-                    guard var data = self.router?.dataStore else { return }
                     
                     self.searchController.searchBar.text = query
                     self.searchController.searchBar.endEditing(true)
