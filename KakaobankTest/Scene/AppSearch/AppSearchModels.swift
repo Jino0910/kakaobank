@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import RealmSwift
 import RxDataSources
 
 enum AppSearch {

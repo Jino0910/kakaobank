@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 /// Realm Object
 class RecentHistoryRealmItem: Object {
