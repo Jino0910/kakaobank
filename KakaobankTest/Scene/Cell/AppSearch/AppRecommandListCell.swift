@@ -1,14 +1,14 @@
 //
-//  AppSearchViewListCell.swift
+//  AppRecommandListCell.swift
 //  KakaobankTest
 //
-//  Created by rowkaxl on 04/05/2019.
+//  Created by rowkaxl on 05/05/2019.
 //  Copyright © 2019 rowkaxl. All rights reserved.
 //
 
 import UIKit
 
-class AppSearchViewListCell: UITableViewCell {
+class AppRecommandListCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

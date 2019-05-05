@@ -35,11 +35,49 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="SKX-Ce-fyH"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Vb-8e-FiK">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ntI-Uo-VBd">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AppRecommandListCell" id="qQx-9W-irR" customClass="AppSearchViewListCell" customModule="KakaobankTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qQx-9W-irR" id="zyu-w8-Mg5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AppItemCell" id="c6i-mZ-BKp" customClass="AppItemCell" customModule="KakaobankTest" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c6i-mZ-BKp" id="lqf-2N-cgd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ntI-Uo-VBd" secondAttribute="trailing" id="8DN-cj-jqy"/>
+                                    <constraint firstItem="ntI-Uo-VBd" firstAttribute="leading" secondItem="8Vb-8e-FiK" secondAttribute="leading" id="MAW-S2-u3L"/>
+                                    <constraint firstItem="ntI-Uo-VBd" firstAttribute="top" secondItem="8Vb-8e-FiK" secondAttribute="top" id="mTY-cu-cHo"/>
+                                    <constraint firstAttribute="bottom" secondItem="ntI-Uo-VBd" secondAttribute="bottom" id="xwv-cT-gaZ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="gyY-si-3zd" secondAttribute="bottom" constant="34" id="0Ty-Kv-wrj"/>
+                            <constraint firstItem="8Vb-8e-FiK" firstAttribute="leading" secondItem="gyY-si-3zd" secondAttribute="leading" id="NEO-m6-X2v"/>
+                            <constraint firstItem="8Vb-8e-FiK" firstAttribute="top" secondItem="gyY-si-3zd" secondAttribute="top" id="Nwt-gB-Iqj"/>
                             <constraint firstAttribute="top" secondItem="gyY-si-3zd" secondAttribute="top" id="TrT-Bb-1MV"/>
+                            <constraint firstItem="8Vb-8e-FiK" firstAttribute="trailing" secondItem="gyY-si-3zd" secondAttribute="trailing" id="WRz-ZH-mdb"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="8Vb-8e-FiK" secondAttribute="bottom" id="Y0k-HD-csw"/>
                             <constraint firstItem="gyY-si-3zd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Yhn-pv-jfb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gyY-si-3zd" secondAttribute="trailing" id="fFQ-jR-ydg"/>
                         </constraints>
@@ -48,6 +86,8 @@
                     <navigationItem key="navigationItem" title="검색" largeTitleDisplayMode="always" id="44Y-T2-LXo"/>
                     <connections>
                         <outlet property="recentTv" destination="gyY-si-3zd" id="Fql-L7-lOx"/>
+                        <outlet property="searchBaseView" destination="8Vb-8e-FiK" id="AEw-hl-EKU"/>
+                        <outlet property="searchTv" destination="ntI-Uo-VBd" id="tMj-VB-qsG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

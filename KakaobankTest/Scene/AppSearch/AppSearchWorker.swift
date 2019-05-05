@@ -11,10 +11,13 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class AppSearchWorker {
-    func doSomeWork() {
-        
+    
+    func requestSearchAppStore(query: String) -> PrimitiveSequence<SingleTrait, APIResponseType> {
+        return APIManager.request(target: .searchAppStore(query: query))
     }
 }
 

@@ -14,9 +14,11 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RealmSwift
+import Async
 
 protocol AppSearchBusinessLogic {
     func doRecentHistory()
+    func doSearchAppStory(request: AppSearch.SearchAppStory.Request)
 }
 
 protocol AppSearchDataStore {
@@ -26,6 +28,8 @@ protocol AppSearchDataStore {
 class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     var presenter: AppSearchPresentationLogic?
     var worker = AppSearchWorker()
+    
+    let disposeBag = DisposeBag()
     
     var appSearchStatus: AppSearchStatus = .searchNon
     
@@ -54,28 +58,53 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
             let response = AppSearch.RecentHitory.Response(recentHitoryModels: models)
             self.presenter?.presentRecentHistory(response: response)
         })
+    }
+    
+    func doSearchAppStory(request: AppSearch.SearchAppStory.Request) {
         
-//        let realm = try! Realm()
-        
-//        let keyword = "카카오뱅크"
-//
-//        try! realm.write {
-//
-//
-//            for item in recentHistoryList {
-//                if item.searchWord == keyword {
-//                    realm.delete(item)
-//                    break
-//                }
-//            }
-//
-//
-//            let item = RecentHistoryRealmItem()
-//            item.searchWord = keyword
-//            realm.add(item)
-//        }
+        self.worker.requestSearchAppStore(query: request.query)
+            .filter {$0.0 == .code200}
+            .subscribe(onSuccess: { (_, json) in
+                
+                print(json)
+                
+                // 검색어 저장
+                self.saveSearchWord(query: request.query)
+                
+                
+                // 검색 히스토리 저장
+                
+                
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func doSearchWordHistory(request: AppSearch.SearchAppStory.Request) {
         
     }
 }
 
-
+extension AppSearchInteractor {
+    
+    func saveSearchWord(query: String) {
+        
+        Async.main() {
+            
+            let keyword = query
+            
+            try! self.realm.write {
+                
+                for item in self.recentHistoryList {
+                    if item.searchWord == keyword {
+                        self.realm.delete(item)
+                        break
+                    }
+                }
+                
+                let item = RecentHistoryRealmItem()
+                item.searchWord = keyword
+                self.realm.add(item)
+            }
+        }
+    }
+}

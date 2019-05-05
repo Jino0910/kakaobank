@@ -29,11 +29,26 @@ enum AppSearch {
             var sectionModels: [AppSearchBaseItemSection]
         }
     }
+    
+    enum SearchAppStory {
+        struct Request {
+            var query: String
+        }
+        struct Response {
+//            var recentHitoryModels: [RecentHitoryModel]
+        }
+        struct ViewModel {
+//            var recentHitoryModels: [RecentHitoryModel]
+//            var sectionModels: [AppSearchBaseItemSection]
+        }
+    }
 }
 
 struct RecentHitoryModel {
     
+    /// 검색어
     var searchWord: String?
+    /// 검색시간
     var date: Date?
     
     init(searchWord: String, date: Date) {
@@ -42,26 +57,43 @@ struct RecentHitoryModel {
     }
 }
 
-class RecentHistoryRealmItem: Object {
-    
-    @objc dynamic var searchWord: String = ""
-    @objc dynamic var date: Date = Date()
-}
-
 enum AppSearchStatus {
+    /// 검색전
     case searchNon
+    /// 검색시작(키워드x)
     case searchStart
+    /// 검색중(키워드o)
     case searching
+    /// 검색완료(앱정보화면)
+    case viewAppInfo
 }
 
 extension AppSearchStatus {
     
-    var alpha: CGFloat {
+    var baseViewAlpha: CGFloat {
         
         switch self {
         case .searchNon: return 0.0
-        case .searchStart: return 0.5
-        case .searching: return 1.0
+        case .searchStart: return 0.4
+        case .searching, .viewAppInfo: return 1.0
+        }
+    }
+    
+    var tableViewAlpha: CGFloat {
+        
+        switch self {
+        case .searchNon: return 0.0
+        case .searchStart: return 0.0
+        case .searching, .viewAppInfo: return 1.0
+        }
+    }
+    
+    var baseViewBackgroundColor: UIColor {
+        
+        switch self {
+        case .searchNon: return .black
+        case .searchStart: return .black
+        case .searching, .viewAppInfo: return .white
         }
     }
 }

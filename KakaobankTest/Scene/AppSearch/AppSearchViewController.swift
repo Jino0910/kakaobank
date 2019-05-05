@@ -81,17 +81,9 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
     let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var recentTv: UITableView!
-    var searchTv: UITableView = {
-       
-        let tv = UITableView(frame: .zero)
-        tv.backgroundColor = .red
-        tv.alpha = 0.0
-        
-        tv.registerCellClass(AppSearchViewListCell.self)
-        
-        return tv
-    }()
-
+    @IBOutlet weak var searchBaseView: UIView!
+    @IBOutlet weak var searchTv: UITableView!
+    
     let sectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel) {
@@ -123,18 +115,6 @@ extension AppSearchViewController: UITableViewDelegate {
         
         //
         definesPresentationContext = true
-
-        self.view.addSubview(searchTv)
-        searchTv.delegate = self
-        Async.main(after: 0.1) {
-            guard let nav = self.navigationController else { return }
-            self.searchTv.snp.makeConstraints { (make) in
-                make.top.equalTo(nav.navigationBar.snp.bottom)
-                make.leading.equalToSuperview()
-                make.trailing.equalToSuperview()
-                make.bottom.equalTo(0)
-            }
-        }
     }
     
     private func configureRx() {
@@ -151,30 +131,42 @@ extension AppSearchViewController: UITableViewDelegate {
         
         sectionModels.bind(to: recentTv.rx.items(dataSource: dataSource)).disposed(by: self.disposeBag)
         
+        // 최금검색어 선택시
         recentTv.rx.itemSelected
             .subscribe(onNext: { (_) in
                 self.recentTv.reloadData()
             })
             .disposed(by: disposeBag)
         
+        // 키보드 동작
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { [weak self] (height) in
                 guard let self = self else { return }
                 guard let window = UIApplication.shared.keyWindow else { return }
-                self.recentTv.contentInset = UIEdgeInsets(top: self.recentTv.contentInset.top, left: self.recentTv.contentInset.left, bottom: height + window.safeAreaInsets.bottom, right: self.recentTv.contentInset.right)
+                self.searchTv.contentInset = UIEdgeInsets(top: self.searchTv.contentInset.top, left: self.searchTv.contentInset.left, bottom: height + window.safeAreaInsets.bottom, right: self.searchTv.contentInset.right)
             })
             .disposed(by: disposeBag)
         
-        searchTv.rx.tapGesture()
+        // 검색뷰 터치
+        searchBaseView.rx.tapGesture()
             .filter({_ in
                 guard var data = self.router?.dataStore else { return false }
                 return data.appSearchStatus != .searching
             })
             .subscribe(onNext: { [weak self](_) in
-//                self?.removeSearchView()
                 guard let self = self else { return }
                 self.searchController.isActive = false
             }).disposed(by: disposeBag)
+        
+        // 검색중 키보드 검색완료 클릭시
+        searchController.searchBar.rx
+            .searchButtonClicked
+            .subscribe(onNext: { (_) in
+                guard let query = self.searchController.searchBar.text else { return }
+                let request = AppSearch.SearchAppStory.Request(query: query)
+                self.interactor?.doSearchAppStory(request: request)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -189,12 +181,14 @@ extension AppSearchViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
 //        filterContentForSearchText(searchController.searchBar.text!)
+        guard var data = self.router?.dataStore else { return }
+        guard data.appSearchStatus != .searchNon else { return }
         
         if searchController.searchBar.text!.isEmpty {
-            setAppSearchStatus(value: .searchStart)
+            setAppSearchStatus(status: .searchStart)
 //            recentTv.reloadData()
         } else {
-            setAppSearchStatus(value: .searching)
+            setAppSearchStatus(status: .searching)
         }
     }
 }
@@ -203,37 +197,37 @@ extension AppSearchViewController: UISearchControllerDelegate {
  
     func willPresentSearchController(_ searchController: UISearchController) {
         print("willPresentSearchController")
-        addSearchView()
+        showSearchBaseView()
     }
     
-    func didDismissSearchController(_ searchController: UISearchController) {
+    func willDismissSearchController(_ searchController: UISearchController) {
         print("willDismissSearchController")
-        removeSearchView()
+        hideSearchBaseView()
     }
 }
 
 extension AppSearchViewController {
     
-    func addSearchView() {
-        setAppSearchStatus(value: .searchStart)
+    func showSearchBaseView() {
+        setAppSearchStatus(status: .searchStart)
         recentTv.reloadData()
     }
     
-    func removeSearchView() {
-        setAppSearchStatus(value: .searchNon)
+    func hideSearchBaseView() {
+        setAppSearchStatus(status: .searchNon)
         recentTv.reloadData()
     }
     
-    func setSearchTv(alpha: CGFloat) {
-        UIView.animate(withDuration: 0.1) {
-            self.searchTv.alpha = alpha
-        }
-    }
-    
-    func setAppSearchStatus(value: AppSearchStatus) {
+    func setAppSearchStatus(status: AppSearchStatus) {
         guard var data = router?.dataStore  else { return }
-        data.appSearchStatus = value
-        setSearchTv(alpha: data.appSearchStatus.alpha)
+        data.appSearchStatus = status
+        setSerchViewStatus(status: data.appSearchStatus)
+    }
+    
+    func setSerchViewStatus(status: AppSearchStatus) {
+        self.searchTv.alpha = status.tableViewAlpha
+        self.searchBaseView.backgroundColor = status.baseViewBackgroundColor
+        self.searchBaseView.alpha = status.baseViewAlpha
     }
 }
 
