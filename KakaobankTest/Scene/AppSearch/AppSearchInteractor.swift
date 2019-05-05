@@ -18,20 +18,25 @@ import Async
 
 protocol AppSearchBusinessLogic {
     func doRecentHistory()
-    func doSearchAppStory(request: AppSearch.SearchAppStory.Request)
+    func doSearchAppStore(request: AppSearch.SearchAppStore.Request)
 }
 
 protocol AppSearchDataStore {
     var appSearchStatus: AppSearchStatus { get set }
+    var recentHistoryModels: [RecentHistoryModel]? { get set }
+    var appInfoModels: [AppInfoModel]? { get set }
 }
 
 class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
+    
     var presenter: AppSearchPresentationLogic?
     var worker = AppSearchWorker()
     
     let disposeBag = DisposeBag()
     
     var appSearchStatus: AppSearchStatus = .searchNon
+    var recentHistoryModels: [RecentHistoryModel]?
+    var appInfoModels: [AppInfoModel]?
     
     let realm = try! Realm()
     
@@ -50,36 +55,43 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
         recentHistoryItemNotificationToken = recentHistoryList.observe({ [weak self](_:RealmCollectionChange) in
 
             guard let self = self else { return }
-            var models: [RecentHitoryModel] = []
+            var models: [RecentHistoryModel] = []
             for item in self.recentHistoryList {
-                models.append(RecentHitoryModel(searchWord: item.searchWord, date: item.date))
+                models.append(RecentHistoryModel(searchWord: item.searchWord, date: item.date))
             }
+            self.recentHistoryModels = models
             
-            let response = AppSearch.RecentHitory.Response(recentHitoryModels: models)
+            let response = AppSearch.RecentHitory.Response(recentHistoryModels: models)
             self.presenter?.presentRecentHistory(response: response)
         })
     }
     
-    func doSearchAppStory(request: AppSearch.SearchAppStory.Request) {
+    func doSearchAppStore(request: AppSearch.SearchAppStore.Request) {
         
         self.worker.requestSearchAppStore(query: request.query)
             .filter {$0.0 == .code200}
             .subscribe(onSuccess: { (_, json) in
                 
-                print(json)
-                
                 // 검색어 저장
                 self.saveSearchWord(query: request.query)
                 
-                
                 // 검색 히스토리 저장
                 
+                
+                var models: [AppInfoModel] = []
+                for item in json["results"].array ?? [] {
+                    models.append(AppInfoModel(json: item))
+                }
+                self.appInfoModels = models
+                
+                let response = AppSearch.SearchAppStore.Response(json: json, appInfoModels: models)
+                self.presenter?.presentSearchAppStore(response: response)
                 
             })
             .disposed(by: disposeBag)
     }
     
-    func doSearchWordHistory(request: AppSearch.SearchAppStory.Request) {
+    func doSearchWordHistory(request: AppSearch.SearchAppStore.Request) {
         
     }
 }

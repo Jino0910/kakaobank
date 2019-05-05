@@ -15,7 +15,7 @@ class AppSearchMainListCell: UITableViewCell {
         // Initialization code
     }
 
-    func configure(model: RecentHitoryModel, type: AppSearchSectionType, status: AppSearchStatus) {
+    func configure(model: RecentHistoryModel, type: AppSearchSectionType, status: AppSearchStatus) {
         
         self.textLabel?.text = model.searchWord
         

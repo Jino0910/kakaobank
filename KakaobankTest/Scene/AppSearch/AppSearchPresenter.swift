@@ -14,6 +14,7 @@ import UIKit
 
 protocol AppSearchPresentationLogic {
     func presentRecentHistory(response: AppSearch.RecentHitory.Response)
+    func presentSearchAppStore(response: AppSearch.SearchAppStore.Response)
 }
 
 class AppSearchPresenter: AppSearchPresentationLogic {
@@ -22,25 +23,46 @@ class AppSearchPresenter: AppSearchPresentationLogic {
     // MARK: Do something
     
     func presentRecentHistory(response: AppSearch.RecentHitory.Response) {
-        let sectionModels = self.getSectionModel(recentHitoryModels: response.recentHitoryModels)
-        let viewModel = AppSearch.RecentHitory.ViewModel(recentHitoryModels: response.recentHitoryModels, sectionModels: sectionModels)
+        let sectionModels = self.getRecentHistorySectionModel(recentHistoryModels: response.recentHistoryModels)
+        let viewModel = AppSearch.RecentHitory.ViewModel(sectionModels: sectionModels)
         viewController?.displayRecentHistory(viewModel: viewModel)
+    }
+    
+    func presentSearchAppStore(response: AppSearch.SearchAppStore.Response) {
+        let sectionModels = self.getSearchAppStoreSectionModel(appInfoModel: response.appInfoModels)
+        let viewModel = AppSearch.SearchAppStore.ViewModel(sectionModels: sectionModels)
+        viewController?.displaySearchAppStore(viewModel: viewModel)
     }
 }
 
 extension AppSearchPresenter {
     
-    func getSectionModel(recentHitoryModels: [RecentHitoryModel]) -> [AppSearchBaseItemSection] {
+    func getRecentHistorySectionModel(recentHistoryModels: [RecentHistoryModel]) -> [AppSearchBaseItemSection] {
         
         var sectionModels: [AppSearchBaseItemSection] = [
-            AppSearchBaseItemSection(items: [AppSearchBaseItem(type: .recentWordTitle, object: RecentHitoryModel(searchWord: "최근 검색어", date: Date()))])
+            AppSearchBaseItemSection(items: [AppSearchBaseItem(type: .recentWordTitle, object: RecentHistoryModel(searchWord: "최근 검색어", date: Date()))])
         ]
         
-        for (index, item) in recentHitoryModels.enumerated() {
+        for (index, item) in recentHistoryModels.enumerated() {
             
             guard index < 10 else { return sectionModels }
-            sectionModels.append(AppSearchBaseItemSection(items: [
-                AppSearchBaseItem(type: .recentWordContent, object: item)
+            sectionModels.append(
+                AppSearchBaseItemSection(items: [
+                    AppSearchBaseItem(type: .recentWordContent, object: item)
+                ]))
+        }
+        
+        return sectionModels
+    }
+    
+    func getSearchAppStoreSectionModel(appInfoModel: [AppInfoModel]) -> [AppSearchBaseItemSection] {
+        
+        var sectionModels: [AppSearchBaseItemSection] = []
+        
+        for item in appInfoModel {
+            sectionModels.append(
+                AppSearchBaseItemSection(items: [
+                    AppSearchBaseItem(type: .searchAppInfoList, object: item)
                 ]))
         }
         

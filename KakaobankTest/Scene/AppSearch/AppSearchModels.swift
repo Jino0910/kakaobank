@@ -12,6 +12,7 @@
 
 import UIKit
 import RxDataSources
+import SwiftyJSON
 
 enum AppSearch {
     // MARK: Use cases
@@ -21,29 +22,28 @@ enum AppSearch {
             
         }
         struct Response {
-            var recentHitoryModels: [RecentHitoryModel]
+            var recentHistoryModels: [RecentHistoryModel]
         }
         struct ViewModel {
-            var recentHitoryModels: [RecentHitoryModel]
             var sectionModels: [AppSearchBaseItemSection]
         }
     }
     
-    enum SearchAppStory {
+    enum SearchAppStore {
         struct Request {
             var query: String
         }
         struct Response {
-//            var recentHitoryModels: [RecentHitoryModel]
+            var json: JSON
+            var appInfoModels: [AppInfoModel]
         }
         struct ViewModel {
-//            var recentHitoryModels: [RecentHitoryModel]
-//            var sectionModels: [AppSearchBaseItemSection]
+            var sectionModels: [AppSearchBaseItemSection]
         }
     }
 }
 
-struct RecentHitoryModel {
+struct RecentHistoryModel {
     
     /// 검색어
     var searchWord: String?

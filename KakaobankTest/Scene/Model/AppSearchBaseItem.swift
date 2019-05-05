@@ -16,6 +16,8 @@ enum AppSearchSectionType {
     case recentWordTitle
     case recentWordContent
     // 앱검색
+    case searchWordList
+    case searchAppInfoList
 //    case
     // 앱상세
 }

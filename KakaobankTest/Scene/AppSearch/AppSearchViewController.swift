@@ -21,6 +21,7 @@ import Async
 
 protocol AppSearchDisplayLogic: class {
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel)
+    func displaySearchAppStore(viewModel: AppSearch.SearchAppStore.ViewModel)
 }
 
 class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
@@ -83,12 +84,17 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
     @IBOutlet weak var recentTv: UITableView!
     @IBOutlet weak var searchBaseView: UIView!
     @IBOutlet weak var searchTv: UITableView!
+    @IBOutlet weak var searchBaseViewBottom: NSLayoutConstraint!
     
-    let sectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
+    let recentSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
+    let searchSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel) {
-        print("hi \(viewModel.recentHitoryModels)")
-        sectionModels.accept(viewModel.sectionModels)
+        recentSectionModels.accept(viewModel.sectionModels)
+    }
+    
+    func displaySearchAppStore(viewModel: AppSearch.SearchAppStore.ViewModel) {
+        searchSectionModels.accept(viewModel.sectionModels)
     }
 }
 
@@ -119,22 +125,42 @@ extension AppSearchViewController: UITableViewDelegate {
     
     private func configureRx() {
         
-        let dataSource = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
+        let recentDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
             
             let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchMainListCell", for: indexPath) as! AppSearchMainListCell
-            if let model = item.object as? RecentHitoryModel, let status = self.router?.dataStore?.appSearchStatus {
+            if let model = item.object as? RecentHistoryModel, let status = self.router?.dataStore?.appSearchStatus {
                 cell.configure(model: model, type: item.type, status: status)
             }
             
             return cell
         })
         
-        sectionModels.bind(to: recentTv.rx.items(dataSource: dataSource)).disposed(by: self.disposeBag)
+        let searchDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
+            
+            let cell = tv.dequeueReusableCell(withIdentifier: "AppItemCell", for: indexPath) as! AppItemCell
+            if let model = item.object as? AppInfoModel {
+                cell.configure(model: model)
+            }
+            
+            return cell
+        })
         
-        // 최금검색어 선택시
+        recentSectionModels.bind(to: recentTv.rx.items(dataSource: recentDs)).disposed(by: self.disposeBag)
+        searchSectionModels.bind(to: searchTv.rx.items(dataSource: searchDs)).disposed(by: self.disposeBag)
+        
+        // 최근검색어 선택
         recentTv.rx.itemSelected
-            .subscribe(onNext: { (_) in
-                self.recentTv.reloadData()
+            .subscribe(onNext: { (indexPath) in
+                
+                self.recentTv.reloadRows(at: [indexPath], with: .none)
+                guard let model = self.router?.dataStore?.recentHistoryModels?[indexPath.section-1] else { return }
+                guard let searchWord = model.searchWord else { return }
+                self.searchController.searchBar.text = searchWord
+                self.searchController.isActive = true
+                Async.main(after: 0.2) {
+                    let request = AppSearch.SearchAppStore.Request(query: searchWord)
+                    self.interactor?.doSearchAppStore(request: request)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -142,8 +168,7 @@ extension AppSearchViewController: UITableViewDelegate {
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { [weak self] (height) in
                 guard let self = self else { return }
-                guard let window = UIApplication.shared.keyWindow else { return }
-                self.searchTv.contentInset = UIEdgeInsets(top: self.searchTv.contentInset.top, left: self.searchTv.contentInset.left, bottom: height + window.safeAreaInsets.bottom, right: self.searchTv.contentInset.right)
+                self.searchBaseViewBottom.constant = height
             })
             .disposed(by: disposeBag)
         
@@ -163,8 +188,23 @@ extension AppSearchViewController: UITableViewDelegate {
             .searchButtonClicked
             .subscribe(onNext: { (_) in
                 guard let query = self.searchController.searchBar.text else { return }
-                let request = AppSearch.SearchAppStory.Request(query: query)
-                self.interactor?.doSearchAppStory(request: request)
+                let request = AppSearch.SearchAppStore.Request(query: query)
+                self.interactor?.doSearchAppStore(request: request)
+            })
+            .disposed(by: disposeBag)
+        
+        // 검색바 취소 클릭시
+        searchController.searchBar.rx
+            .cancelButtonClicked
+            .subscribe(onNext: { (_) in
+                self.searchSectionModels.accept([])
+            })
+            .disposed(by: disposeBag)
+        
+        // 검색한 앱선택
+        searchTv.rx.itemSelected
+            .subscribe(onNext: { (_) in
+                
             })
             .disposed(by: disposeBag)
     }
