@@ -153,6 +153,7 @@ extension AppSearchViewController: UITableViewDelegate {
             .subscribe(onNext: { (indexPath) in
                 
                 self.recentTv.reloadRows(at: [indexPath], with: .none)
+                guard indexPath.section > 0 else { return }
                 guard let model = self.router?.dataStore?.recentHistoryModels?[indexPath.section-1] else { return }
                 guard let searchWord = model.searchWord else { return }
                 self.searchController.searchBar.text = searchWord
@@ -166,9 +167,11 @@ extension AppSearchViewController: UITableViewDelegate {
         
         // 키보드 동작
         RxKeyboard.instance.visibleHeight
+            .skip(1)
             .drive(onNext: { [weak self] (height) in
                 guard let self = self else { return }
                 self.searchBaseViewBottom.constant = height
+                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
             })
             .disposed(by: disposeBag)
         
