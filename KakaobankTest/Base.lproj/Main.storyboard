@@ -50,16 +50,37 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WbB-M4-3MY">
-                                                            <rect key="frame" x="61" y="12" width="42" height="20"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="56" y="13" width="37.5" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dot1" translatesAutoresizingMaskIntoConstraints="NO" id="eaJ-SA-sGk">
+                                                            <rect key="frame" x="20" y="9" width="26" height="26"/>
+                                                            <color key="tintColor" red="0.99607843139999996" green="0.25098039220000001" blue="0.38823529410000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="26" id="QK2-yC-fmz"/>
+                                                                <constraint firstAttribute="width" constant="26" id="ftz-Yy-NXf"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N3x-Wg-kCm">
+                                                            <rect key="frame" x="20" y="43" width="394" height="1"/>
+                                                            <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="5yp-ag-glT"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="WbB-M4-3MY" firstAttribute="leading" secondItem="zyu-w8-Mg5" secondAttribute="leading" constant="61" id="OP6-Lf-49s"/>
-                                                        <constraint firstItem="WbB-M4-3MY" firstAttribute="top" secondItem="zyu-w8-Mg5" secondAttribute="top" constant="12" id="dSN-a9-fFc"/>
-                                                        <constraint firstAttribute="bottom" secondItem="WbB-M4-3MY" secondAttribute="bottom" priority="750" constant="12" id="zyN-bC-zOL"/>
+                                                        <constraint firstItem="eaJ-SA-sGk" firstAttribute="leading" secondItem="zyu-w8-Mg5" secondAttribute="leading" constant="20" id="IjW-k3-n9e"/>
+                                                        <constraint firstAttribute="bottom" secondItem="N3x-Wg-kCm" secondAttribute="bottom" id="Lbb-Zf-wtc"/>
+                                                        <constraint firstItem="eaJ-SA-sGk" firstAttribute="centerY" secondItem="zyu-w8-Mg5" secondAttribute="centerY" id="M3c-AP-kOL"/>
+                                                        <constraint firstItem="WbB-M4-3MY" firstAttribute="centerY" secondItem="eaJ-SA-sGk" secondAttribute="centerY" id="PTJ-FC-7wi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="eaJ-SA-sGk" secondAttribute="bottom" priority="750" constant="9" id="bkZ-a8-QdA"/>
+                                                        <constraint firstItem="eaJ-SA-sGk" firstAttribute="top" secondItem="zyu-w8-Mg5" secondAttribute="top" constant="9" id="dSL-vU-iVW"/>
+                                                        <constraint firstAttribute="trailing" secondItem="N3x-Wg-kCm" secondAttribute="trailing" id="hL2-4t-kak"/>
+                                                        <constraint firstItem="WbB-M4-3MY" firstAttribute="leading" secondItem="eaJ-SA-sGk" secondAttribute="trailing" constant="10" id="kyR-LY-ycU"/>
+                                                        <constraint firstItem="N3x-Wg-kCm" firstAttribute="leading" secondItem="zyu-w8-Mg5" secondAttribute="leading" constant="20" id="rcg-kc-X90"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
@@ -281,4 +302,7 @@
             <point key="canvasLocation" x="238" y="123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dot1" width="120" height="120"/>
+    </resources>
 </document>
