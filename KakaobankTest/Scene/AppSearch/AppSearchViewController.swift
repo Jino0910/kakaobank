@@ -127,10 +127,8 @@ extension AppSearchViewController: UITableViewDelegate {
         
         //
         definesPresentationContext = true
-    }
-    
-    private func configureRx() {
         
+        // tableView datasource
         let recentDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
             
             let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchHistoryListCell", for: indexPath) as! AppSearchHistoryListCell
@@ -153,18 +151,21 @@ extension AppSearchViewController: UITableViewDelegate {
                 
                 return cell
             case .searchAppInfoList:
-                    let cell = tv.dequeueReusableCell(withIdentifier: "AppItemCell", for: indexPath) as! AppItemCell
-                    if let model = item.object as? AppInfoModel {
-                        cell.configure(model: model)
-                    }
-                    
-                    return cell
+                let cell = tv.dequeueReusableCell(withIdentifier: "AppItemCell", for: indexPath) as! AppItemCell
+                if let model = item.object as? AppInfoModel {
+                    cell.configure(model: model)
+                }
+                
+                return cell
             default: return UITableViewCell()
             }
         })
         
         recentSectionModels.bind(to: recentTv.rx.items(dataSource: recentDs)).disposed(by: self.disposeBag)
         searchSectionModels.bind(to: searchTv.rx.items(dataSource: searchDs)).disposed(by: self.disposeBag)
+    }
+    
+    private func configureRx() {
         
         // 최근검색어 선택
         recentTv.rx.itemSelected
@@ -176,7 +177,7 @@ extension AppSearchViewController: UITableViewDelegate {
                 guard let searchWord = model.searchWord else { return }
                 self.searchController.searchBar.text = searchWord
                 self.searchController.isActive = true
-                Async.main(after: 0.2) {
+                Async.background(after: 0.2) {
                     let request = AppSearch.SearchAppStore.Request(query: searchWord)
                     self.interactor?.doSearchAppStore(request: request)
                 }
@@ -186,22 +187,24 @@ extension AppSearchViewController: UITableViewDelegate {
         // 검색한 앱선택
         searchTv.rx.itemSelected
             .subscribe(onNext: { (indexPath) in
-                guard let model = self.router?.dataStore?.appInfoModels?[indexPath.section-1] else { return }
-                print(model.trackName)
+                
+                guard let data = self.router?.dataStore else { return }
+                
+                if data.appSearchStatus == .searching {
+                    
+                    guard let model = data.recentHistoryModels?[indexPath.section-1] else { return }
+                    print(model.searchWord ?? "")
+                    
+                    
+                } else if data.appSearchStatus == .searchComplete {
+                    
+                    guard let model = data.appInfoModels?[indexPath.section-1] else { return }
+                    print(model.trackName)
+                }
+                
+                
             })
             .disposed(by: disposeBag)
-        
-//        // 검색중 이벤트
-//        searchController.searchBar.rx
-//            .textDidBeginEditing
-//            .subscribe(onNext: { (_) in
-//                if let text = self.searchController.searchBar.text, !text.isEmpty {
-//
-//                } else {
-//
-//                }
-//            })
-//            .disposed(by: disposeBag)
         
         // 검색하단뷰 터치(검색어 없을 경우)
         searchBaseView.rx.tapGesture()
@@ -234,14 +237,14 @@ extension AppSearchViewController: UITableViewDelegate {
             .disposed(by: disposeBag)
         
         // 키보드 동작
-        RxKeyboard.instance.visibleHeight
-            .skip(1)
-            .drive(onNext: { [weak self] (height) in
-                guard let self = self else { return }
-                self.searchBaseViewBottom.constant = height
-                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
-            })
-            .disposed(by: disposeBag)
+//        RxKeyboard.instance.visibleHeight
+//            .skip(1)
+//            .drive(onNext: { [weak self] (height) in
+//                guard let self = self else { return }
+//                self.searchBaseViewBottom.constant = height
+//                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
+//            })
+//            .disposed(by: disposeBag)
         
     }
 }
