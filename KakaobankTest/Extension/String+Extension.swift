@@ -17,4 +17,11 @@ extension String {
     static func className(_ aClass: AnyClass) -> String {
         return NSStringFromClass(aClass).components(separatedBy: ".").last!
     }
+    
+    /// 한글 검증
+    var checkKorean: Bool {
+        let regEx = "^[가-힣ㄱ-ㅎㅏ-ㅣ\\s]$"
+        let emailTest = NSPredicate(format: "SELF MATCHES[c] %@", regEx)
+        return emailTest.evaluate(with: self)
+    }
 }

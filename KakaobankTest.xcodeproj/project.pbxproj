@@ -25,17 +25,17 @@
 		61967132227D813500852ED0 /* AppSearchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712C227D813500852ED0 /* AppSearchModels.swift */; };
 		61967133227D813500852ED0 /* AppSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712D227D813500852ED0 /* AppSearchViewController.swift */; };
 		61967134227D813500852ED0 /* AppSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712E227D813500852ED0 /* AppSearchInteractor.swift */; };
-		61F5181F227D8BB900340CBF /* AppSearchMainListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F5181E227D8BB900340CBF /* AppSearchMainListCell.swift */; };
 		61F51821227D8E8800340CBF /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51820227D8E8800340CBF /* TokenManager.swift */; };
 		61F51825227DA98F00340CBF /* AppSearchBaseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51824227DA98F00340CBF /* AppSearchBaseItem.swift */; };
 		61F51827227DB9B300340CBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51826227DB9B300340CBF /* UIView+Extension.swift */; };
 		61F5182B227DD35100340CBF /* UITableView+Extionsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F5182A227DD35100340CBF /* UITableView+Extionsion.swift */; };
 		61F5182F227E925200340CBF /* AppItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F5182E227E925200340CBF /* AppItemCell.swift */; };
-		61F51831227E928600340CBF /* AppRecommandListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51830227E928600340CBF /* AppRecommandListCell.swift */; };
 		61F5183F227E9C3E00340CBF /* RecentHistoryRealmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F5183E227E9C3E00340CBF /* RecentHistoryRealmItem.swift */; };
 		61F51841227E9D0600340CBF /* AppInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51840227E9D0600340CBF /* AppInfoModel.swift */; };
 		61F51845227EBE5D00340CBF /* UIImageView+Extionsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51844227EBE5D00340CBF /* UIImageView+Extionsion.swift */; };
 		61F51847227ED32200340CBF /* SearchHistoryRealmItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51846227ED32200340CBF /* SearchHistoryRealmItem.swift */; };
+		61F51849227EEA8B00340CBF /* AppSearchHistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51848227EEA8B00340CBF /* AppSearchHistoryListCell.swift */; };
+		61F5184B227EEAA600340CBF /* AppRecentHistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F5184A227EEAA500340CBF /* AppRecentHistoryListCell.swift */; };
 		89824791AA7ADBC4F1220A88 /* Pods_KakaobankTestUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */; };
 		9FEF3FA416DB60968093F745 /* Pods_KakaobankTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4796B3656B3F04BC0E100F4 /* Pods_KakaobankTestTests.framework */; };
 /* End PBXBuildFile section */
@@ -83,17 +83,17 @@
 		6196712C227D813500852ED0 /* AppSearchModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchModels.swift; sourceTree = "<group>"; };
 		6196712D227D813500852ED0 /* AppSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchViewController.swift; sourceTree = "<group>"; };
 		6196712E227D813500852ED0 /* AppSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchInteractor.swift; sourceTree = "<group>"; };
-		61F5181E227D8BB900340CBF /* AppSearchMainListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchMainListCell.swift; sourceTree = "<group>"; };
 		61F51820227D8E8800340CBF /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		61F51824227DA98F00340CBF /* AppSearchBaseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchBaseItem.swift; sourceTree = "<group>"; };
 		61F51826227DB9B300340CBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		61F5182A227DD35100340CBF /* UITableView+Extionsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extionsion.swift"; sourceTree = "<group>"; };
 		61F5182E227E925200340CBF /* AppItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppItemCell.swift; sourceTree = "<group>"; };
-		61F51830227E928600340CBF /* AppRecommandListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecommandListCell.swift; sourceTree = "<group>"; };
 		61F5183E227E9C3E00340CBF /* RecentHistoryRealmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentHistoryRealmItem.swift; sourceTree = "<group>"; };
 		61F51840227E9D0600340CBF /* AppInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoModel.swift; sourceTree = "<group>"; };
 		61F51844227EBE5D00340CBF /* UIImageView+Extionsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extionsion.swift"; sourceTree = "<group>"; };
 		61F51846227ED32200340CBF /* SearchHistoryRealmItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryRealmItem.swift; sourceTree = "<group>"; };
+		61F51848227EEA8B00340CBF /* AppSearchHistoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchHistoryListCell.swift; sourceTree = "<group>"; };
+		61F5184A227EEAA500340CBF /* AppRecentHistoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRecentHistoryListCell.swift; sourceTree = "<group>"; };
 		7550B26E4F7B9594B22B3995 /* Pods-KakaobankTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestTests.debug.xcconfig"; path = "Target Support Files/Pods-KakaobankTestTests/Pods-KakaobankTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		924924D08F60AED76B0357FE /* Pods_KakaobankTestUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KakaobankTestUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2C536686074CC42F63DB90C /* Pods-KakaobankTestUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KakaobankTestUITests.release.xcconfig"; path = "Target Support Files/Pods-KakaobankTestUITests/Pods-KakaobankTestUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -243,8 +243,8 @@
 		61F5181B227D8B4400340CBF /* AppSearch */ = {
 			isa = PBXGroup;
 			children = (
-				61F5181E227D8BB900340CBF /* AppSearchMainListCell.swift */,
-				61F51830227E928600340CBF /* AppRecommandListCell.swift */,
+				61F51848227EEA8B00340CBF /* AppSearchHistoryListCell.swift */,
+				61F5184A227EEAA500340CBF /* AppRecentHistoryListCell.swift */,
 				61F5182E227E925200340CBF /* AppItemCell.swift */,
 			);
 			path = AppSearch;
@@ -535,10 +535,9 @@
 				61967122227D598600852ED0 /* APIManager.swift in Sources */,
 				61F51847227ED32200340CBF /* SearchHistoryRealmItem.swift in Sources */,
 				61F51841227E9D0600340CBF /* AppInfoModel.swift in Sources */,
-				61F5181F227D8BB900340CBF /* AppSearchMainListCell.swift in Sources */,
 				61F51827227DB9B300340CBF /* UIView+Extension.swift in Sources */,
-				61F51831227E928600340CBF /* AppRecommandListCell.swift in Sources */,
 				61967130227D813500852ED0 /* AppSearchWorker.swift in Sources */,
+				61F5184B227EEAA600340CBF /* AppRecentHistoryListCell.swift in Sources */,
 				61F5182F227E925200340CBF /* AppItemCell.swift in Sources */,
 				61967134227D813500852ED0 /* AppSearchInteractor.swift in Sources */,
 				61967131227D813500852ED0 /* AppSearchRouter.swift in Sources */,
@@ -554,6 +553,7 @@
 				61967126227D793D00852ED0 /* String+Extension.swift in Sources */,
 				61967133227D813500852ED0 /* AppSearchViewController.swift in Sources */,
 				61967124227D5ABC00852ED0 /* API.swift in Sources */,
+				61F51849227EEA8B00340CBF /* AppSearchHistoryListCell.swift in Sources */,
 				61F51821227D8E8800340CBF /* TokenManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

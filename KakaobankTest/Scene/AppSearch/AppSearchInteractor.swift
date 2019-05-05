@@ -19,7 +19,7 @@ import SwiftyJSON
 
 protocol AppSearchBusinessLogic {
     func doRecentHistory()
-    func doSearchHistory(request: AppSearch.SearchHitory.Request)
+    func doSearchWordHistory(request: AppSearch.SearchWordHitory.Request)
     func doSearchAppStore(request: AppSearch.SearchAppStore.Request)
 }
 
@@ -36,7 +36,7 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     
     let disposeBag = DisposeBag()
     
-    var appSearchStatus: AppSearchStatus = .searchNon
+    var appSearchStatus: AppSearchStatus = .searchBefore
     var recentHistoryModels: [RecentHistoryModel]?
     var appInfoModels: [AppInfoModel]?
     
@@ -77,15 +77,23 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
 
             guard let self = self else { return }
             for item in self.searchHistoryList {
-                print("1 \(item.searchWord)")
+                print("\(item.searchWord)")
             }
-            
         })
     }
     
-    func doSearchHistory(request: AppSearch.SearchHitory.Request) {
+    func doSearchWordHistory(request: AppSearch.SearchWordHitory.Request) {
         
+        let predicate = NSPredicate(format: "searchWord CONTAINS %@", request.query)
+        guard let results = searchHistoryList.realm?.objects(SearchHistoryRealmItem.self).filter(predicate) else { return }
         
+        var models: [SearchHistoryModel] = []
+        for item in results {
+            models.append(SearchHistoryModel(searchWord: item.searchWord, date: item.date))
+        }
+        
+        let response = AppSearch.SearchWordHitory.Response(searchHistoryModel: models)
+        self.presenter?.presentSearchWordHistory(response: response)
     }
     
     func doSearchAppStore(request: AppSearch.SearchAppStore.Request) {
@@ -114,11 +122,6 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
             })
             .disposed(by: disposeBag)
     }
-    
-    func doSearchWordHistory(request: AppSearch.SearchAppStore.Request) {
-        
-    }
-    
 }
 
 extension AppSearchInteractor {

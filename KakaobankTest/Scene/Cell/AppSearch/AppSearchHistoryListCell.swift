@@ -1,20 +1,20 @@
 //
-//  AppSearchMainListCell.swift
+//  AppSearchHistoryListCell.swift
 //  KakaobankTest
 //
-//  Created by rowkaxl on 04/05/2019.
+//  Created by rowkaxl on 05/05/2019.
 //  Copyright © 2019 rowkaxl. All rights reserved.
 //
 
 import UIKit
 
-class AppSearchMainListCell: UITableViewCell {
+class AppSearchHistoryListCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     func configure(model: RecentHistoryModel, type: AppSearchSectionType, status: AppSearchStatus) {
         
         self.textLabel?.text = model.searchWord
@@ -27,7 +27,7 @@ class AppSearchMainListCell: UITableViewCell {
             self.textLabel?.font = UIFont.systemFont(ofSize: 22)
             
             switch status {
-            case .searchNon:
+            case .searchBefore:
                 self.textLabel?.textColor = .appleBlue
             default:
                 self.textLabel?.textColor = .darkGray

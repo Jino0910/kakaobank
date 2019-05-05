@@ -14,6 +14,7 @@ import UIKit
 
 protocol AppSearchPresentationLogic {
     func presentRecentHistory(response: AppSearch.RecentHitory.Response)
+    func presentSearchWordHistory(response: AppSearch.SearchWordHitory.Response)
     func presentSearchAppStore(response: AppSearch.SearchAppStore.Response)
 }
 
@@ -26,6 +27,13 @@ class AppSearchPresenter: AppSearchPresentationLogic {
         let sectionModels = self.getRecentHistorySectionModel(recentHistoryModels: response.recentHistoryModels)
         let viewModel = AppSearch.RecentHitory.ViewModel(sectionModels: sectionModels)
         viewController?.displayRecentHistory(viewModel: viewModel)
+    }
+    
+    func presentSearchWordHistory(response: AppSearch.SearchWordHitory.Response) {
+        
+        let sectionModels = self.getSearchWordHistorySectionModel(searchHistoryModel: response.searchHistoryModel)
+        let viewModel = AppSearch.SearchWordHitory.ViewModel(sectionModels: sectionModels)
+        viewController?.displaySearchWordHistory(viewModel: viewModel)
     }
     
     func presentSearchAppStore(response: AppSearch.SearchAppStore.Response) {
@@ -50,6 +58,20 @@ extension AppSearchPresenter {
                 AppSearchBaseItemSection(items: [
                     AppSearchBaseItem(type: .recentWordContent, object: item)
                 ]))
+        }
+        
+        return sectionModels
+    }
+    
+    func getSearchWordHistorySectionModel(searchHistoryModel: [SearchHistoryModel]) -> [AppSearchBaseItemSection] {
+        
+        var sectionModels: [AppSearchBaseItemSection] = []
+        
+        for item in searchHistoryModel {
+            sectionModels.append(
+                AppSearchBaseItemSection(items: [
+                    AppSearchBaseItem(type: .searchWordList, object: item)
+                    ]))
         }
         
         return sectionModels

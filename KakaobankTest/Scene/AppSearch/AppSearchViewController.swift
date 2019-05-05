@@ -21,6 +21,7 @@ import Async
 
 protocol AppSearchDisplayLogic: class {
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel)
+    func displaySearchWordHistory(viewModel: AppSearch.SearchWordHitory.ViewModel)
     func displaySearchAppStore(viewModel: AppSearch.SearchAppStore.ViewModel)
 }
 
@@ -93,6 +94,10 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
         recentSectionModels.accept(viewModel.sectionModels)
     }
     
+    func displaySearchWordHistory(viewModel: AppSearch.SearchWordHitory.ViewModel) {
+        searchSectionModels.accept(viewModel.sectionModels)
+    }
+    
     func displaySearchAppStore(viewModel: AppSearch.SearchAppStore.ViewModel) {
         searchSectionModels.accept(viewModel.sectionModels)
     }
@@ -112,6 +117,7 @@ extension AppSearchViewController: UITableViewDelegate {
         //
         searchController.obscuresBackgroundDuringPresentation = false
         
+        searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "App Store"
         searchController.searchBar.setValue("취소", forKey: "_cancelButtonText")
         
@@ -127,7 +133,7 @@ extension AppSearchViewController: UITableViewDelegate {
         
         let recentDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
             
-            let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchMainListCell", for: indexPath) as! AppSearchMainListCell
+            let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchHistoryListCell", for: indexPath) as! AppSearchHistoryListCell
             if let model = item.object as? RecentHistoryModel, let status = self.router?.dataStore?.appSearchStatus {
                 cell.configure(model: model, type: item.type, status: status)
             }
@@ -137,12 +143,24 @@ extension AppSearchViewController: UITableViewDelegate {
         
         let searchDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
             
-            let cell = tv.dequeueReusableCell(withIdentifier: "AppItemCell", for: indexPath) as! AppItemCell
-            if let model = item.object as? AppInfoModel {
-                cell.configure(model: model)
-            }
             
-            return cell
+            switch item.type {
+            case .searchWordList:
+                let cell = tv.dequeueReusableCell(withIdentifier: "AppRecentHistoryListCell", for: indexPath) as! AppRecentHistoryListCell
+                if let model = item.object as? SearchHistoryModel {
+                    cell.configure(model: model)
+                }
+                
+                return cell
+            case .searchAppInfoList:
+                    let cell = tv.dequeueReusableCell(withIdentifier: "AppItemCell", for: indexPath) as! AppItemCell
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
+                    
+                    return cell
+            default: return UITableViewCell()
+            }
         })
         
         recentSectionModels.bind(to: recentTv.rx.items(dataSource: recentDs)).disposed(by: self.disposeBag)
@@ -173,17 +191,17 @@ extension AppSearchViewController: UITableViewDelegate {
             })
             .disposed(by: disposeBag)
         
-        // 검색중 이벤트
-        searchController.searchBar.rx
-            .textDidBeginEditing
-            .subscribe(onNext: { (_) in
-                if let text = self.searchController.searchBar.text, !text.isEmpty {
-                    
-                } else {
-                    
-                }
-            })
-            .disposed(by: disposeBag)
+//        // 검색중 이벤트
+//        searchController.searchBar.rx
+//            .textDidBeginEditing
+//            .subscribe(onNext: { (_) in
+//                if let text = self.searchController.searchBar.text, !text.isEmpty {
+//
+//                } else {
+//
+//                }
+//            })
+//            .disposed(by: disposeBag)
         
         // 검색하단뷰 터치(검색어 없을 경우)
         searchBaseView.rx.tapGesture()
@@ -224,26 +242,34 @@ extension AppSearchViewController: UITableViewDelegate {
                 UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
             })
             .disposed(by: disposeBag)
+        
     }
 }
 
 extension AppSearchViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-//        filterContentForSearchText(searchBar.text!)
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        return text.checkKorean || text.isEmpty
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard let text = searchBar.text else { return }
+        guard !text.isEmpty else { return }
+        
+        let request = AppSearch.SearchWordHitory.Request(query: text)
+        self.interactor?.doSearchWordHistory(request: request)
     }
 }
 
 extension AppSearchViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
-//        filterContentForSearchText(searchController.searchBar.text!)
+
         guard var data = self.router?.dataStore else { return }
-        guard data.appSearchStatus != .searchNon else { return }
+        guard data.appSearchStatus != .searchBefore else { return }
         
         if searchController.searchBar.text!.isEmpty {
             setAppSearchStatus(status: .searchStart)
-//            recentTv.reloadData()
         } else {
             setAppSearchStatus(status: .searching)
         }
@@ -271,7 +297,7 @@ extension AppSearchViewController {
     }
     
     func hideSearchBaseView() {
-        setAppSearchStatus(status: .searchNon)
+        setAppSearchStatus(status: .searchBefore)
         recentTv.reloadData()
     }
     
