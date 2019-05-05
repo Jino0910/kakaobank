@@ -26,6 +26,7 @@ protocol AppSearchBusinessLogic {
 protocol AppSearchDataStore {
     var appSearchStatus: AppSearchStatus { get set }
     var recentHistoryModels: [RecentHistoryModel]? { get set }
+    var searchHistoryModels: [SearchHistoryModel]? { get set }
     var appInfoModels: [AppInfoModel]? { get set }
 }
 
@@ -38,6 +39,7 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     
     var appSearchStatus: AppSearchStatus = .searchBefore
     var recentHistoryModels: [RecentHistoryModel]?
+    var searchHistoryModels: [SearchHistoryModel]?
     var appInfoModels: [AppInfoModel]?
     
     let realm = try! Realm()
@@ -91,6 +93,7 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
         for item in results {
             models.append(SearchHistoryModel(searchWord: item.searchWord, date: item.date))
         }
+        self.searchHistoryModels = models
         
         let response = AppSearch.SearchWordHitory.Response(searchHistoryModel: models)
         self.presenter?.presentSearchWordHistory(response: response)

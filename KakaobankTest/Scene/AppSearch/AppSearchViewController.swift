@@ -173,10 +173,14 @@ extension AppSearchViewController: UITableViewDelegate {
                 
                 self.recentTv.reloadRows(at: [indexPath], with: .none)
                 guard indexPath.section > 0 else { return }
-                guard let model = self.router?.dataStore?.recentHistoryModels?[indexPath.section-1] else { return }
+                guard var data = self.router?.dataStore else { return }
+                guard let model = data.recentHistoryModels?[indexPath.section-1] else { return }
                 guard let searchWord = model.searchWord else { return }
+                
                 self.searchController.searchBar.text = searchWord
                 self.searchController.isActive = true
+                data.appSearchStatus = .searchComplete
+                
                 Async.background(after: 0.2) {
                     let request = AppSearch.SearchAppStore.Request(query: searchWord)
                     self.interactor?.doSearchAppStore(request: request)
@@ -188,17 +192,25 @@ extension AppSearchViewController: UITableViewDelegate {
         searchTv.rx.itemSelected
             .subscribe(onNext: { (indexPath) in
                 
+                self.recentTv.reloadRows(at: [indexPath], with: .none)
                 guard let data = self.router?.dataStore else { return }
                 
                 if data.appSearchStatus == .searching {
                     
-                    guard let model = data.recentHistoryModels?[indexPath.section-1] else { return }
-                    print(model.searchWord ?? "")
+                    guard let model = data.searchHistoryModels?[indexPath.section] else { return }
+                    guard let query = model.searchWord else { return }
+                    guard var data = self.router?.dataStore else { return }
                     
+                    self.searchController.searchBar.text = query
+                    self.searchController.searchBar.endEditing(true)
+                    data.appSearchStatus = .searchComplete
+                    
+                    let request = AppSearch.SearchAppStore.Request(query: query)
+                    self.interactor?.doSearchAppStore(request: request)
                     
                 } else if data.appSearchStatus == .searchComplete {
                     
-                    guard let model = data.appInfoModels?[indexPath.section-1] else { return }
+                    guard let model = data.appInfoModels?[indexPath.section] else { return }
                     print(model.trackName)
                 }
                 
@@ -206,24 +218,26 @@ extension AppSearchViewController: UITableViewDelegate {
             })
             .disposed(by: disposeBag)
         
-        // 검색하단뷰 터치(검색어 없을 경우)
-        searchBaseView.rx.tapGesture()
-            .filter({_ in
-                guard var data = self.router?.dataStore else { return false }
-                return data.appSearchStatus != .searching
-            })
-            .subscribe(onNext: { [weak self](_) in
-                guard let self = self else { return }
-                self.searchController.isActive = false
-            }).disposed(by: disposeBag)
+//        // 검색하단뷰 터치(검색어 없을 경우)
+//        searchBaseView.rx.tapGesture()
+//            .filter({_ in
+//                guard var data = self.router?.dataStore else { return false }
+//                return data.appSearchStatus == .searchStart
+//            })
+//            .subscribe(onNext: { [weak self](_) in
+//                guard let self = self else { return }
+//                self.searchController.isActive = false
+//            }).disposed(by: disposeBag)
         
         // 검색완료 클릭
         searchController.searchBar.rx
             .searchButtonClicked
             .subscribe(onNext: { (_) in
                 guard let query = self.searchController.searchBar.text else { return }
+                guard var data = self.router?.dataStore else { return }
                 let request = AppSearch.SearchAppStore.Request(query: query)
                 self.interactor?.doSearchAppStore(request: request)
+                data.appSearchStatus = .searchComplete
             })
             .disposed(by: disposeBag)
         
@@ -237,14 +251,14 @@ extension AppSearchViewController: UITableViewDelegate {
             .disposed(by: disposeBag)
         
         // 키보드 동작
-//        RxKeyboard.instance.visibleHeight
-//            .skip(1)
-//            .drive(onNext: { [weak self] (height) in
-//                guard let self = self else { return }
-//                self.searchBaseViewBottom.constant = height
-//                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
-//            })
-//            .disposed(by: disposeBag)
+        RxKeyboard.instance.visibleHeight
+            .skip(1)
+            .drive(onNext: { [weak self] (height) in
+                guard let self = self else { return }
+                self.searchBaseViewBottom.constant = height
+                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
+            })
+            .disposed(by: disposeBag)
         
     }
 }
@@ -258,6 +272,8 @@ extension AppSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let text = searchBar.text else { return }
         guard !text.isEmpty else { return }
+        guard var data = self.router?.dataStore else { return }
+        data.appSearchStatus = .searching
         
         let request = AppSearch.SearchWordHitory.Request(query: text)
         self.interactor?.doSearchWordHistory(request: request)
