@@ -15,16 +15,23 @@ class AppSearchMainListCell: UITableViewCell {
         // Initialization code
     }
 
-    func configure(model: RecentHitoryModel, type: AppSearchSectionType) {
+    func configure(model: RecentHitoryModel, type: AppSearchSectionType, status: AppSearchStatus) {
         
         self.textLabel?.text = model.searchWord
         
-        if type == .recentWordTitle {
+        switch type {
+        case .recentWordTitle:
             self.textLabel?.font = UIFont.boldSystemFont(ofSize: 22)
             self.textLabel?.textColor = .black
-        } else {
+        default:
             self.textLabel?.font = UIFont.systemFont(ofSize: 22)
-            self.textLabel?.textColor = .appleBlue
+            
+            switch status {
+            case .searchNon:
+                self.textLabel?.textColor = .appleBlue
+            default:
+                self.textLabel?.textColor = .darkGray
+            }
         }
     }
 

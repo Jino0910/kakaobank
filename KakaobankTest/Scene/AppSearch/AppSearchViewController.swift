@@ -91,17 +91,7 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
         
         return tv
     }()
-    
-    let dataSource = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
-        
-        let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchMainListCell", for: indexPath) as! AppSearchMainListCell
-        if let model = item.object as? RecentHitoryModel {
-            cell.configure(model: model, type: item.type)
-        }
-        
-        return cell
-    })
-        
+
     let sectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel) {
@@ -149,6 +139,16 @@ extension AppSearchViewController: UITableViewDelegate {
     
     private func configureRx() {
         
+        let dataSource = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
+            
+            let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchMainListCell", for: indexPath) as! AppSearchMainListCell
+            if let model = item.object as? RecentHitoryModel, let status = self.router?.dataStore?.appSearchStatus {
+                cell.configure(model: model, type: item.type, status: status)
+            }
+            
+            return cell
+        })
+        
         sectionModels.bind(to: recentTv.rx.items(dataSource: dataSource)).disposed(by: self.disposeBag)
         
         recentTv.rx.itemSelected
@@ -192,6 +192,7 @@ extension AppSearchViewController: UISearchResultsUpdating {
         
         if searchController.searchBar.text!.isEmpty {
             setAppSearchStatus(value: .searchStart)
+//            recentTv.reloadData()
         } else {
             setAppSearchStatus(value: .searching)
         }
@@ -215,14 +216,16 @@ extension AppSearchViewController {
     
     func addSearchView() {
         setAppSearchStatus(value: .searchStart)
+        recentTv.reloadData()
     }
     
     func removeSearchView() {
         setAppSearchStatus(value: .searchNon)
+        recentTv.reloadData()
     }
     
     func setSearchTv(alpha: CGFloat) {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.1) {
             self.searchTv.alpha = alpha
         }
     }
