@@ -37,7 +37,8 @@ extension AppDetailPresenter {
             AppSearchBaseItemSection(items: [
                 AppSearchBaseItem(type: .detailHeader, object: appInfoModel),
                 AppSearchBaseItem(type: .detailSubHeader, object: appInfoModel),
-                AppSearchBaseItem(type: .detailScreenShot, object: appInfoModel)
+                AppSearchBaseItem(type: .detailScreenShot, object: appInfoModel),
+                AppSearchBaseItem(type: .detailDescription, object: appInfoModel)
                 ])
         ]
         

@@ -24,4 +24,14 @@ extension String {
         let emailTest = NSPredicate(format: "SELF MATCHES[c] %@", regEx)
         return emailTest.evaluate(with: self)
     }
+    
+    /// 문자열 공백 삭제
+    func trim() -> String {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    /// 문자변경
+    func replace(target: String, withString: String) -> String {
+        return self.replacingOccurrences(of: target, with: withString, options: .literal, range: nil)
+    }
 }

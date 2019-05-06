@@ -19,6 +19,7 @@ class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalP
     private let screenShotWidth: CGFloat = 240.0
     private let screenShotMargin: CGFloat = 10.0
     public static let bottomMargin: CGFloat = 50.0
+    private var finalWidth: CGFloat?
     
     @IBOutlet weak var iv1: UIImageView!
     @IBOutlet weak var iv2: UIImageView!
@@ -56,6 +57,8 @@ class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalP
                     guard let image = image else { return }
                     iv.image = image
                     
+                    guard self.finalWidth == nil else { return }
+                    self.finalWidth = (self.screenShotWidth) * image.size.height / image.size.width
                     self.handler?((self.screenShotWidth) * image.size.height / image.size.width)
                 })
                 

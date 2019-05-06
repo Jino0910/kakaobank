@@ -92,7 +92,7 @@ class AppDetailViewController: UIViewController, AppDetailDisplayLogic {
  
     public let sectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     
-    var screenShotHeight: CGFloat = 0
+    var screenShotHeight: CGFloat = 450
     
     func displaySectionModels(viewModel: AppDetail.AppDetailInfo.ViewModel) {
         sectionModels.accept(viewModel.sectionModels)
@@ -136,10 +136,15 @@ extension AppDetailViewController: UITableViewDelegate {
                     cell.handler = { [weak self] height in
                         self?.screenShotHeight = height
                         cv.performBatchUpdates({})
+//                        cv.reloadItemsAtIndexPaths([indexPath], animationStyle: .none)
                     }
                     return cell
+                case .detailDescription:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailDescriptionCell", for: indexPath) as! AppDetailDescriptionCell
+                    cell.configure(model: model)
+                    cell.handler = { cv.performBatchUpdates({}) }
+                    return cell
                     
-//                case .detailDescription:
 //                case .detailDeveloperInfo:
 //                case .detailRating:
 //                case .detailReviews:
@@ -171,13 +176,21 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         
         let width = UIScreen.main.bounds.width
         
+        print(item.type)
+        
         switch item.type {
             
         case .detailHeader: return CGSize(width: width, height: AppDetailHeaderCell.cellHeight)
         case .detailSubHeader: return CGSize(width: width, height: AppDetailSubHeaderCell.cellHeight)
         case .detailScreenShot: return CGSize(width: width, height: AppDetailScreenShotCell.bottomMargin+screenShotHeight)
+        case .detailDescription:
+            guard let model = self.router?.dataStore?.appInfoModel else { return .zero }
+            if let cell = cv.cellForItem(at: indexPath) as? AppDetailDescriptionCell {
+                return CGSize(width: width, height: cell.cellHeight(width: width, desc: model.description))
+            } else {
+                return CGSize(width: width, height: AppDetailDescriptionCell.cellHeight())
+            }
             
-//        case .detailDescription:
 //        case .detailDeveloperInfo:
 //        case .detailRating:
 //        case .detailReviews:

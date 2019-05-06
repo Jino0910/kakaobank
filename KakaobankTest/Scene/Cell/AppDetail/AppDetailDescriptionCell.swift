@@ -7,7 +7,65 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class AppDetailDescriptionCell: UICollectionViewCell {
     
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var moreLabel: UILabel!
+    
+    private var disposeBag = DisposeBag()
+    
+    private let leftRightMargin: CGFloat = 40.0
+    private let topBottomMargin: CGFloat = 40.0
+    private let defaultHeight: CGFloat = 56.0
+    
+    var handler : (() -> Void)?
+    private var isOpened = false
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+        handler = nil
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        descriptionLabel.rx.tapGesture()
+            .skip(1)
+            .filter({_ in !self.isOpened })
+            .subscribe(onNext: { [weak self](_) in
+                guard let self = self else { return }
+                self.isOpened = true
+                self.moreLabel.isHidden = self.isOpened
+                self.descriptionLabel.numberOfLines = 0
+                self.handler?()
+            }).disposed(by: disposeBag)
+    }
+    
+    func configure(model: AppInfoModel) {
+        
+        self.descriptionLabel.text = model.descriptionTrimVer
+    }
+    
+    public func cellHeight(width: CGFloat, desc: String) -> CGFloat {
+       
+        if isOpened {
+
+            let attribute = NSAttributedString(string: desc, attributes: [
+                .font: UIFont.systemFont(ofSize: 15.0)
+                ])
+            self.descriptionLabel.attributedText = attribute
+            
+            return attribute.height(width: width-leftRightMargin) + topBottomMargin
+        } else {
+            return defaultHeight + topBottomMargin
+        }
+    }
+    
+    public static func cellHeight() -> CGFloat {
+        return 96
+    }
 }

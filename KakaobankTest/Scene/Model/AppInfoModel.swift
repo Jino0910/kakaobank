@@ -66,6 +66,11 @@ struct AppInfoModel {
         return self.json["description"].stringValue
     }
     
+    /// 앱설명
+    var descriptionTrimVer: String {
+        return self.json["description"].stringValue.replace(target: "\n\n", withString: "\n")
+    }
+    
     /// 개발자 등록앱 URL
     var artistViewUrl: String {
         return self.json["artistViewUrl"].stringValue
