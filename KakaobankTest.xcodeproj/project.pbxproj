@@ -26,6 +26,8 @@
 		61967132227D813500852ED0 /* AppSearchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712C227D813500852ED0 /* AppSearchModels.swift */; };
 		61967133227D813500852ED0 /* AppSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712D227D813500852ED0 /* AppSearchViewController.swift */; };
 		61967134227D813500852ED0 /* AppSearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6196712E227D813500852ED0 /* AppSearchInteractor.swift */; };
+		61BE7C0F22802B4E00F0842E /* AppDetailSubHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE7C0E22802B4E00F0842E /* AppDetailSubHeaderCell.swift */; };
+		61BE7C1122802B7B00F0842E /* AppDetailScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BE7C1022802B7B00F0842E /* AppDetailScreenShotCell.swift */; };
 		61F51821227D8E8800340CBF /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51820227D8E8800340CBF /* TokenManager.swift */; };
 		61F51825227DA98F00340CBF /* AppSearchBaseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51824227DA98F00340CBF /* AppSearchBaseItem.swift */; };
 		61F51827227DB9B300340CBF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F51826227DB9B300340CBF /* UIView+Extension.swift */; };
@@ -92,6 +94,8 @@
 		6196712C227D813500852ED0 /* AppSearchModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchModels.swift; sourceTree = "<group>"; };
 		6196712D227D813500852ED0 /* AppSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchViewController.swift; sourceTree = "<group>"; };
 		6196712E227D813500852ED0 /* AppSearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchInteractor.swift; sourceTree = "<group>"; };
+		61BE7C0E22802B4E00F0842E /* AppDetailSubHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailSubHeaderCell.swift; sourceTree = "<group>"; };
+		61BE7C1022802B7B00F0842E /* AppDetailScreenShotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailScreenShotCell.swift; sourceTree = "<group>"; };
 		61F51820227D8E8800340CBF /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		61F51824227DA98F00340CBF /* AppSearchBaseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSearchBaseItem.swift; sourceTree = "<group>"; };
 		61F51826227DB9B300340CBF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
@@ -308,6 +312,8 @@
 			isa = PBXGroup;
 			children = (
 				61F5186322801A9100340CBF /* AppDetailHeaderCell.swift */,
+				61BE7C0E22802B4E00F0842E /* AppDetailSubHeaderCell.swift */,
+				61BE7C1022802B7B00F0842E /* AppDetailScreenShotCell.swift */,
 			);
 			path = AppDetail;
 			sourceTree = "<group>";
@@ -600,12 +606,14 @@
 				61F518572280061600340CBF /* AppDetailPresenter.swift in Sources */,
 				61967131227D813500852ED0 /* AppSearchRouter.swift in Sources */,
 				61F5184F227FE50900340CBF /* Int+Extension.swift in Sources */,
+				61BE7C0F22802B4E00F0842E /* AppDetailSubHeaderCell.swift in Sources */,
 				61F5182B227DD35100340CBF /* UITableView+Extionsion.swift in Sources */,
 				61F51845227EBE5D00340CBF /* UIImageView+Extionsion.swift in Sources */,
 				61F5186422801A9100340CBF /* AppDetailHeaderCell.swift in Sources */,
 				6196711F227D58FB00852ED0 /* UIColor+Extension.swift in Sources */,
 				61F518582280061600340CBF /* AppDetailWorker.swift in Sources */,
 				619670F0227D37C400852ED0 /* ViewController.swift in Sources */,
+				61BE7C1122802B7B00F0842E /* AppDetailScreenShotCell.swift in Sources */,
 				61F51825227DA98F00340CBF /* AppSearchBaseItem.swift in Sources */,
 				619670EE227D37C400852ED0 /* AppDelegate.swift in Sources */,
 				6196712F227D813500852ED0 /* AppSearchPresenter.swift in Sources */,

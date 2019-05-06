@@ -111,7 +111,15 @@ struct AppInfoModel {
     
     /// 카테고리 한글
     var genres: [JSON] {
-        return self.json["primaryGenreName"].arrayValue
+        return self.json["genres"].arrayValue
+    }
+    
+    var genresValue: String {
+        
+        if self.json["genres"].arrayValue.count > 0 {
+            return self.json["genres"].arrayValue[0].string ?? ""
+        }
+        return ""
     }
     
     /// 지원가능 디바이스

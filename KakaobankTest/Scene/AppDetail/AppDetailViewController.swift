@@ -132,6 +132,12 @@ extension AppDetailViewController: UITableViewDelegate {
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailHeaderCell", for: indexPath) as! AppDetailHeaderCell
                     cell.configure(model: model)
                     return cell
+                case .detailSubHeader:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailSubHeaderCell", for: indexPath) as! AppDetailSubHeaderCell
+                    cell.configure(model: model)
+                    return cell
+                    
+                    
                 default: return UICollectionViewCell()
                 }
         })
@@ -159,8 +165,8 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         
         switch item.type {
             
-        case .detailHeader:
-            return CGSize(width: width, height: AppDetailHeaderCell.cellHeight)
+        case .detailHeader: return CGSize(width: width, height: AppDetailHeaderCell.cellHeight)
+        case .detailSubHeader: return CGSize(width: width, height: AppDetailSubHeaderCell.cellHeight)
             
         default: return .zero
         }

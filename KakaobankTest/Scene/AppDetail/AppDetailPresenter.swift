@@ -35,7 +35,8 @@ extension AppDetailPresenter {
         
         let sectionModels: [AppSearchBaseItemSection] = [
             AppSearchBaseItemSection(items: [
-                AppSearchBaseItem(type: .detailHeader, object: appInfoModel)
+                AppSearchBaseItem(type: .detailHeader, object: appInfoModel),
+                AppSearchBaseItem(type: .detailSubHeader, object: appInfoModel)
                 ])
         ]
         
