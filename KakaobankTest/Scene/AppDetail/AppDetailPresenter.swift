@@ -38,7 +38,12 @@ extension AppDetailPresenter {
                 AppSearchBaseItem(type: .detailHeader, object: appInfoModel),
                 AppSearchBaseItem(type: .detailSubHeader, object: appInfoModel),
                 AppSearchBaseItem(type: .detailScreenShot, object: appInfoModel),
-                AppSearchBaseItem(type: .detailDescription, object: appInfoModel)
+                AppSearchBaseItem(type: .detailDescription, object: appInfoModel),
+                AppSearchBaseItem(type: .detailDeveloperInfo, object: appInfoModel),
+                AppSearchBaseItem(type: .detailRating, object: appInfoModel),
+                AppSearchBaseItem(type: .detailReviews, object: appInfoModel),
+                AppSearchBaseItem(type: .detailNewFeature, object: appInfoModel),
+                AppSearchBaseItem(type: .detailInfomation, object: appInfoModel)
                 ])
         ]
         

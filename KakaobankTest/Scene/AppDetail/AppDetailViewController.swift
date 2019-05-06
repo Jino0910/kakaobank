@@ -15,6 +15,7 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import SwiftyJSON
+import SafariServices
 
 protocol AppDetailDisplayLogic: class {
     func displaySectionModels(viewModel: AppDetail.AppDetailInfo.ViewModel)
@@ -136,7 +137,6 @@ extension AppDetailViewController: UITableViewDelegate {
                     cell.handler = { [weak self] height in
                         self?.screenShotHeight = height
                         cv.performBatchUpdates({})
-//                        cv.reloadItemsAtIndexPaths([indexPath], animationStyle: .none)
                     }
                     return cell
                 case .detailDescription:
@@ -144,8 +144,10 @@ extension AppDetailViewController: UITableViewDelegate {
                     cell.configure(model: model)
                     cell.handler = { cv.performBatchUpdates({}) }
                     return cell
-                    
-//                case .detailDeveloperInfo:
+                case .detailDeveloperInfo:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailDeveloperInfoCell", for: indexPath) as! AppDetailDeveloperInfoCell
+                    cell.configure(model: model)
+                    return cell
 //                case .detailRating:
 //                case .detailReviews:
 //                case .detailNewFeature:
@@ -158,8 +160,20 @@ extension AppDetailViewController: UITableViewDelegate {
         if let dataSource = dataSource {
             sectionModels.bind(to: cv.rx.items(dataSource: dataSource)).disposed(by: self.disposeBag)
         }
-        
-        
+    
+        // 최근검색어 선택
+        cv.rx.itemSelected
+            .subscribe(onNext: { (indexPath) in
+                
+                if (self.cv.cellForItem(at: indexPath) as? AppDetailDeveloperInfoCell) != nil {
+                    
+                    guard let model = self.router?.dataStore?.appInfoModel else { return }
+                    guard let url = URL(string: model.artistViewUrl) else { return }
+                    let vc = SFSafariViewController(url: url)
+                    self.present(vc, animated: true, completion: {})
+                }
+            })
+            .disposed(by: disposeBag)
         
     }
 }
@@ -190,8 +204,9 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
             } else {
                 return CGSize(width: width, height: AppDetailDescriptionCell.cellHeight())
             }
+        case .detailDeveloperInfo: return CGSize(width: width, height: AppDetailDeveloperInfoCell.cellHeight)
             
-//        case .detailDeveloperInfo:
+            
 //        case .detailRating:
 //        case .detailReviews:
 //        case .detailNewFeature:

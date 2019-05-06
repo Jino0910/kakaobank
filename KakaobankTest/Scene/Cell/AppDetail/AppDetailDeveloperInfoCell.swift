@@ -10,4 +10,12 @@ import UIKit
 
 class AppDetailDeveloperInfoCell: UICollectionViewCell {
     
+    public static let cellHeight: CGFloat = 60
+    
+    @IBOutlet weak var developerNameLabel: UILabel!
+    
+    func configure(model: AppInfoModel) {
+        
+        self.developerNameLabel.text = model.artistName
+    }
 }
