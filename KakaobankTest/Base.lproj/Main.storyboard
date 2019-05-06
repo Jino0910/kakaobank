@@ -755,15 +755,15 @@
                                                     </constraints>
                                                 </scrollView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone" translatesAutoresizingMaskIntoConstraints="NO" id="sAm-9T-l8D">
-                                                    <rect key="frame" x="20" y="414" width="20" height="20"/>
+                                                    <rect key="frame" x="20" y="417" width="15" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="5Ih-aH-4KX"/>
-                                                        <constraint firstAttribute="width" constant="20" id="Xqj-I8-S9D"/>
+                                                        <constraint firstAttribute="height" constant="15" id="5Ih-aH-4KX"/>
+                                                        <constraint firstAttribute="width" constant="15" id="Xqj-I8-S9D"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iPhone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USI-VZ-vlx">
-                                                    <rect key="frame" x="55" y="415" width="49.333333333333343" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <rect key="frame" x="47" y="416.66666666666669" width="43.333333333333343" height="15.666666666666686"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                     <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -781,8 +781,8 @@
                                             <constraint firstAttribute="trailing" secondItem="Xag-Pk-wqo" secondAttribute="trailing" id="B7e-bD-sNV"/>
                                             <constraint firstAttribute="bottom" secondItem="Xag-Pk-wqo" secondAttribute="bottom" constant="50" id="CM0-gP-EZi"/>
                                             <constraint firstItem="Xag-Pk-wqo" firstAttribute="leading" secondItem="IE3-3v-QwV" secondAttribute="leading" id="MdF-OQ-Tmm"/>
-                                            <constraint firstItem="sAm-9T-l8D" firstAttribute="top" secondItem="Xag-Pk-wqo" secondAttribute="bottom" constant="14" id="OGf-Qd-gM0"/>
-                                            <constraint firstItem="USI-VZ-vlx" firstAttribute="leading" secondItem="sAm-9T-l8D" secondAttribute="trailing" constant="15" id="P83-06-AJb"/>
+                                            <constraint firstItem="sAm-9T-l8D" firstAttribute="top" secondItem="Xag-Pk-wqo" secondAttribute="bottom" constant="17" id="OGf-Qd-gM0"/>
+                                            <constraint firstItem="USI-VZ-vlx" firstAttribute="leading" secondItem="sAm-9T-l8D" secondAttribute="trailing" constant="12" id="P83-06-AJb"/>
                                             <constraint firstItem="Xag-Pk-wqo" firstAttribute="top" secondItem="IE3-3v-QwV" secondAttribute="top" id="cxh-SN-JuF"/>
                                             <constraint firstAttribute="trailing" secondItem="347-3y-NrT" secondAttribute="trailing" constant="20" id="j1g-vA-4nM"/>
                                             <constraint firstItem="USI-VZ-vlx" firstAttribute="centerY" secondItem="sAm-9T-l8D" secondAttribute="centerY" id="s93-Rg-zNC"/>

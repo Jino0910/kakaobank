@@ -135,10 +135,16 @@ extension AppDetailViewController: UITableViewDelegate {
                     cell.configure(model: model)
                     cell.handler = { [weak self] height in
                         self?.screenShotHeight = height
-                        cv.performBatchUpdates({
-                        })
+                        cv.performBatchUpdates({})
                     }
                     return cell
+                    
+//                case .detailDescription:
+//                case .detailDeveloperInfo:
+//                case .detailRating:
+//                case .detailReviews:
+//                case .detailNewFeature:
+//                case .detailInfomation:
                     
                 default: return UICollectionViewCell()
                 }
@@ -171,7 +177,13 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         case .detailSubHeader: return CGSize(width: width, height: AppDetailSubHeaderCell.cellHeight)
         case .detailScreenShot: return CGSize(width: width, height: AppDetailScreenShotCell.bottomMargin+screenShotHeight)
             
-            
+//        case .detailDescription:
+//        case .detailDeveloperInfo:
+//        case .detailRating:
+//        case .detailReviews:
+//        case .detailNewFeature:
+//        case .detailInfomation:
+  
         default: return .zero
         }
     }
