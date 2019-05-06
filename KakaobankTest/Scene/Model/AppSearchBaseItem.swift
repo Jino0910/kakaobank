@@ -18,8 +18,8 @@ enum AppSearchSectionType {
     // 앱검색
     case searchWordList
     case searchAppInfoList
-//    case
     // 앱상세
+    case detailHeader
 }
 
 struct AppSearchBaseItemSection {

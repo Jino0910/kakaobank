@@ -11,22 +11,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxDataSources
+import SwiftyJSON
 
 protocol AppDetailDisplayLogic: class {
-    func displaySomething(viewModel: AppDetail.Something.ViewModel)
+    func displaySectionModels(viewModel: AppDetail.AppDetailInfo.ViewModel)
 }
 
-class AppDetailViewController: UIViewController, AppDetailDisplayLogic, ScrollViewCustomHorizontalPageSize {
+class AppDetailViewController: UIViewController, AppDetailDisplayLogic {
     var interactor: AppDetailBusinessLogic?
     var router: (NSObjectProtocol & AppDetailRoutingLogic & AppDetailDataPassing)?
-    
-    var pageSize: CGFloat {
-        return 210
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        targetContentOffset.pointee.x = getTargetContentOffset(scrollView: scrollView, velocity: velocity)
-    }
     
     // MARK: Object lifecycle
     
@@ -65,86 +61,109 @@ class AppDetailViewController: UIViewController, AppDetailDisplayLogic, ScrollVi
             }
         }
     }
-    @IBOutlet weak var sc: UIScrollView!
     
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doSomething()
-        
-        sc.delegate = self
+        configure()
+        interactor?.doSectionModels()
     }
     
     // MARK: Do something
     
-    //@IBOutlet weak var nameTextField: UITextField!
+    private let disposeBag = DisposeBag()
     
-    func doSomething() {
-        let request = AppDetail.Something.Request()
-        interactor?.doSomething(request: request)
+    @IBOutlet weak var cv: UICollectionView! {
+        didSet {
+            let flowLayout: UICollectionViewFlowLayout! = UICollectionViewFlowLayout()
+            flowLayout.sectionHeadersPinToVisibleBounds = true
+            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            flowLayout.minimumInteritemSpacing = 0
+            flowLayout.minimumLineSpacing = 0
+            
+            cv.collectionViewLayout = flowLayout
+            cv.showsVerticalScrollIndicator = false
+            cv.showsHorizontalScrollIndicator = false
+        }
     }
     
-    func displaySomething(viewModel: AppDetail.Something.ViewModel) {
-        //nameTextField.text = viewModel.name
+    var dataSource: RxCollectionViewSectionedReloadDataSource<AppSearchBaseItemSection>?
+ 
+    public let sectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
+    
+    func displaySectionModels(viewModel: AppDetail.AppDetailInfo.ViewModel) {
+        sectionModels.accept(viewModel.sectionModels)
     }
     
+//    var pageSize: CGFloat {
+//        return 210
+//    }
+//
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        targetContentOffset.pointee.x = getTargetContentOffset(scrollView: scrollView, velocity: velocity)
+//    }
 }
 
-
-protocol ScrollViewCustomHorizontalPageSize: UIScrollViewDelegate {
-    /// Custom page size
-    var pageSize: CGFloat { get }
+extension AppDetailViewController: UITableViewDelegate {
     
-    /// Helper method to get current page fraction
-    func getCurrentPage(scrollView: UIScrollView) -> CGFloat
-    
-    /// Helper method to get targetContentOffset. Usage:
-    ///
-    ///     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-    ///         targetContentOffset.pointee.x = getTargetContentOffset(scrollView: scrollView, velocity: velocity)
-    ///     }
-    func getTargetContentOffset(scrollView: UIScrollView, velocity: CGPoint) -> CGFloat
-    
-    /// Must be implemented. See `getTargetContentOffset` for more info.
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
-}
-
-extension ScrollViewCustomHorizontalPageSize {
-    func getCurrentPage(scrollView: UIScrollView) -> CGFloat {
-        return (scrollView.contentOffset.x + scrollView.contentInset.left) / pageSize
+    private func configure() {
+        configureUI()
+        configureRx()
     }
     
-    func getTargetContentOffset(scrollView: UIScrollView, velocity: CGPoint) -> CGFloat {
-        let targetX: CGFloat = scrollView.contentOffset.x + velocity.x * 60.0
+    private func configureUI() {
+        cv.rx.setDelegate(self).disposed(by: self.disposeBag)
         
-        var targetIndex = (targetX + scrollView.contentInset.left) / pageSize
-        let maxOffsetX = scrollView.contentSize.width - scrollView.bounds.width + scrollView.contentInset.right
-        let maxIndex = (maxOffsetX + scrollView.contentInset.left) / pageSize
-        if velocity.x > 0 {
-            targetIndex = ceil(targetIndex)
-        } else if velocity.x < 0 {
-            targetIndex = floor(targetIndex)
-        } else {
-            let (maxFloorIndex, lastInterval) = modf(maxIndex)
-            if targetIndex > maxFloorIndex {
-                if targetIndex >= lastInterval / 2 + maxFloorIndex {
-                    targetIndex = maxIndex
-                } else {
-                    targetIndex = maxFloorIndex
+//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+    }
+    
+    private func configureRx() {
+        
+        dataSource = RxCollectionViewSectionedReloadDataSource<AppSearchBaseItemSection>(
+            configureCell: { (_, cv, indexPath, item) -> UICollectionViewCell in
+                
+                guard let model = self.router?.dataStore?.appInfoModel else { return UICollectionViewCell() }
+                
+                switch item.type {
+                case .detailHeader:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailHeaderCell", for: indexPath) as! AppDetailHeaderCell
+                    cell.configure(model: model)
+                    return cell
+                default: return UICollectionViewCell()
                 }
-            } else {
-                targetIndex = round(targetIndex)
-            }
+        })
+        
+        if let dataSource = dataSource {
+            sectionModels.bind(to: cv.rx.items(dataSource: dataSource)).disposed(by: self.disposeBag)
         }
         
-        if targetIndex < 0 {
-            targetIndex = 0
-        }
         
-        var offsetX = targetIndex * pageSize - scrollView.contentInset.left
-        offsetX = min(offsetX, maxOffsetX)
         
-        return offsetX
     }
 }
+
+extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        guard let dataSource = dataSource else { return .zero }
+        
+        let section = dataSource[indexPath.section]
+        let item = section.items[indexPath.item]
+        
+        let width = UIScreen.main.bounds.width
+        
+        switch item.type {
+            
+        case .detailHeader:
+            return CGSize(width: width, height: AppDetailHeaderCell.cellHeight)
+            
+        default: return .zero
+        }
+    }
+}
+

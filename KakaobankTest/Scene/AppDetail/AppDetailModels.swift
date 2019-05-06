@@ -15,15 +15,15 @@ import UIKit
 enum AppDetail {
     // MARK: Use cases
     
-    enum Something {
+    enum AppDetailInfo {
         struct Request {
             
         }
         struct Response {
-            
+            var appInfoModel: AppInfoModel
         }
         struct ViewModel {
-            
+            var sectionModels: [AppSearchBaseItemSection]
         }
     }
 }

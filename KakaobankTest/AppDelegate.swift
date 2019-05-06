@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        UISearchBar.appearance().tintColor = .appleBlue
-        UINavigationBar.appearance().tintColor = .appleBlue
+//        UISearchBar.appearance().tintColor = .appleBlue
+//        UINavigationBar.appearance().tintColor = .appleBlue
         
         loadRealm()
         

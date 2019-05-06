@@ -48,7 +48,9 @@ extension AppSearchPresenter {
     func getRecentHistorySectionModel(recentHistoryModels: [RecentHistoryModel]) -> [AppSearchBaseItemSection] {
         
         var sectionModels: [AppSearchBaseItemSection] = [
-            AppSearchBaseItemSection(items: [AppSearchBaseItem(type: .recentWordTitle, object: RecentHistoryModel(searchWord: "최근 검색어", date: Date()))])
+            AppSearchBaseItemSection(items: [
+                AppSearchBaseItem(type: .recentWordTitle, object: RecentHistoryModel(searchWord: "최근 검색어", date: Date()))
+                ])
         ]
         
         for (index, item) in recentHistoryModels.enumerated() {

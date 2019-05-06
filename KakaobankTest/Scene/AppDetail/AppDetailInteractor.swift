@@ -13,7 +13,7 @@
 import UIKit
 
 protocol AppDetailBusinessLogic {
-    func doSomething(request: AppDetail.Something.Request)
+    func doSectionModels()
 }
 
 protocol AppDetailDataStore {
@@ -28,12 +28,10 @@ class AppDetailInteractor: AppDetailBusinessLogic, AppDetailDataStore {
     
     // MARK: Do something
     
-    func doSomething(request: AppDetail.Something.Request) {
-        worker = AppDetailWorker()
-        worker?.doSomeWork()
-        
-        let response = AppDetail.Something.Response()
-        presenter?.presentSomething(response: response)
+    func doSectionModels() {
+
+        let response = AppDetail.AppDetailInfo.Response(appInfoModel: appInfoModel)
+        presenter?.presentSectionModels(response: response)
     }
 }
 

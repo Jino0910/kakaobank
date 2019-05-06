@@ -13,7 +13,7 @@
 import UIKit
 
 protocol AppDetailPresentationLogic {
-    func presentSomething(response: AppDetail.Something.Response)
+    func presentSectionModels(response: AppDetail.AppDetailInfo.Response)
 }
 
 class AppDetailPresenter: AppDetailPresentationLogic {
@@ -21,9 +21,25 @@ class AppDetailPresenter: AppDetailPresentationLogic {
     
     // MARK: Do something
     
-    func presentSomething(response: AppDetail.Something.Response) {
-        let viewModel = AppDetail.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    func presentSectionModels(response: AppDetail.AppDetailInfo.Response) {
+        
+        let sectionModels = self.getAppDetailSectionModel(appInfoModel: response.appInfoModel)
+        let viewModel = AppDetail.AppDetailInfo.ViewModel(sectionModels: sectionModels)
+        viewController?.displaySectionModels(viewModel: viewModel)
+    }
+}
+
+extension AppDetailPresenter {
+
+    func getAppDetailSectionModel(appInfoModel: AppInfoModel) -> [AppSearchBaseItemSection] {
+        
+        let sectionModels: [AppSearchBaseItemSection] = [
+            AppSearchBaseItemSection(items: [
+                AppSearchBaseItem(type: .detailHeader, object: appInfoModel)
+                ])
+        ]
+        
+        return sectionModels
     }
 }
 

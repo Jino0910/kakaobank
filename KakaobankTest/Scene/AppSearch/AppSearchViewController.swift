@@ -78,7 +78,7 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
     
     // MARK: Do something
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -87,8 +87,8 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
     @IBOutlet weak var searchTv: UITableView!
     @IBOutlet weak var searchBaseViewBottom: NSLayoutConstraint!
     
-    let recentSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
-    let searchSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
+    public let recentSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
+    public let searchSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel) {
         recentSectionModels.accept(viewModel.sectionModels)
@@ -127,9 +127,11 @@ extension AppSearchViewController: UITableViewDelegate {
         
         //
         definesPresentationContext = true
+    
+    }
+    
+    private func configureRx() {
         
-        
-        // tableView datasource
         let recentDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
             
             let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchHistoryListCell", for: indexPath) as! AppSearchHistoryListCell
@@ -164,9 +166,6 @@ extension AppSearchViewController: UITableViewDelegate {
         
         recentSectionModels.bind(to: recentTv.rx.items(dataSource: recentDs)).disposed(by: self.disposeBag)
         searchSectionModels.bind(to: searchTv.rx.items(dataSource: searchDs)).disposed(by: self.disposeBag)
-    }
-    
-    private func configureRx() {
         
         // 최근검색어 선택
         recentTv.rx.itemSelected
