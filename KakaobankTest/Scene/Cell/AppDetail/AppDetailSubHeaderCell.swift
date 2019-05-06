@@ -11,7 +11,7 @@ import Cosmos
 
 class AppDetailSubHeaderCell: UICollectionViewCell {
     
-    public static let cellHeight: CGFloat = 60
+    public static let cellHeight: CGFloat = 63
     
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var ratingView: CosmosView!

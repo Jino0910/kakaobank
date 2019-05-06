@@ -92,17 +92,11 @@ class AppDetailViewController: UIViewController, AppDetailDisplayLogic {
  
     public let sectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     
+    var screenShotHeight: CGFloat = 0
+    
     func displaySectionModels(viewModel: AppDetail.AppDetailInfo.ViewModel) {
         sectionModels.accept(viewModel.sectionModels)
     }
-    
-//    var pageSize: CGFloat {
-//        return 210
-//    }
-//
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        targetContentOffset.pointee.x = getTargetContentOffset(scrollView: scrollView, velocity: velocity)
-//    }
 }
 
 extension AppDetailViewController: UITableViewDelegate {
@@ -136,7 +130,15 @@ extension AppDetailViewController: UITableViewDelegate {
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailSubHeaderCell", for: indexPath) as! AppDetailSubHeaderCell
                     cell.configure(model: model)
                     return cell
-                    
+                case .detailScreenShot:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailScreenShotCell", for: indexPath) as! AppDetailScreenShotCell
+                    cell.configure(model: model)
+                    cell.handler = { [weak self] height in
+                        self?.screenShotHeight = height
+                        cv.performBatchUpdates({
+                        })
+                    }
+                    return cell
                     
                 default: return UICollectionViewCell()
                 }
@@ -167,6 +169,8 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
             
         case .detailHeader: return CGSize(width: width, height: AppDetailHeaderCell.cellHeight)
         case .detailSubHeader: return CGSize(width: width, height: AppDetailSubHeaderCell.cellHeight)
+        case .detailScreenShot: return CGSize(width: width, height: AppDetailScreenShotCell.bottomMargin+screenShotHeight)
+            
             
         default: return .zero
         }

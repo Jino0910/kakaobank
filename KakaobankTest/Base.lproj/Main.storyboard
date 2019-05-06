@@ -453,10 +453,10 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AppDetailSubHeaderCell" id="WCv-mj-H5t" customClass="AppDetailSubHeaderCell" customModule="KakaobankTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="120" width="414" height="63"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAh-FS-cTO">
@@ -555,7 +555,7 @@
                                             <constraint firstItem="93X-KY-kBw" firstAttribute="centerY" secondItem="zAh-FS-cTO" secondAttribute="centerY" id="pUn-FC-Msc"/>
                                             <constraint firstItem="1BJ-Sc-0OS" firstAttribute="centerY" secondItem="mJk-d1-axv" secondAttribute="centerY" id="rUb-Zu-grL"/>
                                         </constraints>
-                                        <size key="customSize" width="414" height="60"/>
+                                        <size key="customSize" width="414" height="63"/>
                                         <connections>
                                             <outlet property="contentAdvisoryRatingLabel" destination="GVg-ZS-UMa" id="7VL-8U-Ndu"/>
                                             <outlet property="genresLabel" destination="mJk-d1-axv" id="wub-wh-seV"/>
@@ -563,6 +563,245 @@
                                             <outlet property="ratingLabel" destination="zAh-FS-cTO" id="FaP-Pa-1Wm"/>
                                             <outlet property="ratingView" destination="UhT-er-7Ye" id="lFF-1A-exM"/>
                                             <outlet property="reviewCountLabel" destination="AMP-mc-pL7" id="bd5-bm-4Ga"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AppDetailScreenShotCell" id="IE3-3v-QwV" customClass="AppDetailScreenShotCell" customModule="KakaobankTest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="183" width="414" height="450"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="450"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xag-Pk-wqo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xGs-SI-JVJ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="2530" height="400"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-qS-d8l">
+                                                                    <rect key="frame" x="20" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="240" id="8Sf-BT-AcV"/>
+                                                                    </constraints>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fEn-Y3-wRm">
+                                                                    <rect key="frame" x="270" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="G7I-4Z-qPo">
+                                                                    <rect key="frame" x="520" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RZe-Uf-7w2">
+                                                                    <rect key="frame" x="770" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fuc-j3-5fT">
+                                                                    <rect key="frame" x="1020" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P68-8N-7Uy">
+                                                                    <rect key="frame" x="1270" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KCP-aR-B25">
+                                                                    <rect key="frame" x="1520" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hWa-en-zSc">
+                                                                    <rect key="frame" x="1770" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hye-FK-g64">
+                                                                    <rect key="frame" x="2020" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xkT-Cr-zGb">
+                                                                    <rect key="frame" x="2270" y="20" width="240" height="380"/>
+                                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                            <real key="value" value="20"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                            <real key="value" value="0.5"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </imageView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="RZe-Uf-7w2" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="4A4-yq-Iz0"/>
+                                                                <constraint firstItem="hWa-en-zSc" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="9wm-D6-UDs"/>
+                                                                <constraint firstItem="KCP-aR-B25" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="Bgm-7e-GtG"/>
+                                                                <constraint firstItem="P68-8N-7Uy" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="Hb1-ej-1fK"/>
+                                                                <constraint firstItem="xkT-Cr-zGb" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="XAA-wk-Bs7"/>
+                                                                <constraint firstItem="Hye-FK-g64" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="hAa-ed-0x6"/>
+                                                                <constraint firstItem="Fuc-j3-5fT" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="lXs-24-QAL"/>
+                                                                <constraint firstItem="G7I-4Z-qPo" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="n5D-0r-958"/>
+                                                                <constraint firstItem="fEn-Y3-wRm" firstAttribute="width" secondItem="RsI-qS-d8l" secondAttribute="width" id="pdk-jR-Ivz"/>
+                                                            </constraints>
+                                                            <edgeInsets key="layoutMargins" top="0.0" left="20" bottom="0.0" right="20"/>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="xGs-SI-JVJ" secondAttribute="trailing" id="3q4-Gb-mUk"/>
+                                                        <constraint firstItem="xGs-SI-JVJ" firstAttribute="height" secondItem="Xag-Pk-wqo" secondAttribute="height" id="VaY-TH-EI8"/>
+                                                        <constraint firstItem="xGs-SI-JVJ" firstAttribute="leading" secondItem="Xag-Pk-wqo" secondAttribute="leading" id="YJ2-OG-pnf"/>
+                                                        <constraint firstItem="xGs-SI-JVJ" firstAttribute="top" secondItem="Xag-Pk-wqo" secondAttribute="top" id="dL3-bM-OjP"/>
+                                                        <constraint firstAttribute="bottom" secondItem="xGs-SI-JVJ" secondAttribute="bottom" id="vuW-zn-XrX"/>
+                                                    </constraints>
+                                                </scrollView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iphone" translatesAutoresizingMaskIntoConstraints="NO" id="sAm-9T-l8D">
+                                                    <rect key="frame" x="20" y="414" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="5Ih-aH-4KX"/>
+                                                        <constraint firstAttribute="width" constant="20" id="Xqj-I8-S9D"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iPhone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USI-VZ-vlx">
+                                                    <rect key="frame" x="55" y="415" width="49.333333333333343" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="347-3y-NrT">
+                                                    <rect key="frame" x="20" y="449" width="374" height="1"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="yyH-5i-F5h"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="347-3y-NrT" firstAttribute="leading" secondItem="IE3-3v-QwV" secondAttribute="leading" constant="20" id="1M9-Y8-DRZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="Xag-Pk-wqo" secondAttribute="trailing" id="B7e-bD-sNV"/>
+                                            <constraint firstAttribute="bottom" secondItem="Xag-Pk-wqo" secondAttribute="bottom" constant="50" id="CM0-gP-EZi"/>
+                                            <constraint firstItem="Xag-Pk-wqo" firstAttribute="leading" secondItem="IE3-3v-QwV" secondAttribute="leading" id="MdF-OQ-Tmm"/>
+                                            <constraint firstItem="sAm-9T-l8D" firstAttribute="top" secondItem="Xag-Pk-wqo" secondAttribute="bottom" constant="14" id="OGf-Qd-gM0"/>
+                                            <constraint firstItem="USI-VZ-vlx" firstAttribute="leading" secondItem="sAm-9T-l8D" secondAttribute="trailing" constant="15" id="P83-06-AJb"/>
+                                            <constraint firstItem="Xag-Pk-wqo" firstAttribute="top" secondItem="IE3-3v-QwV" secondAttribute="top" id="cxh-SN-JuF"/>
+                                            <constraint firstAttribute="trailing" secondItem="347-3y-NrT" secondAttribute="trailing" constant="20" id="j1g-vA-4nM"/>
+                                            <constraint firstItem="USI-VZ-vlx" firstAttribute="centerY" secondItem="sAm-9T-l8D" secondAttribute="centerY" id="s93-Rg-zNC"/>
+                                            <constraint firstItem="sAm-9T-l8D" firstAttribute="leading" secondItem="IE3-3v-QwV" secondAttribute="leading" constant="20" id="ycP-6d-921"/>
+                                            <constraint firstAttribute="bottom" secondItem="347-3y-NrT" secondAttribute="bottom" id="ysF-Sh-66f"/>
+                                        </constraints>
+                                        <size key="customSize" width="414" height="450"/>
+                                        <connections>
+                                            <outlet property="iv1" destination="RsI-qS-d8l" id="rWr-Jr-Pyq"/>
+                                            <outlet property="iv10" destination="xkT-Cr-zGb" id="N1o-2b-0mP"/>
+                                            <outlet property="iv2" destination="fEn-Y3-wRm" id="A9K-Jb-kHp"/>
+                                            <outlet property="iv3" destination="G7I-4Z-qPo" id="ehd-gp-tez"/>
+                                            <outlet property="iv4" destination="RZe-Uf-7w2" id="MUy-Fl-8AG"/>
+                                            <outlet property="iv5" destination="Fuc-j3-5fT" id="bFS-hK-BtM"/>
+                                            <outlet property="iv6" destination="P68-8N-7Uy" id="czw-i0-xYP"/>
+                                            <outlet property="iv7" destination="KCP-aR-B25" id="gRe-lD-MlY"/>
+                                            <outlet property="iv8" destination="hWa-en-zSc" id="yiO-7x-ZgW"/>
+                                            <outlet property="iv9" destination="Hye-FK-g64" id="Izl-97-zTq"/>
+                                            <outlet property="sc" destination="Xag-Pk-wqo" id="l9l-QN-7V1"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -584,7 +823,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c7Q-u7-c7I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1840.5797101449277" y="122.54464285714285"/>
+            <point key="canvasLocation" x="1840.5797101449277" y="122.28260869565219"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nbD-WO-sUE">
@@ -608,5 +847,6 @@
     </scenes>
     <resources>
         <image name="dot1" width="120" height="120"/>
+        <image name="iphone" width="512" height="512"/>
     </resources>
 </document>
