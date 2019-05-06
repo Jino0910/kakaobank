@@ -19,10 +19,18 @@ class KakaobankTestTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testReviewCount() {
+        
+        XCTAssertTrue(10.toHangulValue() == "10")
+        XCTAssertTrue(100.toHangulValue() == "100")
+        XCTAssertTrue(1500.toHangulValue() == "1.5천")
+        XCTAssertTrue(2650.toHangulValue() == "2.65천")
+        XCTAssertTrue(15000.toHangulValue() == "1.5만")
+        XCTAssertTrue(56500.toHangulValue() == "5.65만")
+        XCTAssertTrue(155500.toHangulValue() == "15.6만")
+        XCTAssertTrue(655500.toHangulValue() == "65.6만")
     }
+    
 
     func testPerformanceExample() {
         // This is an example of a performance test case.

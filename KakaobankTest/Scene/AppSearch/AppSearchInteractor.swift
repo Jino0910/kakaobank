@@ -79,7 +79,7 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
 
             guard let self = self else { return }
             for item in self.searchHistoryList {
-                print("\(item.searchWord)")
+//                print("\(item.searchWord)")
             }
         })
     }

@@ -1,5 +1,6 @@
 PODS:
   - AsyncSwift (2.0.4)
+  - Cosmos (17.0.0)
   - Differentiator (3.1.0)
   - KeychainSwift (11.0.0)
   - Realm (3.14.2):
@@ -25,6 +26,7 @@ PODS:
 
 DEPENDENCIES:
   - AsyncSwift
+  - Cosmos (~> 17.0)
   - KeychainSwift (~> 11.0)
   - RealmSwift
   - RxCocoa (~> 4.5.0)
@@ -38,6 +40,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AsyncSwift
+    - Cosmos
     - Differentiator
     - KeychainSwift
     - Realm
@@ -52,6 +55,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AsyncSwift: 65775a7b32e740609b24969ece3de58723b9dc3e
+  Cosmos: 309e489f21ffc91a1eeecfebef7f817cd2fcfba6
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
   Realm: 179c6706e3a49dbfe112e572fd3c03d3169bea35
@@ -64,6 +68,6 @@ SPEC CHECKSUMS:
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 2fdfdc161284b5fb85c06b88865abdc502e537d1
+PODFILE CHECKSUM: 89f624f249b449d1d01453c157deb92d1641e1c9
 
 COCOAPODS: 1.6.1
