@@ -128,6 +128,7 @@ extension AppSearchViewController: UITableViewDelegate {
         //
         definesPresentationContext = true
         
+        
         // tableView datasource
         let recentDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
             
@@ -214,16 +215,16 @@ extension AppSearchViewController: UITableViewDelegate {
             })
             .disposed(by: disposeBag)
         
-//        // 검색하단뷰 터치(검색어 없을 경우)
-//        searchBaseView.rx.tapGesture()
-//            .filter({_ in
-//                guard var data = self.router?.dataStore else { return false }
-//                return data.appSearchStatus == .searchStart
-//            })
-//            .subscribe(onNext: { [weak self](_) in
-//                guard let self = self else { return }
-//                self.searchController.isActive = false
-//            }).disposed(by: disposeBag)
+        // 검색하단뷰 터치(검색어 없을 경우)
+        searchBaseView.rx.tapGesture()
+            .filter({_ in
+                guard var data = self.router?.dataStore else { return false }
+                return data.appSearchStatus == .searchStart
+            })
+            .subscribe(onNext: { [weak self](_) in
+                guard let self = self else { return }
+                self.searchController.isActive = false
+            }).disposed(by: disposeBag)
         
         // 검색완료 클릭
         searchController.searchBar.rx
@@ -252,7 +253,9 @@ extension AppSearchViewController: UITableViewDelegate {
             .drive(onNext: { [weak self] (height) in
                 guard let self = self else { return }
                 self.searchBaseViewBottom.constant = height
-                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.view.layoutIfNeeded()
+                })
             })
             .disposed(by: disposeBag)
         
