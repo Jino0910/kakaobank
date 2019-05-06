@@ -35,3 +35,21 @@ extension String {
         return self.replacingOccurrences(of: target, with: withString, options: .literal, range: nil)
     }
 }
+
+extension Formatter {
+    
+    // 100,000,000
+    static let withSeparator: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.groupingSeparator = ","
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
+    
+}
+
+extension BinaryInteger {
+    var formattedWithSeparator: String {
+        return Formatter.withSeparator.string(for: self) ?? ""
+    }
+}

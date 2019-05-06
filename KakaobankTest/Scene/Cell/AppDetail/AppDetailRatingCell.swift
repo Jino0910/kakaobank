@@ -7,7 +7,23 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class AppDetailRatingCell: UICollectionViewCell {
     
+    public static let cellHeight: CGFloat = 155
+    
+    @IBOutlet weak var ratingTrailing3: NSLayoutConstraint!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var reviewCountLabel: UILabel!
+    @IBOutlet weak var reviewsButton: UIButton!
+    
+    private var disposeBag = DisposeBag()
+    
+    func configure(model: AppInfoModel) {
+        
+        self.ratingLabel.text = "\(model.averageUserRating)"
+        self.reviewCountLabel.text = model.userRatingCount.formattedWithSeparator + "개의 평가"
+    }
 }

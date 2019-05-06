@@ -41,7 +41,6 @@ class AppItemCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.ratingView.settings.fillMode = .precise
     }
     
     func configure(model: AppInfoModel) {

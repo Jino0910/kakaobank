@@ -148,7 +148,15 @@ extension AppDetailViewController: UITableViewDelegate {
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailDeveloperInfoCell", for: indexPath) as! AppDetailDeveloperInfoCell
                     cell.configure(model: model)
                     return cell
-//                case .detailRating:
+                case .detailRating:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailRatingCell", for: indexPath) as! AppDetailRatingCell
+                    cell.configure(model: model)
+                    cell.reviewsButton.rx.tap
+                        .subscribe(onNext: { (_) in
+                            print("리뷰 모두보기")
+                        })
+                        .disposed(by: self.disposeBag)
+                    return cell
 //                case .detailReviews:
 //                case .detailNewFeature:
 //                case .detailInfomation:
@@ -205,9 +213,7 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
                 return CGSize(width: width, height: AppDetailDescriptionCell.cellHeight())
             }
         case .detailDeveloperInfo: return CGSize(width: width, height: AppDetailDeveloperInfoCell.cellHeight)
-            
-            
-//        case .detailRating:
+        case .detailRating: return CGSize(width: width, height: AppDetailRatingCell.cellHeight)
 //        case .detailReviews:
 //        case .detailNewFeature:
 //        case .detailInfomation:
