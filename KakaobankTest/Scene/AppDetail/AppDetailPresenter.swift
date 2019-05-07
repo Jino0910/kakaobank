@@ -42,8 +42,10 @@ extension AppDetailPresenter {
                 AppSearchBaseItem(type: .detailDeveloperInfo, object: appInfoModel),
                 AppSearchBaseItem(type: .detailRating, object: appInfoModel),
                 AppSearchBaseItem(type: .detailReviews, object: appInfoModel),
-                AppSearchBaseItem(type: .detailNewFeature, object: appInfoModel),
-                AppSearchBaseItem(type: .detailInfomation, object: appInfoModel)
+                AppSearchBaseItem(type: .detailNewFeatureVersion, object: appInfoModel),
+                AppSearchBaseItem(type: .detailNewFeatureDescription, object: appInfoModel),
+                AppSearchBaseItem(type: .detailInformationTitle, object: appInfoModel),
+                AppSearchBaseItem(type: .detailInformationContent, object: appInfoModel)
                 ])
         ]
         return sectionModels

@@ -26,8 +26,10 @@ enum AppSearchSectionType {
     case detailDeveloperInfo
     case detailRating
     case detailReviews
-    case detailNewFeature
-    case detailInfomation
+    case detailNewFeatureVersion
+    case detailNewFeatureDescription
+    case detailInformationTitle
+    case detailInformationContent
 }
 
 struct AppSearchBaseItemSection {
