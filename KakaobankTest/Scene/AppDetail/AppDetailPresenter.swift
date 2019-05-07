@@ -46,7 +46,6 @@ extension AppDetailPresenter {
                 AppSearchBaseItem(type: .detailInfomation, object: appInfoModel)
                 ])
         ]
-        
         return sectionModels
     }
 }

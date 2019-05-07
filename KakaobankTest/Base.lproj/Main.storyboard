@@ -1271,6 +1271,48 @@
                                             <outlet property="reviewsButton" destination="Irx-Yx-RGM" id="FgP-cc-Nc5"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AppDetailReviewsCell" id="wNL-LN-Lhr" customClass="AppDetailReviewsCell" customModule="KakaobankTest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="944" width="414" height="190"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="190"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxC-Se-maZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JK1-pQ-5c2">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="414" id="09l-Ko-EyB"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="JK1-pQ-5c2" secondAttribute="bottom" id="X6M-8n-GjA"/>
+                                                        <constraint firstItem="JK1-pQ-5c2" firstAttribute="leading" secondItem="xxC-Se-maZ" secondAttribute="leading" id="iXJ-E4-kBT"/>
+                                                        <constraint firstItem="JK1-pQ-5c2" firstAttribute="height" secondItem="xxC-Se-maZ" secondAttribute="height" id="m9G-Qk-3hw"/>
+                                                        <constraint firstAttribute="trailing" secondItem="JK1-pQ-5c2" secondAttribute="trailing" id="pD5-ah-GIW"/>
+                                                        <constraint firstAttribute="height" constant="170" id="veH-fg-DNB"/>
+                                                        <constraint firstItem="JK1-pQ-5c2" firstAttribute="top" secondItem="xxC-Se-maZ" secondAttribute="top" id="w9p-tx-tHS"/>
+                                                    </constraints>
+                                                </scrollView>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="xxC-Se-maZ" firstAttribute="leading" secondItem="wNL-LN-Lhr" secondAttribute="leading" id="9D8-LJ-OkX"/>
+                                            <constraint firstItem="xxC-Se-maZ" firstAttribute="top" secondItem="wNL-LN-Lhr" secondAttribute="top" id="YHZ-S6-u0l"/>
+                                            <constraint firstAttribute="trailing" secondItem="xxC-Se-maZ" secondAttribute="trailing" id="xRF-zX-hst"/>
+                                        </constraints>
+                                        <size key="customSize" width="414" height="190"/>
+                                        <connections>
+                                            <outlet property="sc" destination="xxC-Se-maZ" id="qwc-rw-Swr"/>
+                                            <outlet property="scViewWidth" destination="09l-Ko-EyB" id="3y4-fb-rxn"/>
+                                        </connections>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
