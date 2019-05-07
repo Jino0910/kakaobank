@@ -159,6 +159,7 @@ extension AppSearchViewController: UITableViewDelegate {
                     cell.configure(model: model)
                 }
                 
+                
                 return cell
             default: return UITableViewCell()
             }

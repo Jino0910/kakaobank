@@ -110,6 +110,20 @@ extension AppDetailViewController: UITableViewDelegate {
     private func configureUI() {
         cv.rx.setDelegate(self).disposed(by: self.disposeBag)
         
+        guard let model = self.router?.dataStore?.appInfoModel else { return }
+        
+        let imageView = UIImageView(frame: .zero)
+        imageView.layer.borderColor = UIColor.borderColor.cgColor
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
+        
+        imageView.asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512, handler: { (iv, image) in
+            imageView.image = image?.resizeImage(targetSize: CGSize(width: 30, height: 30))
+            self.navigationItem.titleView = imageView
+            self.navigationItem.titleView?.alpha = 0.0
+        })
+        
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        self.navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -219,6 +233,20 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
 //        case .detailInfomation:
   
         default: return .zero
+        }
+    }
+}
+
+extension AppDetailViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.y)
+        if scrollView.contentOffset.y > 0 {
+            // navigationItem fade in
+            UIView.animate(withDuration: 0.3) { self.navigationItem.titleView?.alpha = 1.0 }
+        } else {
+            // navigationItem fade out
+            UIView.animate(withDuration: 0.3) { self.navigationItem.titleView?.alpha = 0.0 }
         }
     }
 }

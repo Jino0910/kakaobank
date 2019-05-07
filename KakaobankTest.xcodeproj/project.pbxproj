@@ -16,6 +16,7 @@
 		617F7B0B22804E5A001610A6 /* AppDetailNewFeatureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B0A22804E5A001610A6 /* AppDetailNewFeatureCell.swift */; };
 		617F7B0D22804E82001610A6 /* AppDetailInfomationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B0C22804E82001610A6 /* AppDetailInfomationCell.swift */; };
 		617F7B0F228055C6001610A6 /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B0E228055C6001610A6 /* NSAttributedString+Extension.swift */; };
+		617F7B1122815294001610A6 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B1022815294001610A6 /* UIImage+Extension.swift */; };
 		619670EE227D37C400852ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619670ED227D37C400852ED0 /* AppDelegate.swift */; };
 		619670F0227D37C400852ED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619670EF227D37C400852ED0 /* ViewController.swift */; };
 		619670F3227D37C400852ED0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 619670F1227D37C400852ED0 /* Main.storyboard */; };
@@ -85,6 +86,7 @@
 		617F7B0A22804E5A001610A6 /* AppDetailNewFeatureCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailNewFeatureCell.swift; sourceTree = "<group>"; };
 		617F7B0C22804E82001610A6 /* AppDetailInfomationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailInfomationCell.swift; sourceTree = "<group>"; };
 		617F7B0E228055C6001610A6 /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
+		617F7B1022815294001610A6 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		619670EA227D37C400852ED0 /* KakaobankTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaobankTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		619670ED227D37C400852ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		619670EF227D37C400852ED0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				61F51844227EBE5D00340CBF /* UIImageView+Extionsion.swift */,
 				61F5184E227FE50900340CBF /* Int+Extension.swift */,
 				617F7B0E228055C6001610A6 /* NSAttributedString+Extension.swift */,
+				617F7B1022815294001610A6 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				617F7B0922804E37001610A6 /* AppDetailReviewsCell.swift in Sources */,
 				61F518592280061600340CBF /* AppDetailRouter.swift in Sources */,
 				61F518572280061600340CBF /* AppDetailPresenter.swift in Sources */,
+				617F7B1122815294001610A6 /* UIImage+Extension.swift in Sources */,
 				61967131227D813500852ED0 /* AppSearchRouter.swift in Sources */,
 				61F5184F227FE50900340CBF /* Int+Extension.swift in Sources */,
 				61BE7C0F22802B4E00F0842E /* AppDetailSubHeaderCell.swift in Sources */,
