@@ -28,7 +28,7 @@ DEPENDENCIES:
   - AsyncSwift
   - Cosmos (~> 17.0)
   - KeychainSwift (~> 11.0)
-  - RealmSwift
+  - RealmSwift (~> 3.14.2)
   - RxCocoa (~> 4.5.0)
   - RxDataSources
   - RxGesture (~> 2.2.0)
@@ -68,6 +68,6 @@ SPEC CHECKSUMS:
   SnapKit: fd22d10eb9aff484d79a8724eab922c1ddf89bcf
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 89f624f249b449d1d01453c157deb92d1641e1c9
+PODFILE CHECKSUM: f5a8cc34f3d4bd1c3c0d27005170485fe557093d
 
 COCOAPODS: 1.6.1

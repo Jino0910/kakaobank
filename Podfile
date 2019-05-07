@@ -10,7 +10,7 @@ target 'KakaobankTest' do
   pod 'RxDataSources'
   pod 'RxGesture', '~> 2.2.0'
   pod 'RxKeyboard'
-  pod 'RealmSwift'
+  pod 'RealmSwift', '~> 3.14.2'
   pod 'SwiftyJSON'
   pod 'KeychainSwift', '~> 11.0'
   pod 'AsyncSwift'
