@@ -26,8 +26,6 @@ class AppDetailDescriptionCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        disposeBag = DisposeBag()
-        handler = nil
     }
     
     override func awakeFromNib() {

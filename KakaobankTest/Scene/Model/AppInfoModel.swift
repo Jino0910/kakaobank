@@ -90,6 +90,11 @@ struct AppInfoModel {
         return self.json["releaseNotes"].stringValue
     }
     
+    /// 새로운 기능
+    var releaseNotesTrimVer: String {
+        return self.json["releaseNotes"].stringValue.replace(target: "\n\n", withString: "\n")
+    }
+    
     /// 최신업데이트 날짜
     var currentVersionReleaseDate: String {
         return self.json["currentVersionReleaseDate"].stringValue

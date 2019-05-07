@@ -178,7 +178,11 @@ extension AppDetailViewController: UITableViewDelegate {
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailNewFeatureVersionCell", for: indexPath) as! AppDetailNewFeatureVersionCell
                     cell.configure(model: model)
                     return cell
-//                case .detailNewFeatureDescription:
+                case .detailNewFeatureDescription:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailNewFeatureDescriptionCell", for: indexPath) as! AppDetailNewFeatureDescriptionCell
+                    cell.configure(model: model)
+                    cell.handler = { cv.performBatchUpdates({}) }
+                    return cell
                 case .detailInformationTitle:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailInformationTitleCell", for: indexPath) as! AppDetailInformationTitleCell
                     return cell
@@ -215,13 +219,14 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         guard let dataSource = dataSource else { return .zero }
+        guard let model = self.router?.dataStore?.appInfoModel else { return .zero }
         
         let section = dataSource[indexPath.section]
         let item = section.items[indexPath.item]
         
         let width = UIScreen.main.bounds.width
         
-        print(item.type)
+//        print(item.type)
         
         switch item.type {
             
@@ -229,7 +234,6 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         case .detailSubHeader: return CGSize(width: width, height: AppDetailSubHeaderCell.cellHeight)
         case .detailScreenShot: return CGSize(width: width, height: AppDetailScreenShotCell.bottomMargin+screenShotHeight)
         case .detailDescription:
-            guard let model = self.router?.dataStore?.appInfoModel else { return .zero }
             if let cell = cv.cellForItem(at: indexPath) as? AppDetailDescriptionCell {
                 return CGSize(width: width, height: cell.cellHeight(width: width, desc: model.description))
             } else {
@@ -239,7 +243,12 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         case .detailRating: return CGSize(width: width, height: AppDetailRatingCell.cellHeight)
         case .detailReviews: return CGSize(width: width, height: AppDetailReviewsCell.cellHeight)
         case .detailNewFeatureVersion: return CGSize(width: width, height: AppDetailNewFeatureVersionCell.cellHeight)
-//        case .detailNewFeatureDescription:
+        case .detailNewFeatureDescription:
+            if let cell = cv.cellForItem(at: indexPath) as? AppDetailNewFeatureDescriptionCell {
+                return CGSize(width: width, height: cell.cellHeight(width: width, desc: model.releaseNotes))
+            } else {
+                return CGSize(width: width, height: AppDetailNewFeatureDescriptionCell.cellHeight())
+            }
         case .detailInformationTitle: return CGSize(width: width, height: AppDetailInformationTitleCell.cellHeight)
 //        case .detailInformationContent:
   
