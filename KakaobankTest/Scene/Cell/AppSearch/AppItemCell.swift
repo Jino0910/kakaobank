@@ -63,38 +63,38 @@ class AppItemCell: UITableViewCell {
         guard let screenShot3 =  model.screenshotUrls[2].string else { return }
         
         
+//        self.screenShotImageView1.asyncImageLoad(url: screenShot1, cachedName: screenShot1, handler: { (iv, image) in
+//            guard let image = image else { return }
+//            iv.image = image
+//        })
+//
+//        self.screenShotImageView2.asyncImageLoad(url: screenShot2, cachedName: screenShot2, handler: { (iv, image) in
+//            guard let image = image else { return }
+//            iv.image = image
+//
+//            self.screenShotWidth.constant = self.screenShotHeight * image.size.width / image.size.height
+//        })
+//
+//        self.screenShotImageView3.asyncImageLoad(url: screenShot3, cachedName:screenShot3, handler: { (iv, image) in
+//            guard let image = image else { return }
+//            iv.image = image
+//        })
         
-        self.screenShotImageView1.asyncImageLoad(url: screenShot1, cachedName: screenShot1, handler: { (iv, image) in
-            guard let image = image else { return }
-            iv.image = image
-        })
-
-        self.screenShotImageView2.asyncImageLoad(url: screenShot2, cachedName: screenShot2, handler: { (iv, image) in
-            guard let image = image else { return }
-            iv.image = image
-
-            self.screenShotWidth.constant = self.screenShotHeight * image.size.width / image.size.height
-        })
-
-        self.screenShotImageView3.asyncImageLoad(url: screenShot3, cachedName:screenShot3, handler: { (iv, image) in
-            guard let image = image else { return }
-            iv.image = image
-        })
-        
-//        loadScreenShot(imageViews: [self.screenShotImageView1, self.screenShotImageView2, self.screenShotImageView3], url: [screenShot1, screenShot2, screenShot3])
+        loadScreenShot(imageViews: [self.screenShotImageView1, self.screenShotImageView2, self.screenShotImageView3], url: [screenShot1, screenShot2, screenShot3])
     }
     
-//    private func loadScreenShot(imageViews: [UIImageView], url: [String]) {
-//
-//        for (index, imageView) in imageViews.enumerated() {
-//
-//            imageView.asyncImageLoad(url: url[index], cachedName:url[index], handler: { (iv, image) in
-//                guard let image = image else { return }
-//                iv.image = image
-//                self.screenShotWidth.constant = self.screenShotHeight * image.size.width / image.size.height
-//            })
-//        }
-//    }
+    private func loadScreenShot(imageViews: [UIImageView], url: [String]) {
+
+        for (index, imageView) in imageViews.enumerated() {
+
+            imageView.asyncImageLoad(url: url[index], cachedName:url[index], handler: { [weak self] (iv, image) in
+                guard let self = self else { return }
+                guard let image = image else { return }
+                iv.image = image
+                self.screenShotWidth.constant = self.screenShotHeight * image.size.width / image.size.height
+            })
+        }
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

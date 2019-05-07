@@ -240,7 +240,7 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
 extension AppDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
+//        print(scrollView.contentOffset.y)
         if scrollView.contentOffset.y > 0 {
             // navigationItem fade in
             UIView.animate(withDuration: 0.3) { self.navigationItem.titleView?.alpha = 1.0 }

@@ -53,7 +53,8 @@ class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalP
                 
                 guard let url = model.screenshotUrls[index].string else { return }
                 
-                iv?.asyncImageLoad(url: url, cachedName: url, handler: { (iv, image) in
+                iv?.asyncImageLoad(url: url, cachedName: url, handler: { [weak self] (iv, image) in
+                    guard let self = self else { return }
                     guard let image = image else { return }
                     iv.image = image
                     
