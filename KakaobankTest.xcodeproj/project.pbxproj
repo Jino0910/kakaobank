@@ -19,6 +19,7 @@
 		6180EE2A2281D7AC00C167EF /* AppDetailNewFeatureDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180EE292281D7AC00C167EF /* AppDetailNewFeatureDescriptionCell.swift */; };
 		6180EE2C2281D7D200C167EF /* AppDetailInformationTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180EE2B2281D7D200C167EF /* AppDetailInformationTitleCell.swift */; };
 		6180EE2E2281D7E000C167EF /* AppDetailInformationContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180EE2D2281D7E000C167EF /* AppDetailInformationContentCell.swift */; };
+		6180EE302281F7B300C167EF /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180EE2F2281F7B300C167EF /* NSDate+Extension.swift */; };
 		619670EE227D37C400852ED0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619670ED227D37C400852ED0 /* AppDelegate.swift */; };
 		619670F0227D37C400852ED0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619670EF227D37C400852ED0 /* ViewController.swift */; };
 		619670F3227D37C400852ED0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 619670F1227D37C400852ED0 /* Main.storyboard */; };
@@ -91,6 +92,7 @@
 		6180EE292281D7AC00C167EF /* AppDetailNewFeatureDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailNewFeatureDescriptionCell.swift; sourceTree = "<group>"; };
 		6180EE2B2281D7D200C167EF /* AppDetailInformationTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailInformationTitleCell.swift; sourceTree = "<group>"; };
 		6180EE2D2281D7E000C167EF /* AppDetailInformationContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailInformationContentCell.swift; sourceTree = "<group>"; };
+		6180EE2F2281F7B300C167EF /* NSDate+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
 		619670EA227D37C400852ED0 /* KakaobankTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KakaobankTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		619670ED227D37C400852ED0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		619670EF227D37C400852ED0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				61F5184E227FE50900340CBF /* Int+Extension.swift */,
 				617F7B0E228055C6001610A6 /* NSAttributedString+Extension.swift */,
 				617F7B1022815294001610A6 /* UIImage+Extension.swift */,
+				6180EE2F2281F7B300C167EF /* NSDate+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -508,40 +511,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework",
-				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Async.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxKeyboard.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-KakaobankTest/Pods-KakaobankTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -660,6 +634,7 @@
 				61967132227D813500852ED0 /* AppSearchModels.swift in Sources */,
 				61967126227D793D00852ED0 /* String+Extension.swift in Sources */,
 				61967133227D813500852ED0 /* AppSearchViewController.swift in Sources */,
+				6180EE302281F7B300C167EF /* NSDate+Extension.swift in Sources */,
 				61967124227D5ABC00852ED0 /* API.swift in Sources */,
 				61F51849227EEA8B00340CBF /* AppSearchHistoryListCell.swift in Sources */,
 				6180EE2E2281D7E000C167EF /* AppDetailInformationContentCell.swift in Sources */,

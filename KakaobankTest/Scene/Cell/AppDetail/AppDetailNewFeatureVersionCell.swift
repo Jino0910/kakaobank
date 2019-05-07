@@ -7,6 +7,7 @@
 //
 
 import UIKit
+//import AFDateHelper
 
 class AppDetailNewFeatureVersionCell: UICollectionViewCell {
     
@@ -18,6 +19,10 @@ class AppDetailNewFeatureVersionCell: UICollectionViewCell {
     func configure(model: AppInfoModel) {
         
         self.versionLabel.text = "버전 \(model.version)"
-        self.lastUpdateLabel.text = model.currentVersionReleaseDate
+//        self.lastUpdateLabel.text = model.currentVersionReleaseDate
+//        self.lastUpdateLabel.text =dateString.toDate(format: "yyyyMMdd")
+        
+//        offsetFrom
+//            model.currentVersionReleaseDate
     }
 }
