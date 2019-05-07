@@ -179,7 +179,9 @@ extension AppDetailViewController: UITableViewDelegate {
                     cell.configure(model: model)
                     return cell
 //                case .detailNewFeatureDescription:
-//                case .detailInformationTitle:
+                case .detailInformationTitle:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailInformationTitleCell", for: indexPath) as! AppDetailInformationTitleCell
+                    return cell
 //                case .detailInformationContent:
                     
                 default: return UICollectionViewCell()
@@ -238,7 +240,7 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         case .detailReviews: return CGSize(width: width, height: AppDetailReviewsCell.cellHeight)
         case .detailNewFeatureVersion: return CGSize(width: width, height: AppDetailNewFeatureVersionCell.cellHeight)
 //        case .detailNewFeatureDescription:
-//        case .detailInformationTitle:
+        case .detailInformationTitle: return CGSize(width: width, height: AppDetailInformationTitleCell.cellHeight)
 //        case .detailInformationContent:
   
         default: return .zero
