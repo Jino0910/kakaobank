@@ -47,7 +47,7 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
     
     func configure(model: AppInfoModel) {
         
-        let height = self.getDescriptionNSAttributeString(description: model.description).height(width: UIScreen.main.bounds.width-leftRightMargin)
+        let height = self.getDescriptionNSAttributeString(description: model.releaseNotes).height(width: UIScreen.main.bounds.width-leftRightMargin)
         
         self.getMoreDescription(height: height)
 

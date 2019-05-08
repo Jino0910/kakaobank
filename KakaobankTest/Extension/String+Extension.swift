@@ -34,6 +34,13 @@ extension String {
     func replace(target: String, withString: String) -> String {
         return self.replacingOccurrences(of: target, with: withString, options: .literal, range: nil)
     }
+    
+    /// String -> Date 변경
+    func toDate(format: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: self)
+    }
 }
 
 extension Formatter {

@@ -100,6 +100,16 @@ struct AppInfoModel {
         return self.json["currentVersionReleaseDate"].stringValue
     }
     
+    /// 최신업데이트  한글변환
+    var currentVersionReleaseDateHangul: String {
+
+        if let currentDate = self.json["currentVersionReleaseDate"].stringValue.toDate(format: "yyyy-MM-dd'T'HH:mm:ssZ") {
+            return Date().offset(from: currentDate)
+        } else {
+            return self.json["currentVersionReleaseDate"].stringValue
+        }
+    }
+    
     
     ////////////////////////////////////////////////////////////////////////
     
