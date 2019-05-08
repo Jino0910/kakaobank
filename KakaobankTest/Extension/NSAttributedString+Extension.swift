@@ -15,6 +15,6 @@ extension NSAttributedString {
         let boundingBox = self.boundingRect(with: constraintRect,
                                             options: [.usesLineFragmentOrigin, .usesFontLeading],
                                             context: nil)
-        return ceil(boundingBox.height)
+        return ceil(boundingBox.height) + 2 // 계산 오차수정
     }
 }
