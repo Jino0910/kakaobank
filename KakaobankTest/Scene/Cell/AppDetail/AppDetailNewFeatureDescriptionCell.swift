@@ -23,8 +23,9 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
     private let defaultHeight: CGFloat = 56.0
     
     var handler : (() -> Void)?
-    private var isOpened = false
-    private var isMoreInfo = false
+    private var isOpened: Bool = false
+    private var isMoreInfo: Bool = false
+    private var isResize: Bool = false
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -52,36 +53,34 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
         self.getMoreDescription(height: height)
 
         if self.isMoreInfo {
-            self.descriptionLabel.text = model.releaseNotesTrimVer
+            if isOpened {
+                self.descriptionLabel.text = model.releaseNotes
+            } else {
+                self.descriptionLabel.text = model.releaseNotesTrimVer
+            }
         } else {
             self.descriptionLabel.text = model.releaseNotes
         }
         
-        self.moreLabel.isHidden = !self.isMoreInfo
-        
-        
-        Async.main(after: 0.1) { self.handler?() }
+        if !isResize {
+            isResize = true
+            self.moreLabel.isHidden = !self.isMoreInfo
+            Async.main(after: 0.1) { self.handler?() }
+        }
     }
     
     public func cellHeight(width: CGFloat, desc: String) -> CGFloat {
       
         if self.isMoreInfo {
-
             if isOpened {
-                
                 let attribute = self.getDescriptionNSAttributeString(description: desc)
-                
                 self.descriptionLabel.attributedText = attribute
-                
                 return attribute.height(width: width-leftRightMargin) + topBottomMargin
             } else {
                 return defaultHeight + topBottomMargin
             }
-            
         } else {
-            
             let attribute = self.getDescriptionNSAttributeString(description: desc)
-            
             return attribute.height(width: width-leftRightMargin) + topBottomMargin
         }
     }

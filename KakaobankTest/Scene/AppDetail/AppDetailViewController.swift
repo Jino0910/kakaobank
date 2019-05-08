@@ -257,7 +257,7 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         
         let width = UIScreen.main.bounds.width
         
-//        print(item.type)
+        print(item.type)
         
         switch item.type {
             

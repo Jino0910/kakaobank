@@ -22,7 +22,7 @@ class AppDetailDescriptionCell: UICollectionViewCell {
     private let defaultHeight: CGFloat = 56.0
     
     var handler : (() -> Void)?
-    private var isOpened = false
+    private var isOpened: Bool = false
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -45,7 +45,11 @@ class AppDetailDescriptionCell: UICollectionViewCell {
     
     func configure(model: AppInfoModel) {
         
-        self.descriptionLabel.text = model.descriptionTrimVer
+        if isOpened {
+            self.descriptionLabel.text = model.description
+        } else {
+            self.descriptionLabel.text = model.descriptionTrimVer
+        }
     }
     
     public func cellHeight(width: CGFloat, desc: String) -> CGFloat {
