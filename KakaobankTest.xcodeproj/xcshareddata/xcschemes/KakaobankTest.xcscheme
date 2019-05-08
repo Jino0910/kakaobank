@@ -20,6 +20,34 @@
                ReferencedContainer = "container:KakaobankTest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "619670FD227D37C500852ED0"
+               BuildableName = "KakaobankTestTests.xctest"
+               BlueprintName = "KakaobankTestTests"
+               ReferencedContainer = "container:KakaobankTest.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "61967108227D37C500852ED0"
+               BuildableName = "KakaobankTestUITests.xctest"
+               BlueprintName = "KakaobankTestUITests"
+               ReferencedContainer = "container:KakaobankTest.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -35,16 +63,6 @@
                BlueprintIdentifier = "619670FD227D37C500852ED0"
                BuildableName = "KakaobankTestTests.xctest"
                BlueprintName = "KakaobankTestTests"
-               ReferencedContainer = "container:KakaobankTest.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "61967108227D37C500852ED0"
-               BuildableName = "KakaobankTestUITests.xctest"
-               BlueprintName = "KakaobankTestUITests"
                ReferencedContainer = "container:KakaobankTest.xcodeproj">
             </BuildableReference>
          </TestableReference>

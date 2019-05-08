@@ -31,7 +31,38 @@ class KakaobankTestTests: XCTestCase {
         XCTAssertTrue(655500.toHangulValue() == "65.6만")
     }
 
-    
+    func testLastUpdateString() {
+        
+        // 시간생성 후 비교 과정에서 오차발생 -> 초를 제외한 부분에 -1초 추가
+
+        XCTAssertTrue(
+            Date().offset(from:
+                Date().addedBy(byAdding: .year, value: -1)
+                .addedBy(byAdding: .second, value: -1)) == "1년 전")
+        XCTAssertTrue(
+            Date().offset(from:
+                Date().addedBy(byAdding: .month, value: -2)
+                .addedBy(byAdding: .second, value: -1)) == "2개월 전")
+        XCTAssertTrue(
+            Date().offset(from:
+                Date().addedBy(byAdding: .weekOfMonth, value: -3)
+                .addedBy(byAdding: .second, value: -1)) == "3주 전")
+        XCTAssertTrue(
+            Date().offset(from:
+                Date().addedBy(byAdding: .day, value: -4)
+                .addedBy(byAdding: .second, value: -1)) == "4일 전")
+        XCTAssertTrue(
+            Date().offset(from:
+                Date().addedBy(byAdding: .hour, value: -5)
+                .addedBy(byAdding: .second, value: -1)) == "5시간 전")
+        XCTAssertTrue(
+            Date().offset(from:
+                Date().addedBy(byAdding: .minute, value: -6)
+                .addedBy(byAdding: .second, value: -1)) == "6분 전")
+        XCTAssertTrue(
+            Date().offset(from:
+                Date().addedBy(byAdding: .second, value: -7)) == "7초 전")
+    }
 
     func testPerformanceExample() {
         // This is an example of a performance test case.
