@@ -15,6 +15,8 @@
 		617F7B0922804E37001610A6 /* AppDetailReviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B0822804E37001610A6 /* AppDetailReviewsCell.swift */; };
 		617F7B0F228055C6001610A6 /* NSAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B0E228055C6001610A6 /* NSAttributedString+Extension.swift */; };
 		617F7B1122815294001610A6 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B1022815294001610A6 /* UIImage+Extension.swift */; };
+		617F7B132282BF0F001610A6 /* UIAlertController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B122282BF0F001610A6 /* UIAlertController+Extension.swift */; };
+		617F7B152282BFB6001610A6 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617F7B142282BFB6001610A6 /* UIApplication+Extension.swift */; };
 		6180EE282281D79A00C167EF /* AppDetailNewFeatureVersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180EE272281D79A00C167EF /* AppDetailNewFeatureVersionCell.swift */; };
 		6180EE2A2281D7AC00C167EF /* AppDetailNewFeatureDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180EE292281D7AC00C167EF /* AppDetailNewFeatureDescriptionCell.swift */; };
 		6180EE2C2281D7D200C167EF /* AppDetailInformationTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6180EE2B2281D7D200C167EF /* AppDetailInformationTitleCell.swift */; };
@@ -88,6 +90,8 @@
 		617F7B0822804E37001610A6 /* AppDetailReviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailReviewsCell.swift; sourceTree = "<group>"; };
 		617F7B0E228055C6001610A6 /* NSAttributedString+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		617F7B1022815294001610A6 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		617F7B122282BF0F001610A6 /* UIAlertController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extension.swift"; sourceTree = "<group>"; };
+		617F7B142282BFB6001610A6 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		6180EE272281D79A00C167EF /* AppDetailNewFeatureVersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailNewFeatureVersionCell.swift; sourceTree = "<group>"; };
 		6180EE292281D7AC00C167EF /* AppDetailNewFeatureDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailNewFeatureDescriptionCell.swift; sourceTree = "<group>"; };
 		6180EE2B2281D7D200C167EF /* AppDetailInformationTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailInformationTitleCell.swift; sourceTree = "<group>"; };
@@ -244,6 +248,8 @@
 				617F7B0E228055C6001610A6 /* NSAttributedString+Extension.swift */,
 				617F7B1022815294001610A6 /* UIImage+Extension.swift */,
 				6180EE2F2281F7B300C167EF /* NSDate+Extension.swift */,
+				617F7B122282BF0F001610A6 /* UIAlertController+Extension.swift */,
+				617F7B142282BFB6001610A6 /* UIApplication+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -611,6 +617,7 @@
 				617F7B0922804E37001610A6 /* AppDetailReviewsCell.swift in Sources */,
 				61F518592280061600340CBF /* AppDetailRouter.swift in Sources */,
 				61F518572280061600340CBF /* AppDetailPresenter.swift in Sources */,
+				617F7B132282BF0F001610A6 /* UIAlertController+Extension.swift in Sources */,
 				617F7B1122815294001610A6 /* UIImage+Extension.swift in Sources */,
 				61967131227D813500852ED0 /* AppSearchRouter.swift in Sources */,
 				61F5184F227FE50900340CBF /* Int+Extension.swift in Sources */,
@@ -622,6 +629,7 @@
 				6196711F227D58FB00852ED0 /* UIColor+Extension.swift in Sources */,
 				61F518582280061600340CBF /* AppDetailWorker.swift in Sources */,
 				619670F0227D37C400852ED0 /* ViewController.swift in Sources */,
+				617F7B152282BFB6001610A6 /* UIApplication+Extension.swift in Sources */,
 				61BE7C1122802B7B00F0842E /* AppDetailScreenShotCell.swift in Sources */,
 				61F51825227DA98F00340CBF /* AppSearchBaseItem.swift in Sources */,
 				619670EE227D37C400852ED0 /* AppDelegate.swift in Sources */,

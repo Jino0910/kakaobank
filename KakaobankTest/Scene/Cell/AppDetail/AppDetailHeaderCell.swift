@@ -9,6 +9,8 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import SafariServices
+
 
 class AppDetailHeaderCell: UICollectionViewCell {
     
@@ -22,6 +24,8 @@ class AppDetailHeaderCell: UICollectionViewCell {
     @IBOutlet weak var downLoadButton: UIButton!
     @IBOutlet weak var inAppEnableLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
+    
+    let actionTitles = ["앱 공유하기...", "이 개발자의 다른 앱 보기"]
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -44,5 +48,30 @@ class AppDetailHeaderCell: UICollectionViewCell {
                 iv.image = image
             })
             .disposed(by: disposeBag)
+        
+        self.moreButton.rx.tap
+            .throttle(1, latest: true, scheduler: MainScheduler.instance)
+            .flatMap {
+                UIAlertController.showAlert(title: nil,
+                                            message: nil,
+                                            style: .actionSheet,
+                                            actions: self.actionTitles.map({ (title) -> AlertAction in
+                                                AlertAction(title: title, image: #imageLiteral(resourceName: "user"), style: .default)
+                                            }))
+            }
+            .subscribe(onNext: { (index) in
+                switch index {
+                case 0:
+                    let vc = UIActivityViewController(activityItems: [model.shareMessage], applicationActivities: nil)
+                    vc.excludedActivityTypes = [.copyToPasteboard]
+                    UIApplication.topViewController()?.present(vc, animated: true, completion: {})
+                case 1:
+                    guard let url = URL(string: model.artistViewUrl) else { return }
+                    let vc = SFSafariViewController(url: url)
+                    UIApplication.topViewController()?.present(vc, animated: true, completion: {})
+                default: break
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 }

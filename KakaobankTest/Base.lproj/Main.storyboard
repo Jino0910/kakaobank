@@ -909,14 +909,14 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5Z-RA-uUN">
-                                                    <rect key="frame" x="20" y="53" width="70.5" height="57.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5Z-RA-uUN">
+                                                    <rect key="frame" x="20" y="53" width="75" height="57.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
                                                     <color key="textColor" red="0.33333333333333331" green="0.3333333432674408" blue="0.3333333432674408" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(최고 5점)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaw-ND-t16">
-                                                    <rect key="frame" x="27" y="110.5" width="57" height="16"/>
+                                                    <rect key="frame" x="29" y="110.5" width="57" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1492,7 +1492,7 @@
                             <constraint firstAttribute="trailing" secondItem="ya8-UL-0er" secondAttribute="trailing" id="1dy-wb-l8m"/>
                             <constraint firstItem="ya8-UL-0er" firstAttribute="top" secondItem="Mno-HE-Z4s" secondAttribute="top" id="Y5z-u8-hdr"/>
                             <constraint firstItem="ya8-UL-0er" firstAttribute="leading" secondItem="Mno-HE-Z4s" secondAttribute="leading" id="xap-E2-uTi"/>
-                            <constraint firstItem="xZ9-q1-CLe" firstAttribute="bottom" secondItem="ya8-UL-0er" secondAttribute="bottom" id="yfw-FI-7rZ"/>
+                            <constraint firstItem="xZ9-q1-CLe" firstAttribute="bottom" secondItem="ya8-UL-0er" secondAttribute="bottom" priority="750" id="yfw-FI-7rZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xZ9-q1-CLe"/>
                     </view>

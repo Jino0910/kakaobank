@@ -182,6 +182,11 @@ struct AppInfoModel {
         return self.json["isGameCenterEnabled"].boolValue
     }
     
+    /// 공유 메세지
+    var shareMessage: String {
+        return "\(self.json["artistName"].stringValue)의 \(self.json["trackName"].stringValue)<br/>\(self.json["trackViewUrl"].stringValue)"
+    }
+    
     
     ////////////////////////////////////////////////////////////////////////
     
