@@ -9,17 +9,21 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalPageSize {
     
-    @IBOutlet weak var sc: UIScrollView!
-    
-    var handler : ((_ height: CGFloat) -> Void)?
+    private var disposeBag = DisposeBag()
     
     private let screenShotWidth: CGFloat = 240.0
     private let screenShotMargin: CGFloat = 10.0
     public static let bottomMargin: CGFloat = 50.0
+    
+    var handler : ((_ height: CGFloat) -> Void)?
     private var isResize: Bool = false
+    
+    @IBOutlet weak var sc: UIScrollView!
     
     @IBOutlet weak var iv1: UIImageView!
     @IBOutlet weak var iv2: UIImageView!
@@ -35,6 +39,7 @@ class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalP
     override func prepareForReuse() {
         super.prepareForReuse()
         handler = nil
+        disposeBag = DisposeBag()
     }
     
     override func awakeFromNib() {
@@ -53,15 +58,16 @@ class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalP
                 
                 guard let url = model.screenshotUrls[index].string else { return }
                 
-                iv?.asyncImageLoad(url: url, cachedName: url, handler: { [weak self] (iv, image) in
-                    guard let self = self else { return }
-                    guard let image = image else { return }
-                    iv.image = image
-                    
-                    guard self.isResize == false else { return }
-                    self.isResize = true
-                    self.handler?((self.screenShotWidth) * image.size.height / image.size.width)
-                })
+                iv?.rx_asyncImageLoad(url: url, cachedName: url)
+                    .subscribe(onSuccess: { (iv: UIImageView, image: UIImage?) in
+                        guard let image = image else { return }
+                        iv.image = image
+                        
+                        guard self.isResize == false else { return }
+                        self.isResize = true
+                        self.handler?((self.screenShotWidth) * image.size.height / image.size.width)
+                    })
+                    .disposed(by: disposeBag)
                 
             } else {
                 iv?.removeFromSuperview()

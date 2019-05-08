@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 import Cosmos
 
 class AppItemCell: UITableViewCell {
+    
+    private var disposeBag = DisposeBag()
+    
+    private let screenShotHeight: CGFloat = 180.0
     
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -23,9 +29,8 @@ class AppItemCell: UITableViewCell {
     @IBOutlet weak var screenShotImageView1: UIImageView!
     @IBOutlet weak var screenShotImageView2: UIImageView!
     @IBOutlet weak var screenShotImageView3: UIImageView!
-    @IBOutlet weak var screenShotWidth: NSLayoutConstraint!
     
-    private let screenShotHeight: CGFloat = 180.0
+    @IBOutlet weak var screenShotWidth: NSLayoutConstraint!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -36,6 +41,7 @@ class AppItemCell: UITableViewCell {
         self.screenShotImageView2.image = nil
         self.screenShotImageView3.image = nil
         self.ratingView.rating = 0
+        disposeBag = DisposeBag()
     }
     
     override func awakeFromNib() {
@@ -51,48 +57,52 @@ class AppItemCell: UITableViewCell {
         self.ratingView.rating = Double(model.averageUserRating)
         self.reviewCountLabel.text = model.userRatingCount.toHangulValue()
         
-        self.iconImageView.asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512, handler: { (iv, image) in
-            guard let image = image else { return }
-            iv.image = image
-        })
+        self.iconImageView.rx_asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512)
+            .subscribe(onSuccess: { (iv: UIImageView, image: UIImage?) in
+                guard let image = image else { return }
+                iv.image = image
+            })
+            .disposed(by: disposeBag)
+        
+        
+        guard model.screenshotUrls.count != 0 else { return }
+        
+        var imageViews: [UIImageView] = []
+        var screenShots: [String] = []
+        
+        switch model.screenshotUrls.count {
+        case 1:
+            self.screenShotImageView2.isHidden = true
+            self.screenShotImageView3.isHidden = true
+            imageViews = [self.screenShotImageView1]
+            screenShots = [model.screenshotUrls[0].stringValue]
+        case 2:
+            self.screenShotImageView2.isHidden = false
+            self.screenShotImageView3.isHidden = true
+            imageViews = [self.screenShotImageView1, self.screenShotImageView2]
+            screenShots = [model.screenshotUrls[0].stringValue, model.screenshotUrls[1].stringValue]
+        default:
+            self.screenShotImageView2.isHidden = false
+            self.screenShotImageView3.isHidden = false
+            imageViews = [self.screenShotImageView1, self.screenShotImageView2, self.screenShotImageView3]
+            screenShots = [model.screenshotUrls[0].stringValue, model.screenshotUrls[1].stringValue, model.screenshotUrls[2].stringValue]
+        }
 
-        guard model.screenshotUrls.count >= 3 else { return }
-        
-        guard let screenShot1 =  model.screenshotUrls[0].string else { return }
-        guard let screenShot2 =  model.screenshotUrls[1].string else { return }
-        guard let screenShot3 =  model.screenshotUrls[2].string else { return }
-        
-        
-//        self.screenShotImageView1.asyncImageLoad(url: screenShot1, cachedName: screenShot1, handler: { (iv, image) in
-//            guard let image = image else { return }
-//            iv.image = image
-//        })
-//
-//        self.screenShotImageView2.asyncImageLoad(url: screenShot2, cachedName: screenShot2, handler: { (iv, image) in
-//            guard let image = image else { return }
-//            iv.image = image
-//
-//            self.screenShotWidth.constant = self.screenShotHeight * image.size.width / image.size.height
-//        })
-//
-//        self.screenShotImageView3.asyncImageLoad(url: screenShot3, cachedName:screenShot3, handler: { (iv, image) in
-//            guard let image = image else { return }
-//            iv.image = image
-//        })
-        
-        loadScreenShot(imageViews: [self.screenShotImageView1, self.screenShotImageView2, self.screenShotImageView3], url: [screenShot1, screenShot2, screenShot3])
+        loadScreenShot(imageViews: imageViews, url: screenShots)
     }
     
     private func loadScreenShot(imageViews: [UIImageView], url: [String]) {
 
         for (index, imageView) in imageViews.enumerated() {
+            
+            imageView.rx_asyncImageLoad(url: url[index], cachedName: url[index])
+                .subscribe(onSuccess: { (iv: UIImageView, image: UIImage?) in
+                    guard let image = image else { return }
+                    iv.image = image
+                    self.screenShotWidth.constant = self.screenShotHeight * image.size.width / image.size.height
 
-            imageView.asyncImageLoad(url: url[index], cachedName:url[index], handler: { [weak self] (iv, image) in
-                guard let self = self else { return }
-                guard let image = image else { return }
-                iv.image = image
-                self.screenShotWidth.constant = self.screenShotHeight * image.size.width / image.size.height
-            })
+                })
+                .disposed(by: disposeBag)
         }
     }
 

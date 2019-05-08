@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+
+typealias imageAsyncType = (iv: UIImageView, image: UIImage?)
 
 extension UIImageView {
     
@@ -29,5 +33,31 @@ extension UIImageView {
                 }
             }
         }
+    }
+    
+    func rx_asyncImageLoad(url: String, cachedName: String) -> PrimitiveSequence<SingleTrait, imageAsyncType> {
+        
+        return Single.create(subscribe: { (single) -> Disposable in
+            
+            let imageCache = NSCache<NSString, UIImage>()
+            
+            if let cachedImage = imageCache.object(forKey: NSString(string: cachedName)) {
+                single(.success((self, cachedImage)))
+            }
+            else
+            {
+                DispatchQueue.global(qos: .background).async {
+                    guard let url = URL(string: url) else { return }
+                    guard let data = try? Data(contentsOf: url) else { return }
+                    guard let image = UIImage(data: data) else { return  }
+                    DispatchQueue.main.async {
+                        imageCache.setObject(image, forKey: NSString(string: cachedName))
+                        single(.success((self, image)))
+                    }
+                }
+            }
+            
+             return Disposables.create {}
+        })
     }
 }

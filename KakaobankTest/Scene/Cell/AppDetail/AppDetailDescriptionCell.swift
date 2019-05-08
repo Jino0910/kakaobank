@@ -12,9 +12,6 @@ import RxCocoa
 
 class AppDetailDescriptionCell: UICollectionViewCell {
     
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var moreLabel: UILabel!
-    
     private var disposeBag = DisposeBag()
     
     private let leftRightMargin: CGFloat = 40.0
@@ -23,6 +20,9 @@ class AppDetailDescriptionCell: UICollectionViewCell {
     
     var handler : (() -> Void)?
     private var isOpened: Bool = false
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var moreLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -55,7 +55,6 @@ class AppDetailDescriptionCell: UICollectionViewCell {
     public func cellHeight(width: CGFloat, desc: String) -> CGFloat {
        
         if isOpened {
-
             let attribute = NSAttributedString(string: desc, attributes: [
                 .font: UIFont.systemFont(ofSize: 15.0)
                 ])

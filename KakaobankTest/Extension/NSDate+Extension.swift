@@ -10,6 +10,10 @@ import Foundation
 
 extension Date {
     
+    func addedBy(byAdding: Calendar.Component, value: Int) -> Date {
+        return Calendar.current.date(byAdding: byAdding, value: value, to: self)!
+    }
+    
     func years(from date: Date) -> Int{
 
         return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0

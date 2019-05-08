@@ -18,11 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let realmVersion: UInt64 = 1
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-//        UISearchBar.appearance().tintColor = .appleBlue
-//        UINavigationBar.appearance().tintColor = .appleBlue
-        
+
         loadRealm()
+        
+        
         
         return true
     }

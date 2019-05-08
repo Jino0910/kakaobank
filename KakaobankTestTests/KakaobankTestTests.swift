@@ -30,6 +30,7 @@ class KakaobankTestTests: XCTestCase {
         XCTAssertTrue(155500.toHangulValue() == "15.6만")
         XCTAssertTrue(655500.toHangulValue() == "65.6만")
     }
+
     
 
     func testPerformanceExample() {

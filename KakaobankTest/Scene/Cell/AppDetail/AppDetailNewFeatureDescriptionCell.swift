@@ -13,9 +13,6 @@ import Async
 
 class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
     
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var moreLabel: UILabel!
-    
     private var disposeBag = DisposeBag()
     
     private let leftRightMargin: CGFloat = 40.0
@@ -26,6 +23,9 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
     private var isOpened: Bool = false
     private var isMoreInfo: Bool = false
     private var isResize: Bool = false
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var moreLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()

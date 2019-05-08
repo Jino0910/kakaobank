@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class AppDetailHeaderCell: UICollectionViewCell {
+    
+    private var disposeBag = DisposeBag()
     
     public static let cellHeight: CGFloat = 120
     
@@ -18,6 +22,11 @@ class AppDetailHeaderCell: UICollectionViewCell {
     @IBOutlet weak var downLoadButton: UIButton!
     @IBOutlet weak var inAppEnableLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,9 +38,11 @@ class AppDetailHeaderCell: UICollectionViewCell {
         self.titleLabel.text = model.trackName
         self.subTitleLabel.text = model.artistName
         
-        self.iconImageView.asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512, handler: { (iv, image) in
-            guard let image = image else { return }
-            iv.image = image
-        })
+        self.iconImageView.rx_asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512)
+            .subscribe(onSuccess: { (iv: UIImageView, image: UIImage?) in
+                guard let image = image else { return }
+                iv.image = image
+            })
+            .disposed(by: disposeBag)
     }
 }

@@ -16,9 +16,10 @@ class AppDetailReviewsCell: UICollectionViewCell, ScrollViewCustomHorizontalPage
     private let screenShotMargin: CGFloat = 10.0
     private let leftRightMargin: CGFloat = 40.0
     private let reviewCount = 5
-    @IBOutlet weak var scViewWidth: NSLayoutConstraint!
     
     @IBOutlet weak var sc: UIScrollView!
+    
+    @IBOutlet weak var scViewWidth: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

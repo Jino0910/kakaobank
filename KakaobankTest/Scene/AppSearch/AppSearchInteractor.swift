@@ -56,7 +56,7 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     }()
     
     var recentHistoryItemNotificationToken: NotificationToken?
-    var searchHistoryItemNotificationToken: NotificationToken?
+//    var searchHistoryItemNotificationToken: NotificationToken?
     
     // MARK: Do something
     
@@ -75,13 +75,13 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
             self.presenter?.presentRecentHistory(response: response)
         })
         
-        searchHistoryItemNotificationToken = searchHistoryList.observe({ [weak self](_:RealmCollectionChange) in
-
-            guard let self = self else { return }
-            for item in self.searchHistoryList {
-//                print("\(item.searchWord)")
-            }
-        })
+//        searchHistoryItemNotificationToken = searchHistoryList.observe({ [weak self](_:RealmCollectionChange) in
+//
+//            guard let self = self else { return }
+//            for item in self.searchHistoryList {
+////                print("\(item.searchWord)")
+//            }
+//        })
     }
     
     func doSearchWordHistory(request: AppSearch.SearchWordHitory.Request) {
