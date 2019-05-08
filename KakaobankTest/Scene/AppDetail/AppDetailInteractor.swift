@@ -30,8 +30,25 @@ class AppDetailInteractor: AppDetailBusinessLogic, AppDetailDataStore {
     
     func doSectionModels() {
 
-        let response = AppDetail.AppDetailInfo.Response(appInfoModel: appInfoModel)
+        let response = AppDetail.AppDetailInfo.Response(appInfoModel: appInfoModel,informationContents: self.getInformationContents())
         presenter?.presentSectionModels(response: response)
+    }
+}
+
+extension AppDetailInteractor{
+    
+    private func getInformationContents() -> [AppDetailInformationContent]{
+        return [
+            AppDetailInformationContent.sellerName,
+            AppDetailInformationContent.fileSize,
+            AppDetailInformationContent.category,
+            AppDetailInformationContent.supportedDevices,
+            AppDetailInformationContent.languageCodesISO2A,
+            AppDetailInformationContent.contentAdvisoryRating,
+            AppDetailInformationContent.copyRight,
+            AppDetailInformationContent.developerWebsite,
+            AppDetailInformationContent.privacyPolicy
+        ]
     }
 }
 

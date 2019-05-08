@@ -11,7 +11,7 @@ import AFDateHelper
 
 class AppDetailNewFeatureVersionCell: UICollectionViewCell {
     
-    public static let cellHeight: CGFloat = 60
+    public static let cellHeight: CGFloat = 62
     
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var lastUpdateLabel: UILabel!

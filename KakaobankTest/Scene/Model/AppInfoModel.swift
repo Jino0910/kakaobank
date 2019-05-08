@@ -124,6 +124,16 @@ struct AppInfoModel {
         return self.json["fileSizeBytes"].stringValue
     }
     
+    /// 메가바이트 변환
+    var fileSizeMegaBytes: String {
+        
+        if let bytes = Float(self.json["fileSizeBytes"].stringValue) {
+            return "\(round(bytes / 1024.0 / 1024.0 * 10) / 10)MB"
+        } else {
+            return ""
+        }
+    }
+    
     /// 카테고리 영어
     var primaryGenreName: String {
         return self.json["primaryGenreName"].stringValue

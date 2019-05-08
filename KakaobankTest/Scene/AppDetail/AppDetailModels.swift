@@ -21,6 +21,7 @@ enum AppDetail {
         }
         struct Response {
             var appInfoModel: AppInfoModel
+            var informationContents: [AppDetailInformationContent]
         }
         struct ViewModel {
             var sectionModels: [AppSearchBaseItemSection]
@@ -28,3 +29,41 @@ enum AppDetail {
     }
 }
 
+enum AppDetailInformationContent {
+    
+    case sellerName
+    case fileSize
+    case category
+    case supportedDevices
+    case languageCodesISO2A
+    case contentAdvisoryRating
+    case copyRight
+    case developerWebsite
+    case privacyPolicy
+}
+
+extension AppDetailInformationContent {
+    
+    var titleColor: UIColor {
+        
+        switch self {
+        case .developerWebsite, .privacyPolicy: return UIColor.appleBlue
+        default: return UIColor.lightGray
+        }
+    }
+    
+    var title: String {
+        
+        switch self {
+        case .sellerName: return "판매자"
+        case .fileSize: return "크기"
+        case .category: return "카테고리"
+        case .supportedDevices: return "호환성"
+        case .languageCodesISO2A: return "언어"
+        case .contentAdvisoryRating: return "연령"
+        case .copyRight: return "저작권"
+        case .developerWebsite: return "개발자 웹 사이트"
+        case .privacyPolicy: return "개인정보 취급방침"
+        }
+    }
+}

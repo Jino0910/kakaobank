@@ -23,7 +23,7 @@ class AppDetailPresenter: AppDetailPresentationLogic {
     
     func presentSectionModels(response: AppDetail.AppDetailInfo.Response) {
         
-        let sectionModels = self.getAppDetailSectionModel(appInfoModel: response.appInfoModel)
+        let sectionModels = self.getAppDetailSectionModel(appInfoModel: response.appInfoModel, informationContents: response.informationContents)
         let viewModel = AppDetail.AppDetailInfo.ViewModel(sectionModels: sectionModels)
         viewController?.displaySectionModels(viewModel: viewModel)
     }
@@ -31,9 +31,9 @@ class AppDetailPresenter: AppDetailPresentationLogic {
 
 extension AppDetailPresenter {
 
-    func getAppDetailSectionModel(appInfoModel: AppInfoModel) -> [AppSearchBaseItemSection] {
+    func getAppDetailSectionModel(appInfoModel: AppInfoModel, informationContents: [AppDetailInformationContent]) -> [AppSearchBaseItemSection] {
         
-        let sectionModels: [AppSearchBaseItemSection] = [
+        var sectionModels: [AppSearchBaseItemSection] = [
             AppSearchBaseItemSection(items: [
                 AppSearchBaseItem(type: .detailHeader, object: appInfoModel),
                 AppSearchBaseItem(type: .detailSubHeader, object: appInfoModel),
@@ -45,9 +45,21 @@ extension AppDetailPresenter {
                 AppSearchBaseItem(type: .detailNewFeatureVersion, object: appInfoModel),
                 AppSearchBaseItem(type: .detailNewFeatureDescription, object: appInfoModel),
                 AppSearchBaseItem(type: .detailInformationTitle, object: appInfoModel),
-                AppSearchBaseItem(type: .detailInformationContent, object: appInfoModel)
+
                 ])
         ]
+        
+        for informationContent in informationContents {
+            sectionModels.append(
+                AppSearchBaseItemSection(items:
+                    [
+                        AppSearchBaseItem(type: .detailInformationContent,
+                                       object: ["model":appInfoModel, "type":informationContent])
+                    ]
+                )
+            )
+        }
+        
         return sectionModels
     }
 }

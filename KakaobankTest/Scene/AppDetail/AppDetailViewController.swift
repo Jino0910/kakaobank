@@ -134,20 +134,24 @@ extension AppDetailViewController: UITableViewDelegate {
         dataSource = RxCollectionViewSectionedReloadDataSource<AppSearchBaseItemSection>(
             configureCell: { (_, cv, indexPath, item) -> UICollectionViewCell in
                 
-                guard let model = self.router?.dataStore?.appInfoModel else { return UICollectionViewCell() }
-                
                 switch item.type {
                 case .detailHeader:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailHeaderCell", for: indexPath) as! AppDetailHeaderCell
-                    cell.configure(model: model)
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
                     return cell
                 case .detailSubHeader:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailSubHeaderCell", for: indexPath) as! AppDetailSubHeaderCell
-                    cell.configure(model: model)
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
                     return cell
                 case .detailScreenShot:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailScreenShotCell", for: indexPath) as! AppDetailScreenShotCell
-                    cell.configure(model: model)
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
                     cell.handler = { [weak self] height in
                         self?.screenShotHeight = height
                         cv.performBatchUpdates({})
@@ -155,16 +159,22 @@ extension AppDetailViewController: UITableViewDelegate {
                     return cell
                 case .detailDescription:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailDescriptionCell", for: indexPath) as! AppDetailDescriptionCell
-                    cell.configure(model: model)
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
                     cell.handler = { cv.performBatchUpdates({}) }
                     return cell
                 case .detailDeveloperInfo:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailDeveloperInfoCell", for: indexPath) as! AppDetailDeveloperInfoCell
-                    cell.configure(model: model)
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
                     return cell
                 case .detailRating:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailRatingCell", for: indexPath) as! AppDetailRatingCell
-                    cell.configure(model: model)
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
                     cell.reviewsButton.rx.tap
                         .subscribe(onNext: { (_) in
                             print("리뷰 모두보기")
@@ -176,17 +186,29 @@ extension AppDetailViewController: UITableViewDelegate {
                     return cell
                 case .detailNewFeatureVersion:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailNewFeatureVersionCell", for: indexPath) as! AppDetailNewFeatureVersionCell
-                    cell.configure(model: model)
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
                     return cell
                 case .detailNewFeatureDescription:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailNewFeatureDescriptionCell", for: indexPath) as! AppDetailNewFeatureDescriptionCell
-                    cell.configure(model: model)
+                    if let model = item.object as? AppInfoModel {
+                        cell.configure(model: model)
+                    }
                     cell.handler = { cv.performBatchUpdates({}) }
                     return cell
                 case .detailInformationTitle:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailInformationTitleCell", for: indexPath) as! AppDetailInformationTitleCell
                     return cell
-//                case .detailInformationContent:
+                case .detailInformationContent:
+                    let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailInformationContentCell", for: indexPath) as! AppDetailInformationContentCell
+                    if let dic = item.object as? Dictionary<String, Any> {
+                        if let model = dic["model"] as? AppInfoModel, let type = dic["type"] as? AppDetailInformationContent {
+                            cell.configure(model: model, type: type)
+                        }
+//
+                    }
+                    return cell
                     
                 default: return UICollectionViewCell()
                 }
@@ -200,12 +222,21 @@ extension AppDetailViewController: UITableViewDelegate {
         cv.rx.itemSelected
             .subscribe(onNext: { (indexPath) in
                 
+                guard let model = self.router?.dataStore?.appInfoModel else { return }
+                
                 if (self.cv.cellForItem(at: indexPath) as? AppDetailDeveloperInfoCell) != nil {
-                    
-                    guard let model = self.router?.dataStore?.appInfoModel else { return }
+
                     guard let url = URL(string: model.artistViewUrl) else { return }
                     let vc = SFSafariViewController(url: url)
                     self.present(vc, animated: true, completion: {})
+                } else if let cell = self.cv.cellForItem(at: indexPath) as? AppDetailInformationContentCell {
+                    
+                    guard let type = cell.type else { return }
+                    if type == .developerWebsite {
+                        guard let url = URL(string: model.artistViewUrl) else { return }
+                        let vc = SFSafariViewController(url: url)
+                        self.present(vc, animated: true, completion: {})
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -250,7 +281,7 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
                 return CGSize(width: width, height: AppDetailNewFeatureDescriptionCell.cellHeight())
             }
         case .detailInformationTitle: return CGSize(width: width, height: AppDetailInformationTitleCell.cellHeight)
-//        case .detailInformationContent:
+        case .detailInformationContent: return CGSize(width: width, height: AppDetailInformationContentCell.cellHeight)
   
         default: return .zero
         }

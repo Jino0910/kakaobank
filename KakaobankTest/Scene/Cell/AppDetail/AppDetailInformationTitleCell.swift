@@ -9,5 +9,5 @@
 import UIKit
 
 class AppDetailInformationTitleCell: UICollectionViewCell {
-    public static let cellHeight: CGFloat = 42
+    public static let cellHeight: CGFloat = 50
 }
