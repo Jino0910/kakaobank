@@ -144,6 +144,7 @@ struct AppInfoModel {
         return self.json["genres"].arrayValue
     }
     
+    /// 첫번째 카테고리 한글
     var genresValue: String {
         
         if self.json["genres"].arrayValue.count > 0 {
@@ -157,9 +158,66 @@ struct AppInfoModel {
         return self.json["supportedDevices"].arrayValue
     }
     
+    /// 호환성
+    var compatibility: String {
+        
+        
+        let iPhoneName = "iPhone"
+        let iPadName = "iPad"
+        let iPodName = "iPod touch"
+        
+        var iPhone = false
+        var iPad = false
+        var iPod = false
+        
+        for value in self.json["supportedDevices"].arrayValue {
+            
+            if iPhone || iPod || iPad { break }
+            
+            if value.stringValue.contains("iPhone") { iPhone = true }
+            if value.stringValue.contains("iPad") { iPad = true }
+            if value.stringValue.contains("iPod") { iPod = true }
+        }
+        
+        var enableDevice: [String] = [iPhoneName, iPadName, iPodName]
+        
+        var deviceDesc: String = ""
+        if enableDevice.count == 1 {
+            deviceDesc = enableDevice.first ?? ""
+        } else {
+            
+            for index in 0...enableDevice.count-1 {
+                if deviceDesc.isEmpty {
+                    deviceDesc = enableDevice[index]
+                } else {
+                    deviceDesc += ", \(enableDevice[index])"
+                }
+            }
+            
+            deviceDesc += " 및 \(enableDevice.last ?? "")와(과) 호환."
+        }
+        
+        
+        return "iOS \(self.json["minimumOsVersion"].floatValue) 버전 이상이 필요. " + deviceDesc
+    }
+    
     /// 언어
-    var languageCodesISO2A: String {
-        return self.json["languageCodesISO2A"].stringValue
+    var languageCodesISO2A: [JSON] {
+        return self.json["languageCodesISO2A"].arrayValue
+    }
+    
+    /// 언어 string
+    var languageCodesISO2AValue: String {
+        
+        var result = ""
+        for value in self.json["languageCodesISO2A"].arrayValue {
+            if result.isEmpty {
+                result = value.stringValue
+            } else {
+                result += ", \(value.stringValue)"
+            }
+        }
+        return result
     }
     
     /// 연령
@@ -269,5 +327,20 @@ struct AppInfoModel {
     /// 앱아이콘_512
     var artworkUrl512: String {
         return self.json["artworkUrl512"].stringValue
+    }
+    
+    func informationContent(type: AppDetailInformationContent) -> String {
+        
+        switch type {
+        case .sellerName: return self.sellerName
+        case .fileSize: return self.fileSizeMegaBytes
+        case .category: return self.genresValue
+        case .supportedDevices: return self.compatibility
+        case .languageCodesISO2A: return self.languageCodesISO2AValue
+        case .contentAdvisoryRating: return self.contentAdvisoryRating
+        case .copyRight: return "Copyright " + self.sellerName
+        case .developerWebsite: return  ""
+        case .privacyPolicy: return  ""
+        }
     }
 }

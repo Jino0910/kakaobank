@@ -14,6 +14,7 @@ class AppDetailNewFeatureVersionCell: UICollectionViewCell {
     public static let cellHeight: CGFloat = 62
     
     @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var versionHistoryButton: UIButton!
     @IBOutlet weak var lastUpdateLabel: UILabel!
     
     func configure(model: AppInfoModel) {

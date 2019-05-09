@@ -177,7 +177,7 @@ extension AppDetailViewController: UITableViewDelegate {
                     }
                     cell.reviewsButton.rx.tap
                         .subscribe(onNext: { (_) in
-                            print("리뷰 모두보기")
+                            print("리뷰 모두 보기")
                         })
                         .disposed(by: self.disposeBag)
                     return cell
@@ -189,6 +189,11 @@ extension AppDetailViewController: UITableViewDelegate {
                     if let model = item.object as? AppInfoModel {
                         cell.configure(model: model)
                     }
+                    cell.versionHistoryButton.rx.tap
+                        .subscribe(onNext: { (_) in
+                            print("버전 기록 보기")
+                        })
+                        .disposed(by: self.disposeBag)
                     return cell
                 case .detailNewFeatureDescription:
                     let cell = cv.dequeueReusableCell(withReuseIdentifier: "AppDetailNewFeatureDescriptionCell", for: indexPath) as! AppDetailNewFeatureDescriptionCell
@@ -206,8 +211,8 @@ extension AppDetailViewController: UITableViewDelegate {
                         if let model = dic["model"] as? AppInfoModel, let type = dic["type"] as? AppDetailInformationContent {
                             cell.configure(model: model, type: type)
                         }
-//
                     }
+                    cell.handler = { cv.performBatchUpdates({}) }
                     return cell
                     
                 default: return UICollectionViewCell()
@@ -258,7 +263,7 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         
         let width = UIScreen.main.bounds.width
         
-//        print(item.type)
+        print(item.type)
         
         switch item.type {
             
@@ -282,8 +287,14 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
                 return CGSize(width: width, height: AppDetailNewFeatureDescriptionCell.cellHeight())
             }
         case .detailInformationTitle: return CGSize(width: width, height: AppDetailInformationTitleCell.cellHeight)
-        case .detailInformationContent: return CGSize(width: width, height: AppDetailInformationContentCell.cellHeight)
-  
+        case .detailInformationContent: return CGSize(width: width, height: AppDetailInformationContentCell.cellHeight())
+//            if let cell = cv.cellForItem(at: indexPath) as? AppDetailInformationContentCell {
+//                guard let cellType = cell.type else { return .zero }
+//                let content = model.informationContent(type: cellType)
+//                return CGSize(width: width, height: cell.cellHeight(width: width, desc: content))
+//            } else {
+//                return CGSize(width: width, height: AppDetailInformationContentCell.cellHeight())
+//            }
         default: return .zero
         }
     }

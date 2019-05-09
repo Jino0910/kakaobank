@@ -48,7 +48,7 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
     
     func configure(model: AppInfoModel) {
         
-        let height = self.getDescriptionNSAttributeString(description: model.releaseNotes).height(width: UIScreen.main.bounds.width-leftRightMargin)
+        let height = model.releaseNotes.setAttributedString(font: UIFont.systemFont(ofSize: 15.0)).height(width: UIScreen.main.bounds.width-leftRightMargin)
         
         self.getMoreDescription(height: height)
 
@@ -73,14 +73,14 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
       
         if self.isMoreInfo {
             if isOpened {
-                let attribute = self.getDescriptionNSAttributeString(description: desc)
+                let attribute = desc.setAttributedString(font: UIFont.systemFont(ofSize: 15.0))
                 self.descriptionLabel.attributedText = attribute
                 return attribute.height(width: width-leftRightMargin) + topBottomMargin
             } else {
                 return defaultHeight + topBottomMargin
             }
         } else {
-            let attribute = self.getDescriptionNSAttributeString(description: desc)
+            let attribute = desc.setAttributedString(font: UIFont.systemFont(ofSize: 15.0))
             return attribute.height(width: width-leftRightMargin) + topBottomMargin
         }
     }
@@ -91,13 +91,6 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
 }
 
 extension AppDetailNewFeatureDescriptionCell {
-    
-    private func getDescriptionNSAttributeString(description: String) -> NSAttributedString {
-        
-        return NSAttributedString(string: description, attributes: [
-            .font: UIFont.systemFont(ofSize: 15.0)
-            ])
-    }
     
     private func getMoreDescription(height: CGFloat) {
         self.isMoreInfo = height > 60

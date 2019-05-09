@@ -55,9 +55,7 @@ class AppDetailDescriptionCell: UICollectionViewCell {
     public func cellHeight(width: CGFloat, desc: String) -> CGFloat {
        
         if isOpened {
-            let attribute = NSAttributedString(string: desc, attributes: [
-                .font: UIFont.systemFont(ofSize: 15.0)
-                ])
+            let attribute = desc.setAttributedString(font: UIFont.systemFont(ofSize: 15.0))
             self.descriptionLabel.attributedText = attribute
             
             return attribute.height(width: width-leftRightMargin) + topBottomMargin

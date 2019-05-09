@@ -6,7 +6,7 @@
 //  Copyright © 2019 rowkaxl. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     
@@ -40,6 +40,13 @@ extension String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         return dateFormatter.date(from: self)
+    }
+    
+    func setAttributedString(font: UIFont) -> NSAttributedString {
+        
+        return NSAttributedString(string: description, attributes: [
+            .font: font
+            ])
     }
 }
 
