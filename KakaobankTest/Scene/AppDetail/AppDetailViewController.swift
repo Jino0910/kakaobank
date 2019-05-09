@@ -108,6 +108,8 @@ extension AppDetailViewController: UITableViewDelegate {
     }
     
     private func configureUI() {
+        self.navigationController?.navigationBar.shadowImage = UIColor.white.as1ptImage()
+        
         cv.rx.setDelegate(self).disposed(by: self.disposeBag)
         
         guard let model = self.router?.dataStore?.appInfoModel else { return }
@@ -123,10 +125,6 @@ extension AppDetailViewController: UITableViewDelegate {
             self.navigationItem.titleView = imageView
             self.navigationItem.titleView?.alpha = 0.0
         })
-        
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
     }
     
     private func configureRx() {

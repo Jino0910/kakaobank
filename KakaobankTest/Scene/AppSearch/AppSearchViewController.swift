@@ -111,6 +111,7 @@ extension AppSearchViewController: UITableViewDelegate {
     }
     
     private func configureUI() {
+        self.navigationController?.navigationBar.shadowImage = UIColor.white.as1ptImage()
         
         searchController.searchResultsUpdater = self
         searchController.delegate = self
@@ -127,7 +128,8 @@ extension AppSearchViewController: UITableViewDelegate {
         
         //
         definesPresentationContext = true
-    
+        
+//        self.navigationController?.navigationBar.hideBottomLine()
     }
     
     private func configureRx() {
