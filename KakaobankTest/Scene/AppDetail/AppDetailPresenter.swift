@@ -52,10 +52,8 @@ extension AppDetailPresenter {
         for informationContent in informationContents {
             sectionModels.append(
                 AppSearchBaseItemSection(items:
-                    [
-                        AppSearchBaseItem(type: .detailInformationContent,
-                                       object: ["model":appInfoModel, "type":informationContent])
-                    ]
+                    [AppSearchBaseItem(type: .detailInformationContent,
+                                       object: ["model":appInfoModel, "type":informationContent])]
                 )
             )
         }

@@ -111,11 +111,10 @@ extension AppSearchViewController: UITableViewDelegate {
     }
     
     private func configureUI() {
-        self.navigationController?.navigationBar.shadowImage = UIColor.white.as1ptImage()
-        
         searchController.searchResultsUpdater = self
         searchController.delegate = self
-        //
+        
+        // 검색중 검색바 아래 페이지 dim 처리
         searchController.obscuresBackgroundDuringPresentation = false
         
         searchController.searchBar.delegate = self
@@ -123,13 +122,11 @@ extension AppSearchViewController: UITableViewDelegate {
         searchController.searchBar.setValue("취소", forKey: "_cancelButtonText")
         
         navigationItem.searchController = searchController
-        //
+        // 검색전 스크롤시 검색바 접혀 사라짐 여부
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        //
+        // 상위 클래스안에 포함될지 여부
         definesPresentationContext = true
-        
-//        self.navigationController?.navigationBar.hideBottomLine()
     }
     
     private func configureRx() {
@@ -204,16 +201,16 @@ extension AppSearchViewController: UITableViewDelegate {
                     self.searchController.searchBar.endEditing(true)
                     self.setAppSearchStatus(status: .searchComplete)
                     
-                    let request = AppSearch.SearchAppStore.Request(query: query)
-                    self.interactor?.doSearchAppStore(request: request)
+                    Async.background() {
+                        let request = AppSearch.SearchAppStore.Request(query: query)
+                        self.interactor?.doSearchAppStore(request: request)
+                    }
                     
                 } else if data.appSearchStatus == .searchComplete {
                     
                     guard let model = data.appInfoModels?[indexPath.section] else { return }
                     print(model.trackName)
                 }
-                
-                
             })
             .disposed(by: disposeBag)
         
@@ -233,9 +230,11 @@ extension AppSearchViewController: UITableViewDelegate {
             .searchButtonClicked
             .subscribe(onNext: { (_) in
                 guard let query = self.searchController.searchBar.text else { return }
-                let request = AppSearch.SearchAppStore.Request(query: query)
-                self.interactor?.doSearchAppStore(request: request)
-
+                
+                Async.background() {
+                    let request = AppSearch.SearchAppStore.Request(query: query)
+                    self.interactor?.doSearchAppStore(request: request)
+                }
                 self.setAppSearchStatus(status: .searchComplete)
             })
             .disposed(by: disposeBag)
@@ -255,9 +254,7 @@ extension AppSearchViewController: UITableViewDelegate {
             .drive(onNext: { [weak self] (height) in
                 guard let self = self else { return }
                 self.searchBaseViewBottom.constant = height
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.view.layoutIfNeeded()
-                })
+                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
             })
             .disposed(by: disposeBag)
         
@@ -267,6 +264,7 @@ extension AppSearchViewController: UITableViewDelegate {
 extension AppSearchViewController: UISearchBarDelegate {
     // MARK: - UISearchBar Delegate
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        // 한글 & 삭제 활성화
         return text.checkKorean || text.isEmpty
     }
     
@@ -331,13 +329,3 @@ extension AppSearchViewController {
         self.searchBaseView.alpha = status.baseViewAlpha
     }
 }
-
-
-//UIView.animate(withDuration: 0.3,
-//               animations: { () -> Void in
-//
-//                self.searchTv.alpha = 0.5
-//
-//}, completion: { (_) -> Void in
-//
-//})

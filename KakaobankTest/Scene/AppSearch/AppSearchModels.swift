@@ -59,7 +59,7 @@ struct RecentHistoryModel {
     
     /// 검색어
     var searchWord: String?
-    /// 검색시간
+    /// 시간
     var date: Date?
     
     init(searchWord: String, date: Date) {
@@ -72,7 +72,7 @@ struct SearchHistoryModel {
     
     /// 검색어
     var searchWord: String?
-    /// 검색시간
+    /// 시간
     var date: Date?
     
     init(searchWord: String, date: Date) {

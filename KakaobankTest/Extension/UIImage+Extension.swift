@@ -11,6 +11,7 @@ import UIKit
 extension UIImage {
     
     func resizeImage(targetSize: CGSize) -> UIImage? {
+        
         let size = self.size
         
         let widthRatio  = targetSize.width  / size.width
@@ -24,11 +25,13 @@ extension UIImage {
             newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
         }
         
+        let retinaScale: CGFloat = 2.0
+        
         // This is the rect that we've calculated out and this is what is actually used below
         let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
         
         // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 2.0)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, retinaScale)
         self.draw(in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()

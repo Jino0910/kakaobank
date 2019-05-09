@@ -57,6 +57,3 @@ class APIManager {
         })
     }
 }
-
-
-//DispatchQueue.main.async(execute: {

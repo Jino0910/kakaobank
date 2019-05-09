@@ -93,7 +93,7 @@ class AppDetailViewController: UIViewController, AppDetailDisplayLogic {
  
     public let sectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     
-    var screenShotHeight: CGFloat = 450
+    var screenShotHeight: CGFloat = 450 // 스크린샷 최초 높이 사이즈
     
     func displaySectionModels(viewModel: AppDetail.AppDetailInfo.ViewModel) {
         sectionModels.accept(viewModel.sectionModels)
@@ -120,11 +120,13 @@ extension AppDetailViewController: UITableViewDelegate {
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
         
-        imageView.asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512, handler: { (iv, image) in
-            imageView.image = image?.resizeImage(targetSize: CGSize(width: 30, height: 30))
-            self.navigationItem.titleView = imageView
-            self.navigationItem.titleView?.alpha = 0.0
-        })
+        imageView.rx_asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512)
+            .subscribe(onSuccess: { (iv, image) in
+                imageView.image = image?.resizeImage(targetSize: CGSize(width: 30, height: 30))
+                self.navigationItem.titleView = imageView
+                self.navigationItem.titleView?.alpha = 0.0
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configureRx() {
@@ -216,7 +218,6 @@ extension AppDetailViewController: UITableViewDelegate {
             sectionModels.bind(to: cv.rx.items(dataSource: dataSource)).disposed(by: self.disposeBag)
         }
     
-        // 최근검색어 선택
         cv.rx.itemSelected
             .subscribe(onNext: { (indexPath) in
                 
@@ -224,11 +225,13 @@ extension AppDetailViewController: UITableViewDelegate {
                 
                 if (self.cv.cellForItem(at: indexPath) as? AppDetailDeveloperInfoCell) != nil {
 
+                    //  앱 상세 개발자 웹사이트
                     guard let url = URL(string: model.artistViewUrl) else { return }
                     let vc = SFSafariViewController(url: url)
                     self.present(vc, animated: true, completion: {})
                 } else if let cell = self.cv.cellForItem(at: indexPath) as? AppDetailInformationContentCell {
                     
+                    //  추가 정보내 개발자 웹 사이트
                     guard let type = cell.type else { return }
                     if type == .developerWebsite {
                         guard let url = URL(string: model.artistViewUrl) else { return }
@@ -255,7 +258,7 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
         
         let width = UIScreen.main.bounds.width
         
-        print(item.type)
+//        print(item.type)
         
         switch item.type {
             
@@ -289,7 +292,6 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
 extension AppDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print(scrollView.contentOffset.y)
         if scrollView.contentOffset.y > 0 {
             // navigationItem fade in
             UIView.animate(withDuration: 0.3) { self.navigationItem.titleView?.alpha = 1.0 }

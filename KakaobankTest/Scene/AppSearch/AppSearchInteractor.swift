@@ -56,12 +56,12 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     }()
     
     var recentHistoryItemNotificationToken: NotificationToken?
-//    var searchHistoryItemNotificationToken: NotificationToken?
     
     // MARK: Do something
     
     func doRecentHistory() {
         
+        // 최근검색어리스트 옵저버
         recentHistoryItemNotificationToken = recentHistoryList.observe({ [weak self](_:RealmCollectionChange) in
 
             guard let self = self else { return }
@@ -71,21 +71,15 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
             }
             self.recentHistoryModels = models
             
+            
             let response = AppSearch.RecentHitory.Response(recentHistoryModels: models)
             self.presenter?.presentRecentHistory(response: response)
         })
-        
-//        searchHistoryItemNotificationToken = searchHistoryList.observe({ [weak self](_:RealmCollectionChange) in
-//
-//            guard let self = self else { return }
-//            for item in self.searchHistoryList {
-////                print("\(item.searchWord)")
-//            }
-//        })
     }
     
     func doSearchWordHistory(request: AppSearch.SearchWordHitory.Request) {
         
+        // 검색어
         let predicate = NSPredicate(format: "searchWord CONTAINS %@", request.query)
         guard let results = searchHistoryList.realm?.objects(SearchHistoryRealmItem.self).filter(predicate) else { return }
         
@@ -95,12 +89,14 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
         }
         self.searchHistoryModels = models
         
+        
         let response = AppSearch.SearchWordHitory.Response(searchHistoryModel: models)
         self.presenter?.presentSearchWordHistory(response: response)
     }
     
     func doSearchAppStore(request: AppSearch.SearchAppStore.Request) {
         
+        // 검색 api
         self.worker.requestSearchAppStore(query: request.query)
             .filter {$0.0 == .code200}
             .subscribe(onSuccess: { (_, json) in
@@ -116,7 +112,6 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
                     models.append(AppInfoModel(json: item))
                 }
                 self.appInfoModels = models
-                
                 
                 
                 let response = AppSearch.SearchAppStore.Response(json: json, appInfoModels: models)
@@ -141,7 +136,7 @@ extension AppSearchInteractor {
                         break
                     }
                 }
-                
+
                 let item = RecentHistoryRealmItem()
                 item.searchWord = query
                 self.realm.add(item)

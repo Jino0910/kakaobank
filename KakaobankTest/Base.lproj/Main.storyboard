@@ -870,13 +870,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZU5-g1-FJF">
-                                                    <rect key="frame" x="20" y="10" width="38" height="18"/>
+                                                    <rect key="frame" x="20" y="12" width="38" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개발자" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9o-uH-WMw">
-                                                    <rect key="frame" x="20" y="30" width="29" height="13.5"/>
+                                                    <rect key="frame" x="20" y="32" width="29" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -892,7 +892,7 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="h9o-uH-WMw" firstAttribute="leading" secondItem="ZU5-g1-FJF" secondAttribute="leading" id="7sK-yF-ZTA"/>
-                                            <constraint firstItem="ZU5-g1-FJF" firstAttribute="top" secondItem="NER-rA-Fl9" secondAttribute="top" constant="10" id="FWm-lu-9nf"/>
+                                            <constraint firstItem="ZU5-g1-FJF" firstAttribute="top" secondItem="NER-rA-Fl9" secondAttribute="top" constant="12" id="FWm-lu-9nf"/>
                                             <constraint firstItem="bs1-AH-5K2" firstAttribute="centerY" secondItem="NER-rA-Fl9" secondAttribute="centerY" id="O72-eU-ghd"/>
                                             <constraint firstItem="h9o-uH-WMw" firstAttribute="top" secondItem="ZU5-g1-FJF" secondAttribute="bottom" constant="2" id="Rai-Fy-Vwa"/>
                                             <constraint firstAttribute="trailing" secondItem="bs1-AH-5K2" secondAttribute="trailing" constant="20" id="cZO-6E-ca4"/>
