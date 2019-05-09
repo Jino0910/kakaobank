@@ -63,7 +63,6 @@ class AppDetailHeaderCell: UICollectionViewCell {
                 switch index {
                 case 0:
                     let vc = UIActivityViewController(activityItems: [model.shareMessage], applicationActivities: nil)
-                    vc.excludedActivityTypes = [.copyToPasteboard]
                     UIApplication.topViewController()?.present(vc, animated: true, completion: {})
                 case 1:
                     guard let url = URL(string: model.artistViewUrl) else { return }
