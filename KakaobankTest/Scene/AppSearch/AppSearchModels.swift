@@ -94,7 +94,7 @@ enum AppSearchStatus {
 
 extension AppSearchStatus {
     
-    var baseViewAlpha: CGFloat {
+    var dimViewAlpha: CGFloat {
         
         switch self {
         case .searchBefore: return 0.0
@@ -102,22 +102,22 @@ extension AppSearchStatus {
         case .searching, .searchComplete: return 1.0
         }
     }
-    
-    var tableViewAlpha: CGFloat {
-        
-        switch self {
-        case .searchBefore: return 0.0
-        case .searchStart: return 0.0
-        case .searching, .searchComplete: return 1.0
-        }
-    }
-    
-    var baseViewBackgroundColor: UIColor {
+
+    var dimViewBackgroundColor: UIColor {
         
         switch self {
         case .searchBefore: return .black
         case .searchStart: return .black
         case .searching, .searchComplete: return .white
+        }
+    }
+    
+    var serchTvAlpha: CGFloat {
+        
+        switch self {
+        case .searchBefore: return 0.0
+        case .searchStart: return 0.0
+        case .searching, .searchComplete: return 1.0
         }
     }
 }

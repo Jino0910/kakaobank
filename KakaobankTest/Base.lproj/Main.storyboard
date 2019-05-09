@@ -320,25 +320,24 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gyY-si-3zd" secondAttribute="bottom" id="0Ty-Kv-wrj"/>
-                            <constraint firstItem="ntI-Uo-VBd" firstAttribute="bottom" secondItem="8Vb-8e-FiK" secondAttribute="bottom" id="5bo-JL-XRT"/>
-                            <constraint firstItem="ntI-Uo-VBd" firstAttribute="leading" secondItem="8Vb-8e-FiK" secondAttribute="leading" id="9mt-lv-beQ"/>
+                            <constraint firstAttribute="trailing" secondItem="ntI-Uo-VBd" secondAttribute="trailing" id="4A9-oD-WHE"/>
+                            <constraint firstItem="ntI-Uo-VBd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6TT-sW-ay7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ntI-Uo-VBd" secondAttribute="bottom" id="ExD-0j-fna"/>
                             <constraint firstItem="8Vb-8e-FiK" firstAttribute="leading" secondItem="gyY-si-3zd" secondAttribute="leading" id="NEO-m6-X2v"/>
                             <constraint firstItem="8Vb-8e-FiK" firstAttribute="top" secondItem="gyY-si-3zd" secondAttribute="top" id="Nwt-gB-Iqj"/>
                             <constraint firstAttribute="top" secondItem="gyY-si-3zd" secondAttribute="top" id="TrT-Bb-1MV"/>
                             <constraint firstItem="8Vb-8e-FiK" firstAttribute="trailing" secondItem="gyY-si-3zd" secondAttribute="trailing" id="WRz-ZH-mdb"/>
+                            <constraint firstAttribute="top" secondItem="ntI-Uo-VBd" secondAttribute="top" id="XO4-Hz-wx1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8Vb-8e-FiK" secondAttribute="bottom" id="Y0k-HD-csw"/>
                             <constraint firstItem="gyY-si-3zd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Yhn-pv-jfb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gyY-si-3zd" secondAttribute="trailing" id="fFQ-jR-ydg"/>
-                            <constraint firstItem="ntI-Uo-VBd" firstAttribute="trailing" secondItem="8Vb-8e-FiK" secondAttribute="trailing" id="qnp-uU-p0M"/>
-                            <constraint firstItem="ntI-Uo-VBd" firstAttribute="top" secondItem="8Vb-8e-FiK" secondAttribute="top" id="sha-zG-2l3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="검색" largeTitleDisplayMode="always" id="44Y-T2-LXo"/>
                     <connections>
+                        <outlet property="dimView" destination="8Vb-8e-FiK" id="uLH-UO-llX"/>
                         <outlet property="recentTv" destination="gyY-si-3zd" id="Fql-L7-lOx"/>
-                        <outlet property="searchBaseView" destination="8Vb-8e-FiK" id="AEw-hl-EKU"/>
-                        <outlet property="searchBaseViewBottom" destination="Y0k-HD-csw" id="Hiq-Xs-njS"/>
                         <outlet property="searchTv" destination="ntI-Uo-VBd" id="tMj-VB-qsG"/>
                     </connections>
                 </viewController>
