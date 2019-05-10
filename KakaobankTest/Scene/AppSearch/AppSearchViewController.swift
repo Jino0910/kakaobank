@@ -17,6 +17,7 @@ import RxDataSources
 import RxGesture
 import SnapKit
 import RxKeyboard
+import Async
 
 protocol AppSearchDisplayLogic: class {
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel)
@@ -84,6 +85,8 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
     @IBOutlet weak var recentTv: UITableView!
     @IBOutlet weak var dimView: UIView!
     @IBOutlet weak var searchTv: UITableView!
+    @IBOutlet weak var searchTvBottomPadding: NSLayoutConstraint!
+    
     
     public let recentSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     public let searchSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
@@ -132,11 +135,9 @@ extension AppSearchViewController: UITableViewDelegate {
         let recentDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
             
             let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchHistoryListCell", for: indexPath) as! AppSearchHistoryListCell
-            if indexPath.section == 0 {
-                cell.selectionStyle = .none
-            } else {
-                cell.selectionStyle = .blue
-            }
+            if indexPath.section == 0 { cell.selectionStyle = .none }
+            else { cell.selectionStyle = .blue }
+            
             if let model = item.object as? RecentHistoryModel, let status = self.router?.dataStore?.appSearchStatus {
                 cell.configure(model: model, type: item.type, status: status)
             }
@@ -145,7 +146,6 @@ extension AppSearchViewController: UITableViewDelegate {
         })
         
         let searchDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
-            
             
             switch item.type {
             case .searchWordList:
@@ -172,37 +172,46 @@ extension AppSearchViewController: UITableViewDelegate {
         
         // 최근검색어 선택
         recentTv.rx.itemSelected
-            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (indexPath) in
                 
                 guard indexPath.section > 0 else { return }
-                guard let searchWord = self.router?.dataStore?.recentHistoryModels?[indexPath.section-1].searchWord else { return }
                 self.recentTv.reloadRows(at: [indexPath], with: .none)
+                guard let searchWord = self.router?.dataStore?.recentHistoryModels?[indexPath.section-1].searchWord else { return }
                 
                 self.searchController.searchBar.text = searchWord
                 self.searchController.isActive = true
-                self.setAppSearchStatus(status: .searchComplete)
                 
-                let request = AppSearch.SearchAppStore.Request(query: searchWord)
-                self.interactor?.doSearchAppStore(request: request)
+                // 상태꼬임방지
+                Async.main(after: 0.1) {
+                    self.setAppSearchStatus(status: .searchComplete)
+                }
+
+                // 애니메이션 후 통신되도록
+                Async.background(after: 0.2) {
+                    
+                    let request = AppSearch.SearchAppStore.Request(query: searchWord)
+                    self.interactor?.doSearchAppStore(request: request)
+                }
             })
             .disposed(by: disposeBag)
         
         // 검색한 앱선택
         searchTv.rx.itemSelected
-            .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (indexPath) in
                 
                 guard var data = self.router?.dataStore else { return }
                 
                 if data.appSearchStatus == .searching {
                     
-                    guard let query = data.searchHistoryModels?[indexPath.section].searchWord else { return }
                     self.recentTv.reloadRows(at: [indexPath], with: .none)
+                    guard let query = data.searchHistoryModels?[indexPath.section].searchWord else { return }
                     
                     self.searchController.searchBar.text = query
                     self.searchController.searchBar.endEditing(true)
                     self.setAppSearchStatus(status: .searchComplete)
+                    
+                    let request = AppSearch.SearchAppStore.Request(query: query)
+                    self.interactor?.doSearchAppStore(request: request)
                     
                 } else if data.appSearchStatus == .searchComplete {
                     
@@ -221,14 +230,17 @@ extension AppSearchViewController: UITableViewDelegate {
             .subscribe(onNext: { [weak self](_) in
                 guard let self = self else { return }
                 self.searchController.isActive = false
+                // 앱검색 정보 클리어
+                self.searchSectionModels.accept([])
             }).disposed(by: disposeBag)
         
         // 검색완료 클릭
         searchController.searchBar.rx
             .searchButtonClicked
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { (_) in
-                guard let query = self.searchController.searchBar.text else { return }
+            .map{self.searchController.searchBar.text ?? ""}
+            .filter{!$0.isEmpty}
+            .subscribe(onNext: { (query) in
+                
                 self.setAppSearchStatus(status: .searchComplete)
                 let request = AppSearch.SearchAppStore.Request(query: query)
                 self.interactor?.doSearchAppStore(request: request)
@@ -243,14 +255,15 @@ extension AppSearchViewController: UITableViewDelegate {
                 self.searchSectionModels.accept([])
             })
             .disposed(by: disposeBag)
-        
+ 
         // 키보드 동작
         RxKeyboard.instance.visibleHeight
             .skip(1)
             .drive(onNext: { [weak self] (height) in
                 guard let self = self else { return }
-                self.searchTv.contentInset = UIEdgeInsets.init(top: self.searchTv.contentInset.top, left: self.searchTv.contentInset.left, bottom: height, right: self.searchTv.contentInset.right)
-
+                self.searchTvBottomPadding.constant = height
+                self.view.layoutIfNeeded()
+//                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
             })
             .disposed(by: disposeBag)
     

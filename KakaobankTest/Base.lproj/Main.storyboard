@@ -339,6 +339,7 @@
                         <outlet property="dimView" destination="8Vb-8e-FiK" id="uLH-UO-llX"/>
                         <outlet property="recentTv" destination="gyY-si-3zd" id="Fql-L7-lOx"/>
                         <outlet property="searchTv" destination="ntI-Uo-VBd" id="tMj-VB-qsG"/>
+                        <outlet property="searchTvBottomPadding" destination="ExD-0j-fna" id="aKg-Sr-4D5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
