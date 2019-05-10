@@ -202,12 +202,17 @@ extension AppSearchViewController: UITableViewDelegate {
                 
                 if data.appSearchStatus == .searching {
                     
-                    self.recentTv.reloadRows(at: [indexPath], with: .none)
+                    self.searchTv.reloadRows(at: [indexPath], with: .none)
                     guard let query = data.searchHistoryModels?[indexPath.section].searchWord else { return }
                     
                     self.searchController.searchBar.text = query
                     self.searchController.searchBar.endEditing(true)
                     self.setAppSearchStatus(status: .searchComplete)
+                    
+                    // 앱정보 클리어 및 스크롤 상단으로
+                    self.searchTv.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                    self.searchSectionModels.accept([])
+                    
                     
                     let request = AppSearch.SearchAppStore.Request(query: query)
                     self.interactor?.doSearchAppStore(request: request)
@@ -260,7 +265,7 @@ extension AppSearchViewController: UITableViewDelegate {
             .skip(1)
             .drive(onNext: { [weak self] (height) in
                 guard let self = self else { return }
-                self.searchTvBottomPadding.constant = height
+                self.searchTvBottomPadding.constant = height - self.view.safeAreaInsets.bottom
                 self.view.layoutIfNeeded()
             })
             .disposed(by: disposeBag)
