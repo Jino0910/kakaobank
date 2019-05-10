@@ -255,12 +255,6 @@ extension AppSearchViewController: UITableViewDelegate {
             .disposed(by: disposeBag)
     
     }
-    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 30
-//    }
-    
-//    guard var data = router?.dataStore  else { return }
 }
 
 extension AppSearchViewController: UISearchBarDelegate {
