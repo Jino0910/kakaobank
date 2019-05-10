@@ -54,7 +54,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ntI-Uo-VBd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AppRecentHistoryListCell" id="qQx-9W-irR" customClass="AppRecentHistoryListCell" customModule="KakaobankTest" customModuleProvider="target">
@@ -327,7 +327,7 @@
                             <constraint firstItem="8Vb-8e-FiK" firstAttribute="top" secondItem="gyY-si-3zd" secondAttribute="top" id="Nwt-gB-Iqj"/>
                             <constraint firstAttribute="top" secondItem="gyY-si-3zd" secondAttribute="top" id="TrT-Bb-1MV"/>
                             <constraint firstItem="8Vb-8e-FiK" firstAttribute="trailing" secondItem="gyY-si-3zd" secondAttribute="trailing" id="WRz-ZH-mdb"/>
-                            <constraint firstAttribute="top" secondItem="ntI-Uo-VBd" secondAttribute="top" id="XO4-Hz-wx1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="ntI-Uo-VBd" secondAttribute="top" id="XO4-Hz-wx1"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8Vb-8e-FiK" secondAttribute="bottom" id="Y0k-HD-csw"/>
                             <constraint firstItem="gyY-si-3zd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Yhn-pv-jfb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gyY-si-3zd" secondAttribute="trailing" id="fFQ-jR-ydg"/>

@@ -87,10 +87,9 @@ class AppSearchViewController: UIViewController, AppSearchDisplayLogic {
     @IBOutlet weak var searchTv: UITableView!
     @IBOutlet weak var searchTvBottomPadding: NSLayoutConstraint!
     
-    
     public let recentSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
     public let searchSectionModels = BehaviorRelay<[AppSearchBaseItemSection]>(value: [])
-    
+
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel) {
         recentSectionModels.accept(viewModel.sectionModels)
     }
@@ -263,7 +262,6 @@ extension AppSearchViewController: UITableViewDelegate {
                 guard let self = self else { return }
                 self.searchTvBottomPadding.constant = height
                 self.view.layoutIfNeeded()
-//                UIView.animate(withDuration: 0.3, animations: { self.view.layoutIfNeeded() })
             })
             .disposed(by: disposeBag)
     
