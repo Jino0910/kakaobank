@@ -16,6 +16,8 @@ class AppDetailInformationContentCell: UICollectionViewCell {
     
     public var type: AppDetailInformationContent?
     
+    public static let cellHeight: CGFloat = 50
+    
     private let defaultTitleWidth: CGFloat = 120.0
     private let leftRightMargin: CGFloat = 40.0
     private let topBottomMargin: CGFloat = 40.0
@@ -84,14 +86,10 @@ class AppDetailInformationContentCell: UICollectionViewCell {
 //            return defaultCellHeight
 //        }
 //    }
-    
-    public static func cellHeight() -> CGFloat {
-        return 50
-    }
 }
 
 //extension AppDetailInformationContentCell {
-//    
+//
 //    private func getMoreDescription(height: CGFloat) {
 //        self.isMoreInfo = height > 20
 //    }

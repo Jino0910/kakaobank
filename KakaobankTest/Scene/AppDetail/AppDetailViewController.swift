@@ -284,10 +284,10 @@ extension AppDetailViewController: UICollectionViewDelegateFlowLayout {
             if let cell = cv.cellForItem(at: indexPath) as? AppDetailNewFeatureDescriptionCell {
                 return CGSize(width: width, height: cell.cellHeight(width: width, desc: model.releaseNotes))
             } else {
-                return CGSize(width: width, height: AppDetailNewFeatureDescriptionCell.cellHeight())
+                return CGSize(width: width, height: AppDetailNewFeatureDescriptionCell.cellHeight)
             }
         case .detailInformationTitle: return CGSize(width: width, height: AppDetailInformationTitleCell.cellHeight)
-        case .detailInformationContent: return CGSize(width: width, height: AppDetailInformationContentCell.cellHeight())
+        case .detailInformationContent: return CGSize(width: width, height: AppDetailInformationContentCell.cellHeight)
 //            if let cell = cv.cellForItem(at: indexPath) as? AppDetailInformationContentCell {
 //                guard let cellType = cell.type else { return .zero }
 //                let content = model.informationContent(type: cellType)

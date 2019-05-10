@@ -15,6 +15,8 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
     
     private var disposeBag = DisposeBag()
     
+    public static let cellHeight: CGFloat = 86
+    
     private let leftRightMargin: CGFloat = 40.0
     private let topBottomMargin: CGFloat = 30.0
     private let defaultHeight: CGFloat = 56.0
@@ -83,10 +85,6 @@ class AppDetailNewFeatureDescriptionCell: UICollectionViewCell {
             let attribute = desc.setAttributedString(font: UIFont.systemFont(ofSize: 15.0))
             return attribute.height(width: width-leftRightMargin) + topBottomMargin
         }
-    }
-    
-    public static func cellHeight() -> CGFloat {
-        return 86
     }
 }
 
