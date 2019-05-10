@@ -17,7 +17,6 @@ import RxDataSources
 import RxGesture
 import SnapKit
 import RxKeyboard
-import Async
 
 protocol AppSearchDisplayLogic: class {
     func displayRecentHistory(viewModel: AppSearch.RecentHitory.ViewModel)
@@ -133,6 +132,11 @@ extension AppSearchViewController: UITableViewDelegate {
         let recentDs = RxTableViewSectionedReloadDataSource<AppSearchBaseItemSection>(configureCell: {(_, tv, indexPath, item) -> UITableViewCell in
             
             let cell = tv.dequeueReusableCell(withIdentifier: "AppSearchHistoryListCell", for: indexPath) as! AppSearchHistoryListCell
+            if indexPath.section == 0 {
+                cell.selectionStyle = .none
+            } else {
+                cell.selectionStyle = .blue
+            }
             if let model = item.object as? RecentHistoryModel, let status = self.router?.dataStore?.appSearchStatus {
                 cell.configure(model: model, type: item.type, status: status)
             }
@@ -171,18 +175,16 @@ extension AppSearchViewController: UITableViewDelegate {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (indexPath) in
                 
-                self.recentTv.reloadRows(at: [indexPath], with: .none)
                 guard indexPath.section > 0 else { return }
                 guard let searchWord = self.router?.dataStore?.recentHistoryModels?[indexPath.section-1].searchWord else { return }
+                self.recentTv.reloadRows(at: [indexPath], with: .none)
                 
                 self.searchController.searchBar.text = searchWord
                 self.searchController.isActive = true
                 self.setAppSearchStatus(status: .searchComplete)
                 
-                Async.background(after: 0.2) {
-                    let request = AppSearch.SearchAppStore.Request(query: searchWord)
-                    self.interactor?.doSearchAppStore(request: request)
-                }
+                let request = AppSearch.SearchAppStore.Request(query: searchWord)
+                self.interactor?.doSearchAppStore(request: request)
             })
             .disposed(by: disposeBag)
         
@@ -195,17 +197,12 @@ extension AppSearchViewController: UITableViewDelegate {
                 
                 if data.appSearchStatus == .searching {
                     
-                    self.recentTv.reloadRows(at: [indexPath], with: .none)
                     guard let query = data.searchHistoryModels?[indexPath.section].searchWord else { return }
+                    self.recentTv.reloadRows(at: [indexPath], with: .none)
                     
                     self.searchController.searchBar.text = query
                     self.searchController.searchBar.endEditing(true)
                     self.setAppSearchStatus(status: .searchComplete)
-                    
-                    Async.background() {
-                        let request = AppSearch.SearchAppStore.Request(query: query)
-                        self.interactor?.doSearchAppStore(request: request)
-                    }
                     
                 } else if data.appSearchStatus == .searchComplete {
                     
@@ -232,11 +229,9 @@ extension AppSearchViewController: UITableViewDelegate {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { (_) in
                 guard let query = self.searchController.searchBar.text else { return }
-                
-                Async.background() {
-                    let request = AppSearch.SearchAppStore.Request(query: query)
-                    self.interactor?.doSearchAppStore(request: request)
-                }
+                self.setAppSearchStatus(status: .searchComplete)
+                let request = AppSearch.SearchAppStore.Request(query: query)
+                self.interactor?.doSearchAppStore(request: request)
             })
             .disposed(by: disposeBag)
         

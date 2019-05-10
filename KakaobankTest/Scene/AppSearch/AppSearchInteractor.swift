@@ -57,6 +57,7 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
     
     var recentHistoryItemNotificationToken: NotificationToken?
     
+    
     // MARK: Do something
     
     func doRecentHistory() {
