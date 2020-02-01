@@ -121,7 +121,8 @@ extension AppDetailViewController: UITableViewDelegate {
         imageView.clipsToBounds = true
         
         imageView.rx_asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512)
-            .subscribe(onSuccess: { (iv, image) in
+            .subscribe(onSuccess: { [weak self] (iv, image) in
+                guard let self = self else { return }
                 imageView.image = image?.resizeImage(targetSize: CGSize(width: 30, height: 30))
                 self.navigationItem.titleView = imageView
                 self.navigationItem.titleView?.alpha = 0.0
@@ -224,8 +225,8 @@ extension AppDetailViewController: UITableViewDelegate {
         }
     
         cv.rx.itemSelected
-            .subscribe(onNext: { (indexPath) in
-                
+            .subscribe(onNext: { [weak self] (indexPath) in
+                guard let self = self else { return }
                 guard let model = self.router?.dataStore?.appInfoModel else { return }
                 
                 if (self.cv.cellForItem(at: indexPath) as? AppDetailDeveloperInfoCell) != nil {

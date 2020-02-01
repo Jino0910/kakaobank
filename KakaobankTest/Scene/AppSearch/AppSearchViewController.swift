@@ -171,7 +171,9 @@ extension AppSearchViewController: UITableViewDelegate {
         
         // 최근검색어 선택
         recentTv.rx.itemSelected
-            .subscribe(onNext: { (indexPath) in
+            .delay(0.1, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (indexPath) in
+                guard let self = self else { return }
                 
                 guard indexPath.section > 0 else { return }
                 self.recentTv.reloadRows(at: [indexPath], with: .none)
@@ -180,25 +182,18 @@ extension AppSearchViewController: UITableViewDelegate {
                 self.searchController.searchBar.text = searchWord
                 self.searchController.isActive = true
                 
-                // 상태꼬임방지
-                Async.main(after: 0.1) {
-                    self.setAppSearchStatus(status: .searchComplete)
-                }
+                self.setAppSearchStatus(status: .searchComplete)
 
-                // 애니메이션 후 통신되도록
-                Async.background(after: 0.2) {
-                    
-                    let request = AppSearch.SearchAppStore.Request(query: searchWord)
-                    self.interactor?.doSearchAppStore(request: request)
-                }
+                let request = AppSearch.SearchAppStore.Request(query: searchWord)
+                self.interactor?.doSearchAppStore(request: request)
             })
             .disposed(by: disposeBag)
         
         // 검색한 앱선택
         searchTv.rx.itemSelected
-            .subscribe(onNext: { (indexPath) in
-                
-                guard var data = self.router?.dataStore else { return }
+            .subscribe(onNext: { [weak self] (indexPath) in
+                guard let self = self else { return }
+                guard let data = self.router?.dataStore else { return }
                 
                 if data.appSearchStatus == .searching {
                     
@@ -227,11 +222,12 @@ extension AppSearchViewController: UITableViewDelegate {
         
         // 검색하단뷰 터치(검색어 없을 경우)
         dimView.rx.tapGesture()
-            .filter({_ in
-                guard var data = self.router?.dataStore else { return false }
+            .filter({ [weak self] _ in
+                guard let self = self else { return false }
+                guard let data = self.router?.dataStore else { return false }
                 return data.appSearchStatus == .searchStart
             })
-            .subscribe(onNext: { [weak self](_) in
+            .subscribe(onNext: { [weak self] (_) in
                 guard let self = self else { return }
                 self.searchController.isActive = false
                 // 앱검색 정보 클리어
@@ -243,8 +239,8 @@ extension AppSearchViewController: UITableViewDelegate {
             .searchButtonClicked
             .map{self.searchController.searchBar.text ?? ""}
             .filter{!$0.isEmpty}
-            .subscribe(onNext: { (query) in
-                
+            .subscribe(onNext: { [weak self] (query) in
+                guard let self = self else { return }
                 self.setAppSearchStatus(status: .searchComplete)
                 let request = AppSearch.SearchAppStore.Request(query: query)
                 self.interactor?.doSearchAppStore(request: request)
@@ -254,9 +250,9 @@ extension AppSearchViewController: UITableViewDelegate {
         // 검색바 취소 클릭시
         searchController.searchBar.rx
             .cancelButtonClicked
-            .subscribe(onNext: { (_) in
+            .subscribe(onNext: { [weak self] (_) in
                 // 앱검색 정보 클리어
-                self.searchSectionModels.accept([])
+                self?.searchSectionModels.accept([])
             })
             .disposed(by: disposeBag)
  
@@ -294,7 +290,7 @@ extension AppSearchViewController: UISearchResultsUpdating {
     // MARK: - UISearchResultsUpdating Delegate
     func updateSearchResults(for searchController: UISearchController) {
 
-        guard var data = self.router?.dataStore, data.appSearchStatus != .searchBefore else { return }
+        guard let data = self.router?.dataStore, data.appSearchStatus != .searchBefore else { return }
 
         if searchController.searchBar.text!.isEmpty {
             setAppSearchStatus(status: .searchStart)

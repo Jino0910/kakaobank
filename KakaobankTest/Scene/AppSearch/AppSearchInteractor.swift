@@ -65,12 +65,9 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
         recentHistoryItemNotificationToken = recentHistoryList.observe({ [weak self](_:RealmCollectionChange) in
 
             guard let self = self else { return }
-            var models: [RecentHistoryModel] = []
-            for item in self.recentHistoryList {
-                models.append(RecentHistoryModel(searchWord: item.searchWord, date: item.date))
-            }
-            self.recentHistoryModels = models
             
+            let models: [RecentHistoryModel] = self.recentHistoryList.compactMap{ RecentHistoryModel(searchWord: $0.searchWord, date: $0.date) }
+            self.recentHistoryModels = models
             
             let response = AppSearch.RecentHitory.Response(recentHistoryModels: models)
             self.presenter?.presentRecentHistory(response: response)
@@ -83,12 +80,8 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
         let predicate = NSPredicate(format: "searchWord CONTAINS %@", request.query)
         guard let results = searchHistoryList.realm?.objects(SearchHistoryRealmItem.self).filter(predicate) else { return }
         
-        var models: [SearchHistoryModel] = []
-        for item in results {
-            models.append(SearchHistoryModel(searchWord: item.searchWord, date: item.date))
-        }
+        let models: [SearchHistoryModel] = results.compactMap{ SearchHistoryModel(searchWord: $0.searchWord, date: $0.date) }
         self.searchHistoryModels = models
-        
         
         let response = AppSearch.SearchWordHitory.Response(searchHistoryModel: models)
         self.presenter?.presentSearchWordHistory(response: response)
@@ -99,7 +92,8 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
         // 검색 api
         self.worker.requestSearchAppStore(query: request.query)
             .filter {$0.0 == .code200}
-            .subscribe(onSuccess: { (_, json) in
+            .subscribe(onSuccess: { [weak self] (_, json) in
+                guard let self = self else { return }
                 
                 // 검색어 저장
                 self.saveSearchWord(query: request.query)
@@ -107,12 +101,10 @@ class AppSearchInteractor: AppSearchBusinessLogic, AppSearchDataStore {
                 // 검색 히스토리 저장
                 self.saveSearchHistory(json: json)
 
-                var models: [AppInfoModel] = []
-                for item in json["results"].array ?? [] {
-                    models.append(AppInfoModel(json: item))
-                }
+                let results = json["results"].array ?? []
+                let models: [AppInfoModel] = results.compactMap{ AppInfoModel(json: $0) }
+
                 self.appInfoModels = models
-                
                 
                 let response = AppSearch.SearchAppStore.Response(json: json, appInfoModels: models)
                 self.presenter?.presentSearchAppStore(response: response)

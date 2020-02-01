@@ -25,16 +25,7 @@ class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalP
     
     @IBOutlet weak var sc: UIScrollView!
     
-    @IBOutlet weak var iv1: UIImageView!
-    @IBOutlet weak var iv2: UIImageView!
-    @IBOutlet weak var iv3: UIImageView!
-    @IBOutlet weak var iv4: UIImageView!
-    @IBOutlet weak var iv5: UIImageView!
-    @IBOutlet weak var iv6: UIImageView!
-    @IBOutlet weak var iv7: UIImageView!
-    @IBOutlet weak var iv8: UIImageView!
-    @IBOutlet weak var iv9: UIImageView!
-    @IBOutlet weak var iv10: UIImageView!
+    @IBOutlet var imageViews: [UIImageView]!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -50,18 +41,16 @@ class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalP
     
     func configure(model: AppInfoModel) {
         
-        let ivs = [iv1, iv2, iv3, iv4, iv5, iv6, iv7, iv8, iv9, iv10]
-        
-        for (index, iv) in ivs.enumerated() {
+        for (index, iv) in imageViews.enumerated() {
             
             if model.screenshotUrls.count > index {
                 
                 guard let url = model.screenshotUrls[index].string else { return }
                 
-                iv?.rx_asyncImageLoad(url: url, cachedName: url)
-                    .subscribe(onSuccess: { (iv: UIImageView, image: UIImage?) in
+                iv.rx_asyncImageLoad(url: url, cachedName: url)
+                    .subscribe(onSuccess: { [weak self](iv: UIImageView, image: UIImage?) in
+                        guard let self = self else { return }
                         guard let image = image else { return }
-                        iv.image = image
                         
                         guard self.isResize == false else { return }
                         self.isResize = true
@@ -70,7 +59,7 @@ class AppDetailScreenShotCell: UICollectionViewCell, ScrollViewCustomHorizontalP
                     .disposed(by: disposeBag)
                 
             } else {
-                iv?.removeFromSuperview()
+                iv.removeFromSuperview()
             }
         }
     }

@@ -57,13 +57,7 @@ class AppItemCell: UITableViewCell {
         self.ratingView.rating = Double(model.averageUserRating)
         self.reviewCountLabel.text = model.userRatingCount.toHangulValue()
         
-        self.iconImageView.rx_asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512)
-            .subscribe(onSuccess: { (iv: UIImageView, image: UIImage?) in
-                guard let image = image else { return }
-                iv.image = image
-            })
-            .disposed(by: disposeBag)
-        
+        self.iconImageView.rx_asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512).subscribe().dispose()
         
         guard model.screenshotUrls.count != 0 else { return }
         
@@ -96,9 +90,9 @@ class AppItemCell: UITableViewCell {
         for (index, imageView) in imageViews.enumerated() {
             
             imageView.rx_asyncImageLoad(url: url[index], cachedName: url[index])
-                .subscribe(onSuccess: { (iv: UIImageView, image: UIImage?) in
+                .subscribe(onSuccess: { [weak self](_, image: UIImage?) in
+                    guard let self = self else { return }
                     guard let image = image else { return }
-                    iv.image = image
                     self.screenShotWidth.constant = self.screenShotHeight * image.size.width / image.size.height
 
                 })

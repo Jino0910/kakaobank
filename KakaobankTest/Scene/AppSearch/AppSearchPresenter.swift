@@ -47,49 +47,39 @@ extension AppSearchPresenter {
     
     func getRecentHistorySectionModel(recentHistoryModels: [RecentHistoryModel]) -> [AppSearchBaseItemSection] {
         
-        var sectionModels: [AppSearchBaseItemSection] = [
+        let recentWordTitle: [AppSearchBaseItemSection] = [
             AppSearchBaseItemSection(items: [
                 AppSearchBaseItem(type: .recentWordTitle, object: RecentHistoryModel(searchWord: "최근 검색어", date: Date()))
                 ])
         ]
         
-        for (index, item) in recentHistoryModels.enumerated() {
-            
-            guard index < 10 else { return sectionModels }
-            sectionModels.append(
-                AppSearchBaseItemSection(items: [
-                    AppSearchBaseItem(type: .recentWordContent, object: item)
-                ]))
-        }
+        let maxCnt = 10
+        let endIndex = recentHistoryModels.count >= maxCnt ? maxCnt : recentHistoryModels.count
         
-        return sectionModels
+        return recentWordTitle +
+            recentHistoryModels[0..<endIndex]
+                .compactMap{
+                    AppSearchBaseItemSection(items: [
+                        AppSearchBaseItem(type: .recentWordContent,
+                                          object: $0)
+                    ])}
     }
     
     func getSearchWordHistorySectionModel(searchHistoryModel: [SearchHistoryModel]) -> [AppSearchBaseItemSection] {
         
-        var sectionModels: [AppSearchBaseItemSection] = []
-        
-        for item in searchHistoryModel {
-            sectionModels.append(
-                AppSearchBaseItemSection(items: [
-                    AppSearchBaseItem(type: .searchWordList, object: item)
-                    ]))
-        }
-        
-        return sectionModels
+        return searchHistoryModel
+            .compactMap{ AppSearchBaseItemSection(items: [
+                AppSearchBaseItem(type: .searchWordList,
+                                  object: $0)
+            ])}
     }
     
     func getSearchAppStoreSectionModel(appInfoModel: [AppInfoModel]) -> [AppSearchBaseItemSection] {
         
-        var sectionModels: [AppSearchBaseItemSection] = []
-        
-        for item in appInfoModel {
-            sectionModels.append(
-                AppSearchBaseItemSection(items: [
-                    AppSearchBaseItem(type: .searchAppInfoList, object: item)
-                ]))
-        }
-        
-        return sectionModels
+        return appInfoModel
+            .compactMap{ AppSearchBaseItemSection(items: [
+                AppSearchBaseItem(type: .searchAppInfoList,
+                                  object: $0)
+            ])}
     }
 }

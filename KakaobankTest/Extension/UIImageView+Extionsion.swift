@@ -14,27 +14,6 @@ typealias imageAsyncType = (iv: UIImageView, image: UIImage?)
 
 extension UIImageView {
     
-    func asyncImageLoad(url: String, cachedName: String, handler: @escaping ((_ imageView: UIImageView, _ image: UIImage?) -> Void)) {
-        
-        let imageCache = NSCache<NSString, UIImage>()
-        
-        if let cachedImage = imageCache.object(forKey: NSString(string: cachedName)) {
-            handler(self, cachedImage)
-        }
-        else
-        {
-            DispatchQueue.global(qos: .background).async {
-                guard let url = URL(string: url) else { return }
-                guard let data = try? Data(contentsOf: url) else { return }
-                guard let image = UIImage(data: data) else { return }
-                DispatchQueue.main.async {
-                    imageCache.setObject(image, forKey: NSString(string: cachedName))
-                    handler(self, image)
-                }
-            }
-        }
-    }
-    
     func rx_asyncImageLoad(url: String, cachedName: String) -> PrimitiveSequence<SingleTrait, imageAsyncType> {
         
         return Single.create(subscribe: { (single) -> Disposable in
@@ -52,6 +31,7 @@ extension UIImageView {
                     guard let image = UIImage(data: data) else { return  }
                     DispatchQueue.main.async {
                         imageCache.setObject(image, forKey: NSString(string: cachedName))
+                        self.image = image
                         single(.success((self, image)))
                     }
                 }

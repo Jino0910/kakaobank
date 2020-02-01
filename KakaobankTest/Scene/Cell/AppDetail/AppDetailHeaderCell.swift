@@ -42,12 +42,7 @@ class AppDetailHeaderCell: UICollectionViewCell {
         self.titleLabel.text = model.trackName
         self.subTitleLabel.text = model.artistName
         
-        self.iconImageView.rx_asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512)
-            .subscribe(onSuccess: { (iv: UIImageView, image: UIImage?) in
-                guard let image = image else { return }
-                iv.image = image
-            })
-            .disposed(by: disposeBag)
+        self.iconImageView.rx_asyncImageLoad(url: model.artworkUrl512, cachedName: model.artworkUrl512).subscribe().dispose()
         
         self.moreButton.rx.tap
             .throttle(1, latest: true, scheduler: MainScheduler.instance)

@@ -15,8 +15,6 @@ typealias APIResponseType = (code: HttpResponseCode, json: JSON)
 
 class APIManager {
     
-    static let shared = APIManager()
-    
     class func request(target: Kakao) -> PrimitiveSequence<SingleTrait, APIResponseType> {
         return Single.create(subscribe: { (single) -> Disposable in
             
